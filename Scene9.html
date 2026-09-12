@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VYENTRA - Government Schemes</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0d2856;--green:#07964b;--green2:#087d43;
+  --bg:#f3fafc;--border:#dce7ef;--muted:#607896;
+}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#f8fcff,#edf8f8);
+  color:var(--navy);min-height:100vh
+}
+.header{
+  height:80px;background:#fff;border-bottom:1px solid #dfe8ee;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 28px;position:sticky;top:0;z-index:30;
+  box-shadow:0 2px 8px rgba(20,55,75,.06)
+}
+.brand{display:flex;align-items:center;gap:10px}
+.logo-mark{width:45px;height:50px;position:relative}
+.leaf{position:absolute;border-radius:100% 0 100% 0}
+.leaf1{width:25px;height:41px;left:2px;top:1px;background:linear-gradient(135deg,#68d45a,#0b914b);transform:rotate(-35deg)}
+.leaf2{width:24px;height:38px;left:20px;top:10px;background:linear-gradient(135deg,#43bf50,#08763e);transform:rotate(35deg)}
+.stem{position:absolute;width:3px;height:40px;background:#087642;left:21px;top:11px;transform:rotate(7deg)}
+.logo{font-size:31px;font-weight:800;letter-spacing:1px;color:#075d43}
+.divider{height:39px;width:2px;background:#ccd7df;margin-left:5px}
+.tag{font-size:14px;line-height:1.35;color:#304766}
+.header-right{display:flex;align-items:center;gap:20px}
+.top-location{font-size:15px;padding-right:18px;border-right:1px solid #dce4e9}
+.welcome{font-size:16px}.avatar{width:45px;height:45px;border-radius:50%;background:#edf2f6;display:grid;place-items:center;font-size:22px}
+
+.layout{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 80px)}
+.sidebar{
+  background:linear-gradient(180deg,#f7fcfd,#eef8f7);
+  border-right:1px solid var(--border);padding:28px 15px;position:relative
+}
+.nav{display:flex;flex-direction:column;gap:7px}
+.nav button{
+  height:55px;border:0;background:transparent;border-radius:10px;
+  padding:0 18px;display:flex;align-items:center;gap:17px;
+  color:#17395e;font-size:17px;text-align:left;cursor:pointer;transition:.2s
+}
+.nav button:hover,.nav button.active{background:#d6f3e3;color:#087c42}
+.nav button.active{font-weight:700}
+.nav-icon{width:30px;text-align:center;font-size:23px}
+.side-art{position:absolute;left:50px;bottom:33px;text-align:center;color:#08773f}
+.side-art .plant{font-size:66px;line-height:.8}
+.side-art p{font-family:cursive;font-size:19px;font-weight:bold;line-height:1.05}
+.logout{position:absolute;bottom:10px;left:38px;border:0;background:none;color:#17395d;font-size:15px;cursor:pointer}
+
+main{padding:25px 30px 35px;overflow:auto}
+.content{max-width:1290px;margin:auto}
+.page-head{display:flex;justify-content:space-between;gap:25px;align-items:flex-start;margin-bottom:18px}
+.title h1{font-size:38px;letter-spacing:-1px}
+.title p{font-size:20px;color:#58718e;margin-top:7px}
+.business-card{
+  min-width:420px;border:1px solid var(--border);background:#fff;border-radius:10px;
+  padding:11px 16px;display:flex;align-items:center;justify-content:space-between;
+  box-shadow:0 3px 12px rgba(20,55,75,.04)
+}
+.business-info{display:flex;align-items:center;gap:14px}
+.business-icon{
+  width:53px;height:53px;border-radius:50%;background:#edf5ff;
+  display:grid;place-items:center;font-size:31px
+}
+.business-name{font-size:20px;font-weight:700}
+.business-location{font-size:14px;color:#4d6684;margin-top:4px}
+.edit-btn{height:45px;padding:0 19px;border:1px solid #dbe4ec;border-radius:8px;background:#fff;color:#132d52;font-size:16px;font-weight:600;cursor:pointer}
+
+.filters{display:flex;gap:18px;margin-bottom:18px;overflow-x:auto;padding-bottom:2px}
+.filter{
+  flex:1;min-width:170px;height:52px;border:1px solid var(--border);
+  border-radius:9px;background:#fff;color:#2b4666;font-size:16px;
+  font-weight:500;cursor:pointer;box-shadow:0 2px 8px rgba(20,55,75,.03)
+}
+.filter.active{background:#d9f5e8;color:#08783f;border-color:#bfe7d1;font-weight:700}
+.filter:hover{border-color:#8dceb0}
+
+.scheme-layout{display:grid;grid-template-columns:minmax(560px,1fr) 460px;gap:18px}
+.scheme-list{display:flex;flex-direction:column;gap:10px}
+.scheme{
+  background:#fff;border:1px solid var(--border);border-radius:11px;
+  padding:14px 17px;display:grid;grid-template-columns:75px 1fr 30px;
+  align-items:center;gap:14px;cursor:pointer;transition:.2s
+}
+.scheme:hover{transform:translateY(-1px);box-shadow:0 7px 20px rgba(22,60,85,.07)}
+.scheme.selected{border:2px solid #76c79e;background:#f5fcf8}
+.scheme-icon{
+  width:61px;height:61px;border-radius:50%;display:grid;place-items:center;
+  font-size:31px
+}
+.green-bg{background:#e2f7e9}.purple-bg{background:#f0e8ff}
+.gold-bg{background:#fff2cf}.pink-bg{background:#fde8ef}
+.scheme-title{font-size:18px;font-weight:700;margin-bottom:4px}
+.scheme-org{font-size:14px;color:#405b78;margin-bottom:6px}
+.scheme-desc{font-size:15px;color:#36516f;line-height:1.3}
+.badge{
+  display:inline-block;background:#07964b;color:#fff;padding:5px 10px;
+  border-radius:6px;font-size:13px;font-weight:700;margin-bottom:5px
+}
+.arrow{font-size:27px;color:#203e61}
+.meta{display:flex;gap:9px;margin-top:8px;flex-wrap:wrap}
+.meta span{
+  border:1px solid #dbe6ed;border-radius:5px;padding:5px 10px;
+  font-size:13px;color:#314e70;background:#fbfdfe
+}
+
+.detail{
+  background:#fff;border:1px solid var(--border);border-radius:11px;
+  padding:18px 18px;box-shadow:0 3px 12px rgba(20,55,75,.04);
+  position:sticky;top:100px;align-self:start
+}
+.detail-head{display:flex;align-items:center;gap:14px;margin-bottom:13px}
+.detail-icon{width:65px;height:65px;border-radius:50%;background:#e3f7eb;display:grid;place-items:center;font-size:34px}
+.detail h2{font-size:20px;line-height:1.25}.detail-org{font-size:14px;color:#536c87;margin-top:5px}
+.detail-section{border-radius:10px;padding:12px 14px;margin-top:10px}
+.benefits{background:#e9f8ef}.eligibility{background:#edf5ff}.apply{background:#fff7e3}
+.detail-section h3{font-size:17px;margin-bottom:7px}
+.benefits h3{color:#087d43}.eligibility h3{color:#145cc5}.apply h3{color:#a56b00}
+.detail-section ul{list-style:none;line-height:1.65;font-size:14px;color:#294867}
+.detail-section li:before{content:"✓";font-weight:bold;margin-right:9px;color:#087d43}
+.eligibility li:before{content:"•";color:#125fc7}
+.apply li:before{content:counter(step);color:#c78600}
+.apply ul{counter-reset:step}.apply li{counter-increment:step}
+.official{
+  width:100%;height:50px;border:0;border-radius:8px;margin-top:12px;
+  background:#07964b;color:#fff;font-size:17px;font-weight:700;cursor:pointer
+}
+.official:hover{background:#087d43}
+.empty{padding:45px;text-align:center;background:#fff;border:1px solid var(--border);border-radius:11px;color:#617895}
+
+.toast{
+ position:fixed;right:25px;bottom:25px;background:#092b50;color:#fff;
+ padding:14px 18px;border-radius:9px;display:none;z-index:100;
+ box-shadow:0 8px 25px #0003
+}.toast.show{display:block}
+
+.modal{position:fixed;inset:0;background:#071a3080;display:none;align-items:center;justify-content:center;z-index:90;padding:20px}
+.modal.show{display:flex}.modal-box{background:#fff;width:min(620px,100%);border-radius:15px;padding:25px;box-shadow:0 25px 70px #0004}
+.modal-head{display:flex;justify-content:space-between;align-items:center}.modal-head h2{font-size:25px}
+.close{border:0;width:37px;height:37px;border-radius:50%;background:#edf3f6;font-size:22px;cursor:pointer}
+.form-row{margin-top:18px}.form-row label{display:block;font-weight:600;margin-bottom:7px}.form-row input{width:100%;height:47px;border:1px solid #d4dfe8;border-radius:8px;padding:0 13px;font-size:16px}
+.save{margin-top:17px;width:100%;height:47px;border:0;border-radius:8px;background:#07964b;color:#fff;font-weight:bold;cursor:pointer}
+
+@media(max-width:1150px){
+ .scheme-layout{grid-template-columns:1fr}.detail{position:static}.business-card{min-width:370px}
+}
+@media(max-width:850px){
+ .header{height:70px;padding:0 15px}.tag,.divider,.welcome,.top-location{display:none}.logo{font-size:27px}
+ .layout{grid-template-columns:70px 1fr}.sidebar{padding:20px 9px}.nav button{justify-content:center;padding:0}.nav button span:not(.nav-icon),.side-art,.logout{display:none}
+ main{padding:18px}.page-head{display:block}.business-card{margin-top:15px;min-width:0}.filters{gap:9px}.filter{min-width:145px}
+}
+@media(max-width:560px){
+ .title h1{font-size:30px}.title p{font-size:17px}.business-card{padding:10px}.business-name{font-size:17px}.scheme{grid-template-columns:58px 1fr 20px;padding:12px}.scheme-icon{width:52px;height:52px;font-size:26px}.scheme-title{font-size:16px}.scheme-desc{font-size:13px}.meta span{font-size:11px;padding:4px 7px}.detail h2{font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+ <div class="brand">
+  <div class="logo-mark"><span class="leaf leaf1"></span><span class="leaf leaf2"></span><span class="stem"></span></div>
+  <div class="logo">VYENTRA</div><div class="divider"></div>
+  <div class="tag">Smart Business Decisions<br>for a Better Tomorrow</div>
+ </div>
+ <div class="header-right">
+  <div class="top-location">📍 <span id="headerLocation">Kothapalli, Guntur, Andhra Pradesh</span></div>
+  <div class="welcome">Welcome, Entrepreneur!</div><div class="avatar">👤</div>
+ </div>
+</header>
+
+<div class="layout">
+<aside class="sidebar">
+ <nav class="nav">
+  <button onclick="navigate('dashboard.html')"><span class="nav-icon">⌂</span><span>Dashboard</span></button>
+  <button onclick="navigate('local-analysis.html')"><span class="nav-icon">▥</span><span>Local Analysis</span></button>
+  <button onclick="navigate('market-analysis.html')"><span class="nav-icon">↗</span><span>Market Analysis</span></button>
+  <button onclick="navigate('financial-planner.html')"><span class="nav-icon">▣</span><span>Financial Planner</span></button>
+  <button class="active"><span class="nav-icon">▤</span><span>Government Schemes</span></button>
+  <button onclick="navigate('ai-advisor.html')"><span class="nav-icon">🤖</span><span>AI Advisor</span></button>
+  <button onclick="navigate('business-plan.html')"><span class="nav-icon">💡</span><span>Business Plan</span></button>
+ </nav>
+ <div class="side-art"><div class="plant">🌿</div><p>Small<br>Entrepreneurs<br>Big Possibilities</p></div>
+ <button class="logout" onclick="logout()">↪ &nbsp; Logout</button>
+</aside>
+
+<main>
+<div class="content">
+
+ <div class="page-head">
+  <div class="title">
+   <h1>Government Schemes</h1>
+   <p>Find relevant government schemes and financial support for your business.</p>
+  </div>
+  <div class="business-card">
+   <div class="business-info">
+    <div class="business-icon">🐄</div>
+    <div><div class="business-name" id="businessName">Dairy Farming</div><div class="business-location" id="businessLocation">Kothapalli, Guntur, Andhra Pradesh</div></div>
+   </div>
+   <button class="edit-btn" onclick="editBusiness()">✎ &nbsp;Edit</button>
+  </div>
+ </div>
+
+ <div class="filters" id="filters">
+  <button class="filter active" data-category="all">▦ &nbsp; All Schemes</button>
+  <button class="filter" data-category="loan">◉ &nbsp; Loans &amp; Subsidies</button>
+  <button class="filter" data-category="infrastructure">▥ &nbsp; Infrastructure</button>
+  <button class="filter" data-category="training">👥 &nbsp; Training &amp; Skill Development</button>
+  <button class="filter" data-category="support">▤ &nbsp; Other Support</button>
+ </div>
+
+ <div class="scheme-layout">
+  <div class="scheme-list" id="schemeList"></div>
+  <aside class="detail" id="detail"></aside>
+ </div>
+
+</div>
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal" id="editModal" onclick="closeBackdrop(event)">
+ <div class="modal-box">
+  <div class="modal-head"><h2>Edit Business Details</h2><button class="close" onclick="closeEdit()">×</button></div>
+  <div class="form-row"><label>Business Name</label><input id="editBusinessName" value="Dairy Farming"></div>
+  <div class="form-row"><label>Location</label><input id="editBusinessLocation" value="Kothapalli, Guntur, Andhra Pradesh"></div>
+  <button class="save" onclick="saveBusiness()">Save Changes</button>
+ </div>
+</div>
+
+<script>
+const schemes = [
+ {
+  id:"deds",category:"loan",recommended:true,icon:"🚜",iconClass:"green-bg",
+  title:"Dairy Entrepreneurship Development Scheme (DEDS)",
+  org:"Department of Animal Husbandry & Dairying",
+  desc:"Financial assistance for setting up dairy units, purchase of milk animals, equipment and infrastructure.",
+  meta:["₹ Up to 33% Subsidy","👥 Individual / SHG / FPO","▤ Pan India"],
+  benefits:["Up to 33% capital subsidy","Support for purchase of milch animals","Assistance for equipment and infrastructure","Promotes dairy entrepreneurship in rural areas"],
+  eligibility:["Individual farmers, SHGs, FPOs, MSMEs","Minimum 5 milch animals (varies by category)","Must be engaged in dairy related activities"],
+  apply:["Visit the official website","Fill the application form","Submit required documents","Track your application status"]
+ },
+ {
+  id:"mudra",category:"loan",recommended:false,icon:"🏛️",iconClass:"purple-bg",
+  title:"PM Mudra Yojana",
+  org:"Ministry of Finance",
+  desc:"Collateral-free loans for micro and small businesses, including dairy enterprises.",
+  meta:["₹ Up to ₹10 Lakh","👥 Individual / MSME","▤ Pan India"],
+  benefits:["Collateral-free business credit","Multiple loan categories","Suitable for micro and small enterprises","Supports income-generating activities"],
+  eligibility:["Micro and small business applicants","New or existing eligible enterprises","Applicant must meet lender requirements"],
+  apply:["Check eligibility with participating lender","Prepare required documents","Submit loan application","Track application status"]
+ },
+ {
+  id:"didf",category:"infrastructure",recommended:false,icon:"⚙️",iconClass:"gold-bg",
+  title:"Dairy Infrastructure Development Fund (DIDF)",
+  org:"National Bank for Agriculture and Rural Development (NABARD)",
+  desc:"Long-term financing for dairy infrastructure, processing and value addition.",
+  meta:["₹ Up to 90% Financing","👥 Dairy Cooperatives / MSME","▤ Pan India"],
+  benefits:["Financing support for dairy infrastructure","Processing and value-addition support","Long-term financing structure","Supports dairy value chains"],
+  eligibility:["Eligible dairy cooperatives and enterprises","Eligible infrastructure projects","Subject to applicable financing guidelines"],
+  apply:["Review current scheme guidelines","Prepare project proposal","Submit required documents","Track financing application"]
+ },
+ {
+  id:"skill",category:"training",recommended:false,icon:"🎓",iconClass:"pink-bg",
+  title:"Skill Development Programme",
+  org:"Ministry of Skill Development & Entrepreneurship",
+  desc:"Training and skill development for dairy farming and allied activities.",
+  meta:["₹ Free Training","👥 Rural Youth / Entrepreneurs","▤ Pan India"],
+  benefits:["Skill development and training","Dairy and allied activity support","Entrepreneurship-oriented learning","Improved technical capabilities"],
+  eligibility:["Eligible rural youth and entrepreneurs","Training availability depends on programme","Applicant must satisfy programme criteria"],
+  apply:["Find a suitable training programme","Register for training","Attend required sessions","Complete assessment/certification"]
+ },
+ {
+  id:"support",category:"support",recommended:false,icon:"📄",iconClass:"purple-bg",
+  title:"Entrepreneur Support Services",
+  org:"Government & Development Agencies",
+  desc:"Additional support resources for entrepreneurship, training, market access and business development.",
+  meta:["Business Support","👥 Entrepreneurs","▤ Location Based"],
+  benefits:["Business guidance","Training opportunities","Market linkage support","Information about applicable programmes"],
+  eligibility:["Entrepreneurs seeking business support","Eligibility varies by programme","Location and business activity may apply"],
+  apply:["Identify the relevant support programme","Check current eligibility","Prepare required documents","Contact the implementing agency"]
+ }
+];
+
+let selectedId = "deds";
+let activeCategory = "all";
+
+function renderSchemes(){
+ const list = document.getElementById("schemeList");
+ const filtered = schemes.filter(s => activeCategory==="all" || s.category===activeCategory);
+ list.innerHTML = "";
+
+ if(!filtered.length){
+  list.innerHTML = '<div class="empty">No schemes found in this category.</div>';
+  return;
+ }
+
+ filtered.forEach(s=>{
+  const card=document.createElement("div");
+  card.className="scheme"+(s.id===selectedId?" selected":"");
+  card.onclick=()=>selectScheme(s.id);
+  card.innerHTML=`
+   <div class="scheme-icon ${s.iconClass}">${s.icon}</div>
+   <div>
+    ${s.recommended?'<span class="badge">Recommended</span>':''}
+    <div class="scheme-title">${s.title}</div>
+    <div class="scheme-org">${s.org}</div>
+    <div class="scheme-desc">${s.desc}</div>
+    <div class="meta">${s.meta.map(x=>`<span>${x}</span>`).join("")}</div>
+   </div>
+   <div class="arrow">→</div>`;
+  list.appendChild(card);
+ });
+
+ renderDetail();
+}
+
+function selectScheme(id){
+ selectedId=id;
+ renderSchemes();
+}
+
+function renderDetail(){
+ const s=schemes.find(x=>x.id===selectedId);
+ if(!s)return;
+
+ document.getElementById("detail").innerHTML=`
+  <div class="detail-head">
+   <div class="detail-icon">${s.icon}</div>
+   <div><h2>${s.title}</h2><div class="detail-org">${s.org}</div></div>
+  </div>
+
+  <div class="detail-section benefits">
+   <h3>✔ &nbsp;Key Benefits</h3>
+   <ul>${s.benefits.map(x=>`<li>${x}</li>`).join("")}</ul>
+  </div>
+
+  <div class="detail-section eligibility">
+   <h3>👥 &nbsp;Eligibility</h3>
+   <ul>${s.eligibility.map(x=>`<li>${x}</li>`).join("")}</ul>
+  </div>
+
+  <div class="detail-section apply">
+   <h3>▤ &nbsp;How to Apply</h3>
+   <ul>${s.apply.map(x=>`<li>${x}</li>`).join("")}</ul>
+  </div>
+
+  <button class="official" onclick="visitOfficial('${s.title.replace(/'/g,"\\'")}')">
+   Visit Official Website &nbsp; →
+  </button>
+ `;
+}
+
+document.querySelectorAll(".filter").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  activeCategory=btn.dataset.category;
+  renderSchemes();
+ });
+});
+
+function editBusiness(){
+ document.getElementById("editBusinessName").value=document.getElementById("businessName").textContent;
+ document.getElementById("editBusinessLocation").value=document.getElementById("businessLocation").textContent;
+ document.getElementById("editModal").classList.add("show");
+}
+
+function saveBusiness(){
+ const name=document.getElementById("editBusinessName").value.trim() || "Dairy Farming";
+ const location=document.getElementById("editBusinessLocation").value.trim() || "Kothapalli, Guntur, Andhra Pradesh";
+ document.getElementById("businessName").textContent=name;
+ document.getElementById("businessLocation").textContent=location;
+ document.getElementById("headerLocation").textContent=location;
+ localStorage.setItem("vyentraBusinessName",name);
+ localStorage.setItem("vyentraLocation",location);
+ closeEdit();
+ showToast("Business details updated");
+}
+
+function closeEdit(){document.getElementById("editModal").classList.remove("show")}
+function closeBackdrop(e){if(e.target.id==="editModal")closeEdit()}
+
+function visitOfficial(title){
+ showToast("Opening official information for: "+title);
+ /*
+   Replace the next line with the verified official scheme URL
+   when your project database contains the current government URL.
+   This demo intentionally does not invent government URLs.
+ */
+}
+
+function showToast(message){
+ const t=document.getElementById("toast");
+ t.textContent=message;t.classList.add("show");
+ setTimeout(()=>t.classList.remove("show"),3000);
+}
+
+function navigate(page){window.location.href=page}
+
+function logout(){
+ if(confirm("Are you sure you want to logout?")){
+  localStorage.removeItem("vyentraBusinessProfile");
+  localStorage.removeItem("vyentraFinancialPlan");
+  window.location.href="login.html";
+ }
+}
+
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeEdit()});
+
+document.addEventListener("DOMContentLoaded",()=>{
+ const location=localStorage.getItem("vyentraLocation");
+ const business=localStorage.getItem("vyentraBusinessName");
+
+ if(location){
+  document.getElementById("headerLocation").textContent=location;
+  document.getElementById("businessLocation").textContent=location;
+ }
+ if(business)document.getElementById("businessName").textContent=business;
+
+ renderSchemes();
+});
+</script>
+</body>
+</html>

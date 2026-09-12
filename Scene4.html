@@ -1,0 +1,3572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VYENTRA - Business Location</title>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --green: #079447;
+    --green-dark: #08783f;
+    --green-light: #e0f6e9;
+
+    --navy: #102f50;
+    --navy-light: #274b68;
+
+    --text: #173c5a;
+    --muted: #6b8090;
+
+    --border: #dce7ed;
+
+    --background: #f5fafc;
+    --white: #ffffff;
+
+    --shadow: 0 4px 18px rgba(18, 57, 80, 0.08);
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    background: var(--background);
+
+    color: var(--text);
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 80px;
+
+    background: white;
+
+    border-bottom: 1px solid #dfe8ed;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    z-index: 1000;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+/* Logo */
+
+.logo-area {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+.logo-icon {
+
+    font-size: 42px;
+
+    line-height: 1;
+}
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+}
+
+.brand-name {
+
+    font-size: 28px;
+
+    font-weight: 800;
+
+    color: #106c55;
+
+    letter-spacing: 1px;
+}
+
+.brand-line {
+
+    width: 2px;
+
+    height: 39px;
+
+    background: #9baab4;
+}
+
+.brand-text {
+
+    color: #1a405e;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+}
+
+
+/* Header right */
+
+.header-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+.header-location {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    font-size: 15px;
+
+    color: var(--text);
+
+    cursor: pointer;
+}
+
+.header-divider {
+
+    width: 1px;
+
+    height: 30px;
+
+    background: #dce4e9;
+}
+
+.welcome {
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+.profile-icon {
+
+    width: 44px;
+
+    height: 44px;
+
+    border-radius: 50%;
+
+    background: #edf2f7;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+
+    position: fixed;
+
+    top: 80px;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 270px;
+
+    background: white;
+
+    border-right: 1px solid #dce7ed;
+
+    padding: 27px 15px;
+
+    z-index: 900;
+}
+
+
+/* Menu */
+
+.menu {
+
+    list-style: none;
+}
+
+.menu-item {
+
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 17px;
+
+    padding: 0 20px;
+
+    border-radius: 10px;
+
+    margin-bottom: 7px;
+
+    cursor: pointer;
+
+    color: #153c59;
+
+    transition: 0.2s;
+}
+
+.menu-item:hover {
+
+    background: #eff9f4;
+}
+
+.menu-item.active {
+
+    background: #d9f4e5;
+
+    color: #087b40;
+
+    font-weight: 700;
+}
+
+.menu-icon {
+
+    width: 26px;
+
+    text-align: center;
+
+    font-size: 21px;
+}
+
+
+/* Sidebar slogan */
+
+.sidebar-slogan {
+
+    position: absolute;
+
+    bottom: 20px;
+
+    left: 35px;
+
+    text-align: center;
+
+    color: #23834c;
+}
+
+.slogan-leaf {
+
+    font-size: 66px;
+
+    line-height: 0.7;
+}
+
+.sidebar-slogan p {
+
+    margin-top: 8px;
+
+    font-family: cursive;
+
+    font-size: 18px;
+
+    line-height: 1.05;
+
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+
+    margin-left: 270px;
+
+    padding: 105px 25px 30px;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.page-card {
+
+    max-width: 1350px;
+
+    min-height: 745px;
+
+    margin: auto;
+
+    background: white;
+
+    border: 1px solid #e0e9ee;
+
+    border-radius: 15px;
+
+    box-shadow: var(--shadow);
+
+    overflow: hidden;
+
+    display: grid;
+
+    grid-template-columns: 220px 1fr;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.progress-panel {
+
+    padding: 32px 25px;
+
+    border-right: 1px solid #e6edf0;
+}
+
+.step {
+
+    position: relative;
+
+    display: flex;
+
+    gap: 15px;
+
+    min-height: 100px;
+}
+
+.step:not(:last-child)::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 19px;
+
+    top: 42px;
+
+    width: 3px;
+
+    height: 60px;
+
+    background: #dce6eb;
+}
+
+.step.completed:not(:last-child)::after {
+
+    background: var(--green);
+}
+
+
+/* Circle */
+
+.step-circle {
+
+    width: 40px;
+
+    height: 40px;
+
+    min-width: 40px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #e2eaf0;
+
+    color: #31516b;
+
+    font-weight: bold;
+
+    z-index: 2;
+}
+
+.step.completed .step-circle {
+
+    background: var(--green);
+
+    color: white;
+
+    font-size: 21px;
+}
+
+.step.active .step-circle {
+
+    background: #123b5d;
+
+    color: white;
+}
+
+
+/* Step text */
+
+.step-text {
+
+    padding-top: 4px;
+}
+
+.step-text strong {
+
+    display: block;
+
+    font-size: 17px;
+
+    color: var(--navy);
+}
+
+.step.completed .step-text strong {
+
+    color: var(--green-dark);
+}
+
+.step-text span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #6d7e8d;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.content {
+
+    padding: 30px 30px;
+
+    overflow: hidden;
+}
+
+
+/* Heading */
+
+.page-heading h1 {
+
+    font-size: 31px;
+
+    color: #092d4e;
+
+    margin-bottom: 4px;
+}
+
+.page-heading p {
+
+    font-size: 18px;
+
+    color: #657a8b;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================================
+   LOCATION AREA
+========================================================= */
+
+.location-area {
+
+    display: grid;
+
+    grid-template-columns: 365px 1fr;
+
+    gap: 25px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.form-panel {
+
+    width: 100%;
+}
+
+.form-group {
+
+    margin-bottom: 20px;
+}
+
+.form-group label {
+
+    display: block;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: #102d4c;
+
+    margin-bottom: 8px;
+}
+
+
+/* Select */
+
+.select-wrapper {
+
+    position: relative;
+}
+
+.select-wrapper select {
+
+    width: 100%;
+
+    height: 53px;
+
+    border: 1px solid #d4e0e6;
+
+    border-radius: 9px;
+
+    padding: 0 42px 0 17px;
+
+    font-size: 16px;
+
+    color: #274863;
+
+    background: white;
+
+    outline: none;
+
+    appearance: none;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.select-wrapper select:focus {
+
+    border-color: var(--green);
+
+    box-shadow:
+        0 0 0 3px rgba(8,148,71,.08);
+}
+
+.select-arrow {
+
+    position: absolute;
+
+    right: 17px;
+
+    top: 15px;
+
+    pointer-events: none;
+
+    font-size: 19px;
+
+    color: #42617a;
+}
+
+
+/* Current location */
+
+.current-location-btn {
+
+    width: 100%;
+
+    height: 54px;
+
+    border: 1px solid #a7d5ed;
+
+    background: #f9fcff;
+
+    border-radius: 9px;
+
+    color: #0b55a3;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    transition: 0.2s;
+}
+
+.current-location-btn:hover {
+
+    background: #edf7ff;
+
+    border-color: #7cbfe2;
+}
+
+
+/* =========================================================
+   MAP
+========================================================= */
+
+.map-container {
+
+    height: 505px;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    position: relative;
+
+    border: 1px solid #dbe5e9;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d9efd9,
+            #edf5dc 35%,
+            #d8ebd3 60%,
+            #d7e9d0
+        );
+}
+
+
+/* Map roads */
+
+.road {
+
+    position: absolute;
+
+    background: rgba(255,255,255,.8);
+
+    transform-origin: center;
+
+    box-shadow:
+        0 0 2px rgba(100,100,100,.2);
+}
+
+.road.one {
+
+    width: 130%;
+
+    height: 8px;
+
+    top: 44%;
+
+    left: -15%;
+
+    transform: rotate(-10deg);
+}
+
+.road.two {
+
+    width: 130%;
+
+    height: 7px;
+
+    top: 70%;
+
+    left: -15%;
+
+    transform: rotate(14deg);
+}
+
+.road.three {
+
+    width: 7px;
+
+    height: 130%;
+
+    top: -15%;
+
+    left: 54%;
+
+    transform: rotate(11deg);
+}
+
+.road.four {
+
+    width: 6px;
+
+    height: 130%;
+
+    top: -15%;
+
+    left: 30%;
+
+    transform: rotate(-25deg);
+}
+
+
+/* Smaller roads */
+
+.small-road {
+
+    position: absolute;
+
+    width: 350px;
+
+    height: 3px;
+
+    background: rgba(255,255,255,.75);
+
+    transform: rotate(28deg);
+}
+
+
+/* Water */
+
+.water {
+
+    position: absolute;
+
+    width: 180px;
+
+    height: 480px;
+
+    right: -70px;
+
+    top: -80px;
+
+    background: rgba(145, 207, 223, .35);
+
+    transform: rotate(20deg);
+
+    border-radius: 50%;
+}
+
+
+/* Map labels */
+
+.map-label {
+
+    position: absolute;
+
+    color: #243e4c;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    text-shadow:
+        0 1px 2px white;
+}
+
+.label-guntur {
+
+    top: 105px;
+
+    left: 47%;
+}
+
+.label-kothapalli {
+
+    top: 250px;
+
+    left: 27%;
+}
+
+.label-tenali {
+
+    top: 125px;
+
+    left: 5%;
+}
+
+.label-vijayawada {
+
+    top: 15px;
+
+    right: 12px;
+
+    font-weight: 600;
+}
+
+.label-narasaraopet {
+
+    top: 305px;
+
+    left: 4%;
+}
+
+.label-pedakakani {
+
+    top: 80px;
+
+    right: 22%;
+}
+
+.label-amaravathi {
+
+    top: 210px;
+
+    right: 5%;
+}
+
+.label-ponnur {
+
+    bottom: 75px;
+
+    left: 10%;
+}
+
+.label-mangalagiri {
+
+    bottom: 55px;
+
+    right: 22%;
+}
+
+
+/* Search */
+
+.map-search {
+
+    position: absolute;
+
+    top: 17px;
+
+    left: 20px;
+
+    right: 145px;
+
+    height: 53px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.1);
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 15px;
+
+    z-index: 20;
+}
+
+.map-search span {
+
+    font-size: 25px;
+
+    color: #385b73;
+
+    margin-right: 12px;
+}
+
+.map-search input {
+
+    border: none;
+
+    outline: none;
+
+    width: 100%;
+
+    font-size: 15px;
+
+    color: #23475e;
+}
+
+
+/* Radius */
+
+.radius-circle {
+
+    position: absolute;
+
+    width: 315px;
+
+    height: 315px;
+
+    border-radius: 50%;
+
+    background: rgba(82, 190, 150, .13);
+
+    border: 2px solid rgba(36, 129, 188, .55);
+
+    left: 50%;
+
+    top: 55%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 5;
+
+    transition: 0.4s;
+}
+
+
+/* Location marker */
+
+.location-marker {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 55%;
+
+    transform: translate(-50%, -100%);
+
+    z-index: 30;
+
+    cursor: pointer;
+
+    transition:
+        left .5s,
+        top .5s;
+}
+
+.marker-pin {
+
+    width: 34px;
+
+    height: 45px;
+
+    background: #e51d2a;
+
+    border-radius: 50% 50% 50% 0;
+
+    transform: rotate(-45deg);
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.25);
+
+    position: relative;
+}
+
+.marker-pin::after {
+
+    content: "";
+
+    width: 13px;
+
+    height: 13px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    position: absolute;
+
+    top: 10px;
+
+    left: 10px;
+}
+
+.marker-text {
+
+    position: absolute;
+
+    left: 45px;
+
+    top: 7px;
+
+    white-space: nowrap;
+
+    font-weight: 700;
+
+    color: #1e3545;
+
+    text-shadow:
+        0 1px 2px white;
+}
+
+
+/* Business points */
+
+.business-point {
+
+    position: absolute;
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: #1976d2;
+
+    border: 3px solid white;
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,.25);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+
+    font-size: 12px;
+
+    z-index: 12;
+
+    cursor: pointer;
+
+    transition: transform .2s;
+}
+
+.business-point:hover {
+
+    transform: scale(1.15);
+}
+
+.point1 {
+    left: 43%;
+    top: 25%;
+}
+
+.point2 {
+    left: 62%;
+    top: 68%;
+}
+
+.point3 {
+    left: 30%;
+    top: 65%;
+}
+
+.point4 {
+    left: 72%;
+    top: 48%;
+}
+
+.point5 {
+    left: 50%;
+    top: 35%;
+}
+
+.point6 {
+    left: 40%;
+    top: 80%;
+}
+
+
+/* Restaurants / market points */
+
+.market-point {
+
+    position: absolute;
+
+    width: 30px;
+
+    height: 30px;
+
+    border-radius: 50%;
+
+    background: #f28c18;
+
+    border: 3px solid white;
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,.25);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: white;
+
+    z-index: 12;
+
+    font-size: 13px;
+}
+
+.market1 {
+
+    left: 50%;
+
+    top: 47%;
+}
+
+.market2 {
+
+    left: 66%;
+
+    top: 35%;
+}
+
+
+/* Map controls */
+
+.map-control {
+
+    position: absolute;
+
+    right: 14px;
+
+    top: 15px;
+
+    width: 54px;
+
+    height: 54px;
+
+    background: white;
+
+    border: none;
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.12);
+
+    font-size: 23px;
+
+    color: #2b4b64;
+
+    cursor: pointer;
+
+    z-index: 20;
+}
+
+.map-control.location {
+
+    top: 83px;
+}
+
+.zoom-control {
+
+    position: absolute;
+
+    right: 14px;
+
+    bottom: 16px;
+
+    width: 52px;
+
+    background: white;
+
+    border-radius: 9px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 3px 10px rgba(0,0,0,.13);
+
+    z-index: 20;
+}
+
+.zoom-control button {
+
+    width: 52px;
+
+    height: 52px;
+
+    background: white;
+
+    border: none;
+
+    font-size: 28px;
+
+    cursor: pointer;
+
+    color: #294b64;
+}
+
+.zoom-control button + button {
+
+    border-top: 1px solid #e2e8ec;
+}
+
+
+/* Radius legend */
+
+.radius-label {
+
+    position: absolute;
+
+    left: 18px;
+
+    bottom: 15px;
+
+    background: white;
+
+    padding: 9px 14px;
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.12);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    z-index: 20;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.radius-dot {
+
+    width: 25px;
+
+    height: 25px;
+
+    border-radius: 50%;
+
+    background: rgba(30,160,100,.12);
+
+    border: 2px solid #179452;
+}
+
+
+/* =========================================================
+   BOTTOM BUTTONS
+========================================================= */
+
+.actions {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 25px;
+
+    gap: 25px;
+}
+
+.action-btn {
+
+    height: 55px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.back-btn {
+
+    width: 230px;
+
+    background: #edf3f7;
+
+    color: #35536a;
+}
+
+.back-btn:hover {
+
+    background: #e2ebf0;
+}
+
+.continue-btn {
+
+    flex: 1;
+
+    background: var(--green);
+
+    color: white;
+}
+
+.continue-btn:hover {
+
+    background: #067c3e;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+
+    position: fixed;
+
+    right: 25px;
+
+    bottom: 25px;
+
+    background: #123c59;
+
+    color: white;
+
+    padding: 14px 20px;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 5px 20px rgba(0,0,0,.2);
+
+    transform: translateY(100px);
+
+    opacity: 0;
+
+    transition: .3s;
+
+    z-index: 5000;
+}
+
+.toast.show {
+
+    transform: translateY(0);
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1100px) {
+
+    .sidebar {
+
+        width: 220px;
+    }
+
+    .main {
+
+        margin-left: 220px;
+    }
+
+    .page-card {
+
+        grid-template-columns: 190px 1fr;
+    }
+
+    .location-area {
+
+        grid-template-columns: 1fr;
+    }
+
+    .map-container {
+
+        height: 430px;
+    }
+
+}
+
+
+@media(max-width:850px) {
+
+    .sidebar {
+
+        width: 75px;
+    }
+
+    .main {
+
+        margin-left: 75px;
+    }
+
+    .menu-item {
+
+        justify-content: center;
+
+        padding: 0;
+    }
+
+    .menu-item span:last-child {
+
+        display: none;
+    }
+
+    .sidebar-slogan {
+
+        display: none;
+    }
+
+    .page-card {
+
+        grid-template-columns: 1fr;
+    }
+
+    .progress-panel {
+
+        border-right: none;
+
+        border-bottom: 1px solid #e4ecef;
+
+        display: flex;
+
+        padding: 18px 25px;
+    }
+
+    .step {
+
+        flex: 1;
+
+        min-height: auto;
+    }
+
+    .step:not(:last-child)::after {
+
+        display: none;
+    }
+
+}
+
+
+@media(max-width:600px) {
+
+    .header {
+
+        height: 70px;
+
+        padding: 0 12px;
+    }
+
+    .brand-name {
+
+        font-size: 21px;
+    }
+
+    .brand-text,
+    .brand-line,
+    .welcome,
+    .header-divider {
+
+        display: none;
+    }
+
+    .header-location {
+
+        font-size: 13px;
+    }
+
+    .sidebar {
+
+        display: none;
+    }
+
+    .main {
+
+        margin-left: 0;
+
+        padding: 85px 10px 20px;
+    }
+
+    .content {
+
+        padding: 20px 15px;
+    }
+
+    .page-heading h1 {
+
+        font-size: 24px;
+    }
+
+    .page-heading p {
+
+        font-size: 15px;
+    }
+
+    .location-area {
+
+        grid-template-columns: 1fr;
+    }
+
+    .map-container {
+
+        height: 390px;
+    }
+
+    .radius-circle {
+
+        width: 245px;
+
+        height: 245px;
+    }
+
+    .map-search {
+
+        right: 15px;
+    }
+
+    .actions {
+
+        flex-direction: column-reverse;
+    }
+
+    .back-btn {
+
+        width: 100%;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header">
+
+
+    <div class="logo-area">
+
+        <div class="logo-icon">
+            🌿
+        </div>
+
+        <div class="brand">
+
+            <div class="brand-name">
+                VYENTRA
+            </div>
+
+            <div class="brand-line"></div>
+
+            <div class="brand-text">
+                Smart Business Decisions<br>
+                for a Better Tomorrow
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <div
+            class="header-location"
+            onclick="showToast('Current location: ' + getLocationText())"
+        >
+
+            📍
+
+            <span id="headerLocation">
+                Kothapalli, Guntur
+            </span>
+
+            ▾
+
+        </div>
+
+
+        <div class="header-divider"></div>
+
+
+        <div class="welcome">
+            Welcome, Entrepreneur!
+        </div>
+
+
+        <div class="profile-icon">
+            👤
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     SIDEBAR
+========================================================= -->
+
+<aside class="sidebar">
+
+    <ul class="menu">
+
+
+        <li
+            class="menu-item"
+            onclick="navigateMenu(this,'Dashboard')"
+        >
+
+            <span class="menu-icon">
+                🏠
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
+        </li>
+
+
+        <li
+            class="menu-item active"
+            onclick="navigateMenu(this,'Location')"
+        >
+
+            <span class="menu-icon">
+                📍
+            </span>
+
+            <span>
+                Location
+            </span>
+
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="navigateMenu(this,'Local Analysis')"
+        >
+
+            <span class="menu-icon">
+                📊
+            </span>
+
+            <span>
+                Local Analysis
+            </span>
+
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="navigateMenu(this,'Market Analysis')"
+        >
+
+            <span class="menu-icon">
+                📈
+            </span>
+
+            <span>
+                Market Analysis
+            </span>
+
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="navigateMenu(this,'Financial Planner')"
+        >
+
+            <span class="menu-icon">
+                🧮
+            </span>
+
+            <span>
+                Financial Planner
+            </span>
+
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="navigateMenu(this,'Government Schemes')"
+        >
+
+            <span class="menu-icon">
+                🏛️
+            </span>
+
+            <span>
+                Government Schemes
+            </span>
+
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="navigateMenu(this,'AI Advisor')"
+        >
+
+            <span class="menu-icon">
+                🤖
+            </span>
+
+            <span>
+                AI Advisor
+            </span>
+
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="navigateMenu(this,'Business Plan')"
+        >
+
+            <span class="menu-icon">
+                💡
+            </span>
+
+            <span>
+                Business Plan
+            </span>
+
+        </li>
+
+
+    </ul>
+
+
+    <div class="sidebar-slogan">
+
+        <div class="slogan-leaf">
+            🌿
+        </div>
+
+        <p>
+            Small<br>
+            Entrepreneurs<br>
+            Big Possibilities
+        </p>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main">
+
+
+    <div class="page-card">
+
+
+        <!-- =====================================================
+             PROGRESS
+        ===================================================== -->
+
+        <section class="progress-panel">
+
+
+            <div class="step completed">
+
+                <div class="step-circle">
+                    ✓
+                </div>
+
+                <div class="step-text">
+
+                    <strong>
+                        Profile
+                    </strong>
+
+                    <span>
+                        Completed
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="step completed">
+
+                <div class="step-circle">
+                    ✓
+                </div>
+
+                <div class="step-text">
+
+                    <strong>
+                        Business
+                    </strong>
+
+                    <span>
+                        Your business
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="step active">
+
+                <div
+                    class="step-circle"
+                    id="locationStep"
+                >
+                    3
+                </div>
+
+                <div class="step-text">
+
+                    <strong>
+                        Location
+                    </strong>
+
+                    <span id="locationStatus">
+                        Select your location
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             CONTENT
+        ===================================================== -->
+
+        <section class="content">
+
+
+            <div class="page-heading">
+
+                <h1>
+                    Where Do You Want to Start Your Business?
+                </h1>
+
+                <p>
+                    Choose your location to get hyper-local insights.
+                </p>
+
+            </div>
+
+
+
+            <div class="location-area">
+
+
+                <!-- =================================================
+                     FORM
+                ================================================= -->
+
+                <div class="form-panel">
+
+
+                    <!-- State -->
+
+                    <div class="form-group">
+
+                        <label>
+                            State
+                        </label>
+
+                        <div class="select-wrapper">
+
+                            <select
+                                id="stateSelect"
+                                onchange="stateChanged()"
+                            >
+
+                                <option value="">
+                                    Select state
+                                </option>
+
+                                <option
+                                    value="Andhra Pradesh"
+                                    selected
+                                >
+                                    Andhra Pradesh
+                                </option>
+
+                                <option value="Telangana">
+                                    Telangana
+                                </option>
+
+                                <option value="Karnataka">
+                                    Karnataka
+                                </option>
+
+                                <option value="Tamil Nadu">
+                                    Tamil Nadu
+                                </option>
+
+                                <option value="Maharashtra">
+                                    Maharashtra
+                                </option>
+
+                            </select>
+
+                            <span class="select-arrow">
+                               ⌄
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- District -->
+
+                    <div class="form-group">
+
+                        <label>
+                            District
+                        </label>
+
+                        <div class="select-wrapper">
+
+                            <select
+                                id="districtSelect"
+                                onchange="districtChanged()"
+                            >
+
+                                <option value="">
+                                    Select district
+                                </option>
+
+                                <option
+                                    value="Guntur"
+                                    selected
+                                >
+                                    Guntur
+                                </option>
+
+                                <option value="Vijayawada">
+                                    NTR
+                                </option>
+
+                                <option value="Palnadu">
+                                    Palnadu
+                                </option>
+
+                                <option value="Bapatla">
+                                    Bapatla
+                                </option>
+
+                            </select>
+
+                            <span class="select-arrow">
+                                ⌄
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Mandal -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Block / Mandal
+                        </label>
+
+                        <div class="select-wrapper">
+
+                            <select
+                                id="mandalSelect"
+                                onchange="mandalChanged()"
+                            >
+
+                                <option value="">
+                                    Select mandal
+                                </option>
+
+                                <option
+                                    value="Pedakakani"
+                                >
+                                    Pedakakani
+                                </option>
+
+                                <option
+                                    value="Mangalagiri"
+                                >
+                                    Mangalagiri
+                                </option>
+
+                                <option
+                                    value="Tadikonda"
+                                >
+                                    Tadikonda
+                                </option>
+
+                                <option
+                                    value="Thullur"
+                                >
+                                    Thullur
+                                </option>
+
+                            </select>
+
+                            <span class="select-arrow">
+                                ⌄
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Village -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Village
+                        </label>
+
+                        <div class="select-wrapper">
+
+                            <select
+                                id="villageSelect"
+                                onchange="villageChanged()"
+                            >
+
+                                <option value="">
+                                    Select village
+                                </option>
+
+                                <option
+                                    value="Kothapalli"
+                                    selected
+                                >
+                                    Kothapalli
+                                </option>
+
+                                <option
+                                    value="Namburu"
+                                >
+                                    Namburu
+                                </option>
+
+                                <option
+                                    value="Ponnekallu"
+                                >
+                                    Ponnekallu
+                                </option>
+
+                                <option
+                                    value="Undavalli"
+                                >
+                                    Undavalli
+                                </option>
+
+                            </select>
+
+                            <span class="select-arrow">
+                                ⌄
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Current Location -->
+
+                    <button
+                        class="current-location-btn"
+                        onclick="useCurrentLocation()"
+                    >
+
+                        📍
+
+                        Use Current Location
+
+                    </button>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     MAP
+                ================================================= -->
+
+                <div class="map-container" id="map">
+
+
+                    <!-- Map background -->
+
+                    <div class="water"></div>
+
+                    <div class="road one"></div>
+                    <div class="road two"></div>
+                    <div class="road three"></div>
+                    <div class="road four"></div>
+
+                    <div class="small-road"
+                         style="top:30%;left:5%;">
+                    </div>
+
+                    <div class="small-road"
+                         style="top:58%;left:40%;">
+                    </div>
+
+
+
+                    <!-- Search -->
+
+                    <div class="map-search">
+
+                        <span>
+                            ⌕
+                        </span>
+
+                        <input
+                            id="mapSearch"
+                            type="text"
+                            placeholder="Search location..."
+                            onkeyup="searchLocation(event)"
+                        >
+
+                    </div>
+
+
+
+                    <!-- Map labels -->
+
+                    <span class="map-label label-guntur">
+                        Guntur
+                    </span>
+
+                    <span class="map-label label-kothapalli">
+                        Kothapalli
+                    </span>
+
+                    <span class="map-label label-tenali">
+                        Tenali
+                    </span>
+
+                    <span class="map-label label-vijayawada">
+                        Vijayawada →
+                    </span>
+
+                    <span class="map-label label-narasaraopet">
+                        ← Narasaraopet
+                    </span>
+
+                    <span class="map-label label-pedakakani">
+                        Pedakakani
+                    </span>
+
+                    <span class="map-label label-amaravathi">
+                        Amaravathi →
+                    </span>
+
+                    <span class="map-label label-ponnur">
+                        Ponnur
+                    </span>
+
+                    <span class="map-label label-mangalagiri">
+                        Mangalagiri
+                    </span>
+
+
+
+                    <!-- Radius -->
+
+                    <div
+                        class="radius-circle"
+                        id="radiusCircle"
+                    >
+                    </div>
+
+
+
+                    <!-- Business points -->
+
+                    <div
+                        class="business-point point1"
+                        title="Nearby business"
+                    >
+                        🏪
+                    </div>
+
+                    <div
+                        class="business-point point2"
+                        title="Nearby business"
+                    >
+                        🏪
+                    </div>
+
+                    <div
+                        class="business-point point3"
+                        title="Nearby business"
+                    >
+                        🏪
+                    </div>
+
+                    <div
+                        class="business-point point4"
+                        title="Nearby business"
+                    >
+                        🏪
+                    </div>
+
+                    <div
+                        class="business-point point5"
+                        title="Nearby business"
+                    >
+                        🏪
+                    </div>
+
+                    <div
+                        class="business-point point6"
+                        title="Nearby business"
+                    >
+                        🏪
+                    </div>
+
+
+
+                    <!-- Market points -->
+
+                    <div
+                        class="market-point market1"
+                        title="Local market"
+                    >
+                        🍴
+                    </div>
+
+                    <div
+                        class="market-point market2"
+                        title="Local market"
+                    >
+                        🍴
+                    </div>
+
+
+
+                    <!-- Location -->
+
+                    <div
+                        class="location-marker"
+                        id="locationMarker"
+                        title="Your selected location"
+                    >
+
+                        <div class="marker-pin"></div>
+
+                        <span class="marker-text">
+                            Your Location
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- Map Controls -->
+
+                    <button
+                        class="map-control"
+                        onclick="resetMap()"
+                        title="Reset map"
+                    >
+                        ◎
+                    </button>
+
+
+                    <button
+                        class="map-control location"
+                        onclick="useCurrentLocation()"
+                        title="Current location"
+                    >
+                        ⌖
+                    </button>
+
+
+
+                    <!-- Zoom -->
+
+                    <div class="zoom-control">
+
+                        <button
+                            onclick="zoomMap(1)"
+                        >
+                            +
+                        </button>
+
+                        <button
+                            onclick="zoomMap(-1)"
+                        >
+                            −
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- Radius label -->
+
+                    <div class="radius-label">
+
+                        <span class="radius-dot"></span>
+
+                        <span>
+                            10 km radius
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 ACTIONS
+            ===================================================== -->
+
+            <div class="actions">
+
+                <button
+                    class="action-btn back-btn"
+                    onclick="goBack()"
+                >
+                    Back
+                </button>
+
+
+                <button
+                    class="action-btn continue-btn"
+                    onclick="continuePage()"
+                >
+                    Continue &nbsp; →
+                </button>
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    class="toast"
+    id="toast"
+>
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   VYENTRA LOCATION PAGE JAVASCRIPT
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   DATA
+--------------------------------------------------------- */
+
+const locationData = {
+
+    "Andhra Pradesh": {
+
+        "Guntur": {
+
+            "Pedakakani": [
+                "Kothapalli",
+                "Namburu",
+                "Ponnekallu"
+            ],
+
+            "Mangalagiri": [
+                "Undavalli",
+                "Nowlur",
+                "Atmakur"
+            ],
+
+            "Tadikonda": [
+                "Tadikonda",
+                "Ponnekallu",
+                "Lalapuram"
+            ]
+
+        }
+
+    },
+
+    "Telangana": {
+
+        "Hyderabad": {
+
+            "Madhapur": [
+                "Madhapur",
+                "Kondapur"
+            ],
+
+            "Serilingampally": [
+                "Chandanagar",
+                "Lingampally"
+            ]
+
+        }
+
+    },
+
+    "Karnataka": {
+
+        "Bengaluru": {
+
+            "Anekal": [
+                "Anekal",
+                "Jigani"
+            ]
+
+        }
+
+    }
+
+};
+
+
+/* ---------------------------------------------------------
+   CURRENT LOCATION STATE
+--------------------------------------------------------- */
+
+let currentLocation = {
+
+    state: "Andhra Pradesh",
+
+    district: "Guntur",
+
+    mandal: "Pedakakani",
+
+    village: "Kothapalli"
+
+};
+
+
+/* ---------------------------------------------------------
+   STATE CHANGE
+--------------------------------------------------------- */
+
+function stateChanged() {
+
+    const state =
+        document.getElementById(
+            "stateSelect"
+        ).value;
+
+
+    const districtSelect =
+        document.getElementById(
+            "districtSelect"
+        );
+
+
+    districtSelect.innerHTML =
+        '<option value="">Select district</option>';
+
+
+    if (
+        locationData[state]
+    ) {
+
+        Object.keys(
+            locationData[state]
+        ).forEach(function(district) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                district;
+
+            option.textContent =
+                district;
+
+            districtSelect.appendChild(
+                option
+            );
+
+        });
+
+    }
+
+
+    document
+        .getElementById(
+            "mandalSelect"
+        )
+        .innerHTML =
+        '<option value="">Select mandal</option>';
+
+
+    document
+        .getElementById(
+            "villageSelect"
+        )
+        .innerHTML =
+        '<option value="">Select village</option>';
+
+
+    currentLocation.state =
+        state;
+
+    currentLocation.district =
+        "";
+
+    currentLocation.mandal =
+        "";
+
+    currentLocation.village =
+        "";
+
+}
+
+
+/* ---------------------------------------------------------
+   DISTRICT CHANGE
+--------------------------------------------------------- */
+
+function districtChanged() {
+
+    const state =
+        document.getElementById(
+            "stateSelect"
+        ).value;
+
+
+    const district =
+        document.getElementById(
+            "districtSelect"
+        ).value;
+
+
+    const mandalSelect =
+        document.getElementById(
+            "mandalSelect"
+        );
+
+
+    mandalSelect.innerHTML =
+        '<option value="">Select mandal</option>';
+
+
+    if (
+        locationData[state] &&
+        locationData[state][district]
+    ) {
+
+        Object.keys(
+            locationData[state][district]
+        ).forEach(function(mandal) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                mandal;
+
+            option.textContent =
+                mandal;
+
+            mandalSelect.appendChild(
+                option
+            );
+
+        });
+
+    }
+
+
+    document
+        .getElementById(
+            "villageSelect"
+        )
+        .innerHTML =
+        '<option value="">Select village</option>';
+
+
+    currentLocation.district =
+        district;
+
+    currentLocation.mandal =
+        "";
+
+    currentLocation.village =
+        "";
+
+}
+
+
+/* ---------------------------------------------------------
+   MANDAL CHANGE
+--------------------------------------------------------- */
+
+function mandalChanged() {
+
+    const state =
+        document.getElementById(
+            "stateSelect"
+        ).value;
+
+
+    const district =
+        document.getElementById(
+            "districtSelect"
+        ).value;
+
+
+    const mandal =
+        document.getElementById(
+            "mandalSelect"
+        ).value;
+
+
+    const villageSelect =
+        document.getElementById(
+            "villageSelect"
+        );
+
+
+    villageSelect.innerHTML =
+        '<option value="">Select village</option>';
+
+
+    const villages =
+        locationData
+        [state]
+        ?. [district]
+        ?. [mandal];
+
+
+    if (villages) {
+
+        villages.forEach(function(village) {
+
+            const option =
+                document.createElement(
+                    "option"
+                );
+
+            option.value =
+                village;
+
+            option.textContent =
+                village;
+
+            villageSelect.appendChild(
+                option
+            );
+
+        });
+
+    }
+
+
+    currentLocation.mandal =
+        mandal;
+
+}
+
+
+/* ---------------------------------------------------------
+   VILLAGE CHANGE
+--------------------------------------------------------- */
+
+function villageChanged() {
+
+    const village =
+        document.getElementById(
+            "villageSelect"
+        ).value;
+
+
+    currentLocation.village =
+        village;
+
+
+    updateLocation();
+
+}
+
+
+/* ---------------------------------------------------------
+   UPDATE LOCATION
+--------------------------------------------------------- */
+
+function updateLocation() {
+
+    const state =
+        document.getElementById(
+            "stateSelect"
+        ).value;
+
+
+    const district =
+        document.getElementById(
+            "districtSelect"
+        ).value;
+
+
+    const mandal =
+        document.getElementById(
+            "mandalSelect"
+        ).value;
+
+
+    const village =
+        document.getElementById(
+            "villageSelect"
+        ).value;
+
+
+    currentLocation = {
+
+        state,
+        district,
+        mandal,
+        village
+
+    };
+
+
+    const locationText =
+        village
+            ? village + ", " + district
+            : district;
+
+
+    document
+        .getElementById(
+            "headerLocation"
+        )
+        .textContent =
+        locationText;
+
+
+    localStorage.setItem(
+        "vyentraLocation",
+        JSON.stringify(
+            currentLocation
+        )
+    );
+
+
+    /* Move marker slightly */
+
+    moveMarker();
+
+
+    if (village) {
+
+        document
+            .getElementById(
+                "locationStatus"
+            )
+            .textContent =
+            "Location selected";
+
+        showToast(
+            "Location selected: " +
+            locationText
+        );
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   MOVE LOCATION MARKER
+--------------------------------------------------------- */
+
+function moveMarker() {
+
+    const marker =
+        document.getElementById(
+            "locationMarker"
+        );
+
+
+    const positions = {
+
+        "Kothapalli":
+            ["50%", "55%"],
+
+        "Namburu":
+            ["43%", "48%"],
+
+        "Ponnekallu":
+            ["58%", "63%"],
+
+        "Undavalli":
+            ["63%", "55%"],
+
+        "Nowlur":
+            ["67%", "45%"],
+
+        "Tadikonda":
+            ["42%", "60%"]
+
+    };
+
+
+    const village =
+        currentLocation.village;
+
+
+    if (
+        positions[village]
+    ) {
+
+        marker.style.left =
+            positions[village][0];
+
+        marker.style.top =
+            positions[village][1];
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   USE CURRENT LOCATION
+--------------------------------------------------------- */
+
+function useCurrentLocation() {
+
+    showToast(
+        "Detecting your location..."
+    );
+
+
+    if (
+        !navigator.geolocation
+    ) {
+
+        showToast(
+            "Geolocation is not supported by this browser."
+        );
+
+        return;
+
+    }
+
+
+    navigator
+        .geolocation
+        .getCurrentPosition(
+
+            function(position) {
+
+                const latitude =
+                    position.coords.latitude;
+
+                const longitude =
+                    position.coords.longitude;
+
+
+                /*
+                   For this demo we use
+                   Kothapalli as the local
+                   result.
+
+                   A real application can
+                   send latitude/longitude
+                   to Google Maps,
+                   OpenStreetMap,
+                   Mapbox or your backend
+                   geocoding API.
+                */
+
+
+                document
+                    .getElementById(
+                        "stateSelect"
+                    )
+                    .value =
+                    "Andhra Pradesh";
+
+
+                document
+                    .getElementById(
+                        "districtSelect"
+                    )
+                    .value =
+                    "Guntur";
+
+
+                document
+                    .getElementById(
+                        "mandalSelect"
+                    )
+                    .innerHTML =
+                    `
+                    <option selected>
+                        Pedakakani
+                    </option>
+                    `;
+
+
+                document
+                    .getElementById(
+                        "villageSelect"
+                    )
+                    .innerHTML =
+                    `
+                    <option selected>
+                        Kothapalli
+                    </option>
+                    `;
+
+
+                currentLocation = {
+
+                    state:
+                        "Andhra Pradesh",
+
+                    district:
+                        "Guntur",
+
+                    mandal:
+                        "Pedakakani",
+
+                    village:
+                        "Kothapalli",
+
+                    latitude:
+                        latitude,
+
+                    longitude:
+                        longitude
+
+                };
+
+
+                updateLocation();
+
+
+                showToast(
+                    "Current location detected successfully"
+                );
+
+            },
+
+            function(error) {
+
+                let message =
+                    "Unable to detect location.";
+
+
+                if (
+                    error.code ===
+                    error.PERMISSION_DENIED
+                ) {
+
+                    message =
+                        "Location permission was denied.";
+
+                }
+
+
+                showToast(
+                    message
+                );
+
+            }
+
+        );
+
+}
+
+
+/* ---------------------------------------------------------
+   SEARCH LOCATION
+--------------------------------------------------------- */
+
+function searchLocation(event) {
+
+    if (
+        event.key !== "Enter"
+    ) {
+
+        return;
+
+    }
+
+
+    const search =
+        document
+        .getElementById(
+            "mapSearch"
+        )
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    if (!search) {
+
+        return;
+
+    }
+
+
+    const locations = {
+
+        "kothapalli":
+            ["50%", "55%"],
+
+        "guntur":
+            ["55%", "40%"],
+
+        "tenali":
+            ["22%", "35%"],
+
+        "vijayawada":
+            ["80%", "25%"],
+
+        "amaravathi":
+            ["78%", "45%"],
+
+        "ponnur":
+            ["28%", "76%"],
+
+        "mangalagiri":
+            ["72%", "70%"]
+
+    };
+
+
+    const result =
+        locations[search];
+
+
+    if (!result) {
+
+        showToast(
+            "Location not found in demo map"
+        );
+
+        return;
+
+    }
+
+
+    const marker =
+        document.getElementById(
+            "locationMarker"
+        );
+
+
+    marker.style.left =
+        result[0];
+
+    marker.style.top =
+        result[1];
+
+
+    showToast(
+        "Showing " +
+        search
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   ZOOM MAP
+--------------------------------------------------------- */
+
+let mapScale = 1;
+
+
+function zoomMap(direction) {
+
+    mapScale +=
+        direction * 0.1;
+
+
+    if (
+        mapScale < 0.7
+    ) {
+
+        mapScale = 0.7;
+
+    }
+
+
+    if (
+        mapScale > 1.5
+    ) {
+
+        mapScale = 1.5;
+
+    }
+
+
+    const radius =
+        document.getElementById(
+            "radiusCircle"
+        );
+
+
+    radius.style.transform =
+        `translate(-50%, -50%) scale(${mapScale})`;
+
+
+    showToast(
+        "Map zoom: " +
+        Math.round(
+            mapScale * 100
+        ) +
+        "%"
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   RESET MAP
+--------------------------------------------------------- */
+
+function resetMap() {
+
+    mapScale = 1;
+
+
+    const radius =
+        document.getElementById(
+            "radiusCircle"
+        );
+
+
+    radius.style.transform =
+        "translate(-50%, -50%) scale(1)";
+
+
+    const marker =
+        document.getElementById(
+            "locationMarker"
+        );
+
+
+    marker.style.left =
+        "50%";
+
+    marker.style.top =
+        "55%";
+
+
+    showToast(
+        "Map reset"
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   CONTINUE
+--------------------------------------------------------- */
+
+function continuePage() {
+
+    const state =
+        document.getElementById(
+            "stateSelect"
+        ).value;
+
+
+    const district =
+        document.getElementById(
+            "districtSelect"
+        ).value;
+
+
+    const mandal =
+        document.getElementById(
+            "mandalSelect"
+        ).value;
+
+
+    const village =
+        document.getElementById(
+            "villageSelect"
+        ).value;
+
+
+    if (
+        !state ||
+        !district ||
+        !mandal ||
+        !village
+    ) {
+
+        showToast(
+            "Please select your complete location."
+        );
+
+        return;
+
+    }
+
+
+    const location = {
+
+        state,
+        district,
+        mandal,
+        village
+
+    };
+
+
+    localStorage.setItem(
+        "vyentraLocation",
+        JSON.stringify(location)
+    );
+
+
+    showToast(
+        "Location saved. Opening Local Analysis..."
+    );
+
+
+    /*
+       Connect this to your next page:
+
+       window.location.href =
+       "local-analysis.html";
+    */
+
+
+    setTimeout(function() {
+
+        alert(
+            "Location Saved Successfully!\n\n" +
+
+            "State: " +
+            state +
+
+            "\nDistrict: " +
+            district +
+
+            "\nMandal: " +
+            mandal +
+
+            "\nVillage: " +
+            village +
+
+            "\n\nNext Page: Local Analysis"
+        );
+
+    }, 500);
+
+}
+
+
+/* ---------------------------------------------------------
+   BACK
+--------------------------------------------------------- */
+
+function goBack() {
+
+    showToast(
+        "Going back to Business Selection..."
+    );
+
+
+    /*
+       Connect to your previous page:
+
+       window.location.href =
+       "business-selection.html";
+    */
+
+}
+
+
+/* ---------------------------------------------------------
+   SIDEBAR NAVIGATION
+--------------------------------------------------------- */
+
+function navigateMenu(
+    element,
+    name
+) {
+
+    document
+        .querySelectorAll(
+            ".menu-item"
+        )
+        .forEach(function(item) {
+
+            item.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    element.classList.add(
+        "active"
+    );
+
+
+    showToast(
+        name +
+        " selected"
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   LOCATION TEXT
+--------------------------------------------------------- */
+
+function getLocationText() {
+
+    if (
+        currentLocation.village
+    ) {
+
+        return (
+            currentLocation.village +
+            ", " +
+            currentLocation.district
+        );
+
+    }
+
+
+    return currentLocation.district;
+
+}
+
+
+/* ---------------------------------------------------------
+   TOAST
+--------------------------------------------------------- */
+
+let toastTimer;
+
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(function() {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        }, 2500);
+
+}
+
+
+/* ---------------------------------------------------------
+   LOAD SAVED LOCATION
+--------------------------------------------------------- */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const saved =
+            localStorage.getItem(
+                "vyentraLocation"
+            );
+
+
+        if (!saved) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const location =
+                JSON.parse(saved);
+
+
+            if (
+                location.state
+            ) {
+
+                document
+                    .getElementById(
+                        "stateSelect"
+                    )
+                    .value =
+                    location.state;
+
+            }
+
+
+            if (
+                location.district
+            ) {
+
+                document
+                    .getElementById(
+                        "districtSelect"
+                    )
+                    .value =
+                    location.district;
+
+            }
+
+
+            if (
+                location.mandal
+            ) {
+
+                document
+                    .getElementById(
+                        "mandalSelect"
+                    )
+                    .value =
+                    location.mandal;
+
+            }
+
+
+            if (
+                location.village
+            ) {
+
+                document
+                    .getElementById(
+                        "villageSelect"
+                    )
+                    .value =
+                    location.village;
+
+            }
+
+
+            currentLocation =
+                location;
+
+
+            updateLocation();
+
+
+        } catch(error) {
+
+            console.log(
+                "No saved location"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

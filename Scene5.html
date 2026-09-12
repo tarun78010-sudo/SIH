@@ -1,0 +1,2183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VYENTRA - Choose Your Business</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --green: #079447;
+    --green-dark: #08763d;
+    --green-light: #e4f7ed;
+
+    --navy: #123858;
+    --navy-dark: #092c4a;
+
+    --text: #183b57;
+    --muted: #63788b;
+
+    --border: #dce7ed;
+    --background: #f5fafc;
+    --white: #ffffff;
+
+    --shadow: 0 3px 15px rgba(23, 67, 91, 0.08);
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+    height: 80px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    border-bottom: 1px solid #e1e9ee;
+
+    z-index: 1000;
+
+    box-shadow: 0 2px 8px rgba(20, 70, 100, 0.05);
+}
+
+
+/* Logo */
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 35px;
+}
+
+.logo::before {
+    content: "🌿";
+}
+
+
+/* Brand */
+
+.brand-section {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.brand-name {
+    font-size: 28px;
+    font-weight: 800;
+    color: #116c55;
+    letter-spacing: 1px;
+}
+
+.vertical-line {
+    height: 40px;
+    width: 2px;
+    background: #9eabb5;
+}
+
+.tagline {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #17415e;
+}
+
+
+/* User section */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.current-location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    color: var(--text);
+}
+
+.header-divider {
+    height: 30px;
+    width: 1px;
+    background: #d8e1e6;
+}
+
+.welcome {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.profile {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+
+    background: #edf2f7;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    position: fixed;
+
+    top: 80px;
+    bottom: 0;
+    left: 0;
+
+    width: 270px;
+
+    background: white;
+
+    border-right: 1px solid #dce6eb;
+
+    padding: 26px 15px;
+
+    z-index: 900;
+}
+
+
+/* Menu */
+
+.menu {
+    list-style: none;
+}
+
+.menu-item {
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 17px;
+
+    padding: 0 20px;
+
+    margin-bottom: 6px;
+
+    border-radius: 10px;
+
+    color: #153d5b;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.menu-item:hover {
+    background: #eff9f5;
+    transform: translateX(2px);
+}
+
+.menu-item.active {
+    background: #ddf5e8;
+    color: #08783f;
+    font-weight: 700;
+}
+
+.menu-icon {
+    width: 25px;
+    text-align: center;
+    font-size: 21px;
+}
+
+
+/* Sidebar bottom */
+
+.sidebar-bottom {
+    position: absolute;
+
+    left: 40px;
+    bottom: 22px;
+
+    text-align: center;
+}
+
+.leaf {
+    font-size: 67px;
+    line-height: 0.7;
+}
+
+.sidebar-bottom p {
+    margin-top: 8px;
+
+    color: #22864c;
+
+    font-family: cursive;
+
+    font-weight: bold;
+
+    font-size: 18px;
+
+    line-height: 1.05;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main {
+    margin-left: 270px;
+
+    padding: 105px 28px 35px;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   PAGE CARD
+========================================================= */
+
+.page-container {
+    max-width: 1320px;
+
+    margin: auto;
+
+    background: white;
+
+    border-radius: 15px;
+
+    border: 1px solid #e2ebef;
+
+    box-shadow: var(--shadow);
+
+    min-height: 720px;
+
+    display: grid;
+
+    grid-template-columns: 250px 1fr;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   PROGRESS AREA
+========================================================= */
+
+.progress-area {
+    padding: 30px 25px;
+
+    border-right: 1px solid #edf1f3;
+
+    background: #ffffff;
+}
+
+
+/* Progress step */
+
+.step {
+    position: relative;
+
+    display: flex;
+
+    gap: 15px;
+
+    min-height: 100px;
+}
+
+
+/* vertical line */
+
+.step:not(:last-child)::after {
+    content: "";
+
+    position: absolute;
+
+    left: 19px;
+    top: 42px;
+
+    width: 3px;
+    height: 60px;
+
+    background: #dce7ec;
+}
+
+.step.completed:not(:last-child)::after {
+    background: var(--green);
+}
+
+
+/* circle */
+
+.step-circle {
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #e5edf2;
+
+    color: #37556d;
+
+    font-weight: 700;
+
+    z-index: 2;
+}
+
+.step.completed .step-circle {
+    background: var(--green);
+
+    color: white;
+
+    font-size: 21px;
+}
+
+
+/* step text */
+
+.step-title {
+    padding-top: 4px;
+}
+
+.step-title strong {
+    display: block;
+
+    font-size: 17px;
+
+    color: var(--navy);
+}
+
+.step.completed .step-title strong {
+    color: var(--green-dark);
+}
+
+.step-title span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #687b8a;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   BUSINESS CONTENT
+========================================================= */
+
+.content {
+    padding: 32px 30px;
+
+    position: relative;
+}
+
+
+/* Heading */
+
+.heading-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 25px;
+
+    margin-bottom: 28px;
+}
+
+.heading h1 {
+    font-size: 31px;
+
+    color: #0c3152;
+
+    margin-bottom: 5px;
+}
+
+.heading p {
+    font-size: 18px;
+
+    color: #60778a;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.search-box {
+    width: 380px;
+
+    position: relative;
+}
+
+.search-box input {
+    width: 100%;
+
+    height: 54px;
+
+    border: 1px solid #d8e3e9;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    padding: 0 18px 0 48px;
+
+    font-size: 15px;
+
+    color: var(--text);
+
+    transition: 0.2s;
+}
+
+.search-box input:focus {
+    border-color: var(--green);
+
+    box-shadow: 0 0 0 3px rgba(8,148,71,.08);
+}
+
+.search-icon {
+    position: absolute;
+
+    left: 17px;
+
+    top: 15px;
+
+    font-size: 23px;
+
+    color: #547087;
+}
+
+
+/* =========================================================
+   BUSINESS GRID
+========================================================= */
+
+.business-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(150px, 1fr));
+
+    gap: 16px;
+}
+
+
+/* Business card */
+
+.business-card {
+    min-height: 185px;
+
+    border: 1px solid #dce6eb;
+
+    border-radius: 13px;
+
+    background: white;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 18px;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s,
+        box-shadow .2s,
+        border-color .2s,
+        background .2s;
+}
+
+.business-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow: 0 7px 18px rgba(25, 67, 90, .10);
+
+    border-color: #92c9ae;
+}
+
+.business-card.selected {
+    border: 2px solid var(--green);
+
+    background: #f0fbf5;
+
+    box-shadow:
+        0 4px 15px rgba(12, 148, 71, .10);
+}
+
+
+/* Business icon */
+
+.business-icon {
+    width: 66px;
+    height: 66px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 44px;
+
+    margin-bottom: 12px;
+}
+
+
+/* Business title */
+
+.business-card h3 {
+    font-size: 17px;
+
+    color: #0d3152;
+
+    margin-bottom: 5px;
+}
+
+.business-card p {
+    color: #61778b;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   BUTTON AREA
+========================================================= */
+
+.bottom-actions {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 72px;
+
+    gap: 20px;
+}
+
+.action-button {
+    height: 52px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    padding: 0 40px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.back-button {
+    background: #edf3f7;
+
+    color: #31506a;
+
+    min-width: 230px;
+}
+
+.back-button:hover {
+    background: #e1ebf0;
+}
+
+.continue-button {
+    background: #079447;
+
+    color: white;
+
+    min-width: 430px;
+}
+
+.continue-button:hover {
+    background: #06783b;
+
+    transform: translateY(-1px);
+}
+
+.continue-button:disabled {
+    background: #b9c9c2;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   EMPTY SEARCH
+========================================================= */
+
+.no-results {
+    display: none;
+
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 50px;
+
+    color: #718492;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+    position: fixed;
+
+    bottom: 25px;
+
+    right: 25px;
+
+    background: #123e59;
+
+    color: white;
+
+    padding: 14px 22px;
+
+    border-radius: 9px;
+
+    box-shadow: 0 6px 20px rgba(0,0,0,.2);
+
+    transform: translateY(100px);
+
+    opacity: 0;
+
+    transition: .3s;
+
+    z-index: 3000;
+}
+
+.toast.show {
+    transform: translateY(0);
+
+    opacity: 1;
+}
+
+
+/* =========================================================
+   LOCATION MODAL
+========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(8, 35, 50, .55);
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 2000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    background: white;
+
+    width: 440px;
+
+    border-radius: 16px;
+
+    padding: 28px;
+
+    box-shadow: 0 15px 50px rgba(0,0,0,.25);
+}
+
+.modal-box h2 {
+    margin-bottom: 20px;
+
+    color: var(--navy);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+
+    height: 45px;
+
+    border: 1px solid #ccdbe3;
+
+    border-radius: 8px;
+
+    padding: 0 12px;
+
+    outline: none;
+}
+
+.form-group input:focus {
+    border-color: var(--green);
+}
+
+.modal-actions {
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.modal-button {
+    padding: 11px 20px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+}
+
+.cancel {
+    background: #edf3f6;
+
+    color: #31506a;
+}
+
+.save {
+    background: var(--green);
+
+    color: white;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 1150px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main {
+        margin-left: 220px;
+    }
+
+    .page-container {
+        grid-template-columns: 200px 1fr;
+    }
+
+    .business-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .search-box {
+        width: 300px;
+    }
+
+}
+
+
+@media(max-width: 900px) {
+
+    .tagline,
+    .vertical-line,
+    .welcome,
+    .header-divider {
+        display: none;
+    }
+
+    .sidebar {
+        width: 75px;
+    }
+
+    .main {
+        margin-left: 75px;
+    }
+
+    .menu-item {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .menu-item span:last-child {
+        display: none;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .page-container {
+        grid-template-columns: 1fr;
+    }
+
+    .progress-area {
+        border-right: none;
+
+        border-bottom: 1px solid #e5edf0;
+
+        display: flex;
+
+        padding: 18px 25px;
+    }
+
+    .step {
+        flex: 1;
+
+        min-height: auto;
+    }
+
+    .step:not(:last-child)::after {
+        display: none;
+    }
+
+    .business-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .heading-row {
+        flex-direction: column;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+}
+
+
+@media(max-width: 600px) {
+
+    .header {
+        height: 70px;
+
+        padding: 0 12px;
+    }
+
+    .brand-name {
+        font-size: 22px;
+    }
+
+    .current-location {
+        display: none;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+
+        padding: 90px 12px 20px;
+    }
+
+    .page-container {
+        border-radius: 10px;
+    }
+
+    .content {
+        padding: 22px 16px;
+    }
+
+    .progress-area {
+        overflow-x: auto;
+
+        gap: 20px;
+    }
+
+    .step-title span {
+        display: none;
+    }
+
+    .step-title strong {
+        font-size: 13px;
+    }
+
+    .business-grid {
+        grid-template-columns: 1fr 1fr;
+
+        gap: 10px;
+    }
+
+    .business-card {
+        min-height: 150px;
+    }
+
+    .business-icon {
+        font-size: 35px;
+
+        width: 50px;
+        height: 50px;
+    }
+
+    .business-card h3 {
+        font-size: 14px;
+    }
+
+    .business-card p {
+        font-size: 11px;
+    }
+
+    .bottom-actions {
+        margin-top: 35px;
+
+        flex-direction: column-reverse;
+    }
+
+    .action-button {
+        width: 100%;
+        min-width: 0;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="logo-section">
+
+        <div class="logo"></div>
+
+        <div class="brand-section">
+
+            <div class="brand-name">
+                VYENTRA
+            </div>
+
+            <div class="vertical-line"></div>
+
+            <div class="tagline">
+                Smart Business Decisions<br>
+                for a Better Tomorrow
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="header-right">
+
+        <div
+            class="current-location"
+            onclick="openLocationModal()"
+        >
+            📍
+
+            <span id="headerLocation">
+                Kothapalli, Guntur
+            </span>
+
+            ▾
+        </div>
+
+        <div class="header-divider"></div>
+
+        <div class="welcome">
+            Welcome, Entrepreneur!
+        </div>
+
+        <div class="profile">
+            👤
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+    <ul class="menu">
+
+        <li
+            class="menu-item"
+            onclick="menuClick(this,'Dashboard')"
+        >
+            <span class="menu-icon">⌂</span>
+            <span>Dashboard</span>
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="menuClick(this,'Location')"
+        >
+            <span class="menu-icon">📍</span>
+            <span>Location</span>
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="menuClick(this,'Local Analysis')"
+        >
+            <span class="menu-icon">▥</span>
+            <span>Local Analysis</span>
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="menuClick(this,'Market Analysis')"
+        >
+            <span class="menu-icon">↗</span>
+            <span>Market Analysis</span>
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="menuClick(this,'Financial Planner')"
+        >
+            <span class="menu-icon">▦</span>
+            <span>Financial Planner</span>
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="menuClick(this,'Government Schemes')"
+        >
+            <span class="menu-icon">▤</span>
+            <span>Government Schemes</span>
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="menuClick(this,'AI Advisor')"
+        >
+            <span class="menu-icon">🤖</span>
+            <span>AI Advisor</span>
+        </li>
+
+
+        <li
+            class="menu-item"
+            onclick="menuClick(this,'Business Plan')"
+        >
+            <span class="menu-icon">💡</span>
+            <span>Business Plan</span>
+        </li>
+
+    </ul>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="leaf">
+            🌿
+        </div>
+
+        <p>
+            Small<br>
+            Entrepreneurs<br>
+            Big Possibilities
+        </p>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <div class="page-container">
+
+
+        <!-- =================================================
+             PROGRESS
+        ================================================= -->
+
+        <section class="progress-area">
+
+
+            <div class="step completed">
+
+                <div class="step-circle">
+                    ✓
+                </div>
+
+                <div class="step-title">
+
+                    <strong>
+                        Profile
+                    </strong>
+
+                    <span>
+                        Completed
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="step completed">
+
+                <div class="step-circle">
+                    ✓
+                </div>
+
+                <div class="step-title">
+
+                    <strong>
+                        Business
+                    </strong>
+
+                    <span>
+                        Select your business
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <div
+                    class="step-circle"
+                    id="locationStep"
+                >
+                    3
+                </div>
+
+                <div class="step-title">
+
+                    <strong>
+                        Location
+                    </strong>
+
+                    <span id="locationStatus">
+                        Pending
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             CONTENT
+        ================================================= -->
+
+        <section class="content">
+
+
+            <!-- Heading -->
+
+            <div class="heading-row">
+
+
+                <div class="heading">
+
+                    <h1>
+                        Choose Your Business
+                    </h1>
+
+                    <p>
+                        Select the type of business you want to start.
+                    </p>
+
+                </div>
+
+
+                <!-- Search -->
+
+                <div class="search-box">
+
+                    <span class="search-icon">
+                        ⌕
+                    </span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search business ideas..."
+                        oninput="searchBusinesses()"
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 BUSINESS CARDS
+            ================================================= -->
+
+            <div
+                class="business-grid"
+                id="businessGrid"
+            >
+
+
+                <!-- Dairy -->
+
+                <div
+                    class="business-card selected"
+                    data-business="Dairy"
+                    data-description="Milk & milk products"
+                    onclick="selectBusiness(this)"
+                >
+
+                    <div class="business-icon">
+                        🐄
+                    </div>
+
+                    <h3>
+                        Dairy
+                    </h3>
+
+                    <p>
+                        Milk & milk products
+                    </p>
+
+                </div>
+
+
+                <!-- Poultry -->
+
+                <div
+                    class="business-card"
+                    data-business="Poultry"
+                    data-description="Chicken & eggs"
+                    onclick="selectBusiness(this)"
+                >
+
+                    <div class="business-icon">
+                        🐔
+                    </div>
+
+                    <h3>
+                        Poultry
+                    </h3>
+
+                    <p>
+                        Chicken & eggs
+                    </p>
+
+                </div>
+
+
+                <!-- Agriculture -->
+
+                <div
+                    class="business-card"
+                    data-business="Agriculture"
+                    data-description="Fruits, vegetables"
+                    onclick="selectBusiness(this)"
+                >
+
+                    <div class="business-icon">
+                        🌱
+                    </div>
+
+                    <h3>
+                        Agriculture
+                    </h3>
+
+                    <p>
+                        Fruits, vegetables
+                    </p>
+
+                </div>
+
+
+                <!-- Food Processing -->
+
+                <div
+                    class="business-card"
+                    data-business="Food Processing"
+                    data-description="Value added products"
+                    onclick="selectBusiness(this)"
+                >
+
+                    <div class="business-icon">
+                        🍔
+                    </div>
+
+                    <h3>
+                        Food Processing
+                    </h3>
+
+                    <p>
+                        Value added products
+                    </p>
+
+                </div>
+
+
+                <!-- Retail -->
+
+                <div
+                    class="business-card"
+                    data-business="Retail"
+                    data-description="General store"
+                    onclick="selectBusiness(this)"
+                >
+
+                    <div class="business-icon">
+                        🏪
+                    </div>
+
+                    <h3>
+                        Retail
+                    </h3>
+
+                    <p>
+                        General store
+                    </p>
+
+                </div>
+
+
+                <!-- Handicrafts -->
+
+                <div
+                    class="business-card"
+                    data-business="Handicrafts"
+                    data-description="Local products"
+                    onclick="selectBusiness(this)"
+                >
+
+                    <div class="business-icon">
+                        🧶
+                    </div>
+
+                    <h3>
+                        Handicrafts
+                    </h3>
+
+                    <p>
+                        Local products
+                    </p>
+
+                </div>
+
+
+                <!-- Services -->
+
+                <div
+                    class="business-card"
+                    data-business="Services"
+                    data-description="Repair, tailoring, etc."
+                    onclick="selectBusiness(this)"
+                >
+
+                    <div class="business-icon">
+                        🛠️
+                    </div>
+
+                    <h3>
+                        Services
+                    </h3>
+
+                    <p>
+                        Repair, tailoring, etc.
+                    </p>
+
+                </div>
+
+
+                <!-- Other -->
+
+                <div
+                    class="business-card"
+                    data-business="Other"
+                    data-description="Explore more"
+                    onclick="selectBusiness(this)"
+                >
+
+                    <div class="business-icon">
+                        ⋯
+                    </div>
+
+                    <h3>
+                        Other
+                    </h3>
+
+                    <p>
+                        Explore more
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="no-results"
+                    id="noResults"
+                >
+                    No business ideas found.
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ACTION BUTTONS
+            ================================================= -->
+
+            <div class="bottom-actions">
+
+
+                <button
+                    class="action-button back-button"
+                    onclick="goBack()"
+                >
+                    Back
+                </button>
+
+
+                <button
+                    class="action-button continue-button"
+                    onclick="continueToLocation()"
+                >
+                    Continue &nbsp; →
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     LOCATION MODAL
+===================================================== -->
+
+<div
+    class="modal"
+    id="locationModal"
+>
+
+    <div class="modal-box">
+
+        <h2>
+            📍 Change Location
+        </h2>
+
+
+        <div class="form-group">
+
+            <label>
+                Village / Town
+            </label>
+
+            <input
+                type="text"
+                id="village"
+                value="Kothapalli"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                District
+            </label>
+
+            <input
+                type="text"
+                id="district"
+                value="Guntur"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                State
+            </label>
+
+            <input
+                type="text"
+                id="state"
+                value="Andhra Pradesh"
+            >
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="modal-button cancel"
+                onclick="closeLocationModal()"
+            >
+                Cancel
+            </button>
+
+            <button
+                class="modal-button save"
+                onclick="saveLocation()"
+            >
+                Save Location
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+>
+    Business selected
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   VYENTRA BUSINESS SELECTION JAVASCRIPT
+========================================================= */
+
+
+/* ---------------------------------------------------------
+   CURRENT BUSINESS
+--------------------------------------------------------- */
+
+let selectedBusiness = "Dairy";
+
+
+/* ---------------------------------------------------------
+   SELECT BUSINESS
+--------------------------------------------------------- */
+
+function selectBusiness(card) {
+
+    const cards =
+        document.querySelectorAll(
+            ".business-card"
+        );
+
+
+    cards.forEach(function(item) {
+
+        item.classList.remove(
+            "selected"
+        );
+
+    });
+
+
+    card.classList.add(
+        "selected"
+    );
+
+
+    selectedBusiness =
+        card.dataset.business;
+
+
+    localStorage.setItem(
+        "vyentraBusiness",
+        selectedBusiness
+    );
+
+
+    showToast(
+        selectedBusiness +
+        " selected"
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   SEARCH BUSINESS
+--------------------------------------------------------- */
+
+function searchBusinesses() {
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const cards =
+        document.querySelectorAll(
+            ".business-card"
+        );
+
+
+    let visibleCount = 0;
+
+
+    cards.forEach(function(card) {
+
+        const name =
+            card.dataset.business
+            .toLowerCase();
+
+        const description =
+            card.dataset.description
+            .toLowerCase();
+
+
+        if (
+            name.includes(search) ||
+            description.includes(search)
+        ) {
+
+            card.style.display =
+                "flex";
+
+            visibleCount++;
+
+        } else {
+
+            card.style.display =
+                "none";
+
+        }
+
+    });
+
+
+    const noResults =
+        document.getElementById(
+            "noResults"
+        );
+
+
+    if (visibleCount === 0) {
+
+        noResults.style.display =
+            "block";
+
+    } else {
+
+        noResults.style.display =
+            "none";
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   LOCATION MODAL
+--------------------------------------------------------- */
+
+function openLocationModal() {
+
+    document
+        .getElementById(
+            "locationModal"
+        )
+        .classList.add("show");
+
+}
+
+
+function closeLocationModal() {
+
+    document
+        .getElementById(
+            "locationModal"
+        )
+        .classList.remove("show");
+
+}
+
+
+/* ---------------------------------------------------------
+   SAVE LOCATION
+--------------------------------------------------------- */
+
+function saveLocation() {
+
+    const village =
+        document
+        .getElementById(
+            "village"
+        )
+        .value
+        .trim();
+
+
+    const district =
+        document
+        .getElementById(
+            "district"
+        )
+        .value
+        .trim();
+
+
+    const state =
+        document
+        .getElementById(
+            "state"
+        )
+        .value
+        .trim();
+
+
+    if (
+        !village ||
+        !district ||
+        !state
+    ) {
+
+        showToast(
+            "Please enter all location details"
+        );
+
+        return;
+
+    }
+
+
+    const location =
+        village +
+        ", " +
+        district;
+
+
+    document
+        .getElementById(
+            "headerLocation"
+        )
+        .textContent =
+        location;
+
+
+    localStorage.setItem(
+        "vyentraLocation",
+        location
+    );
+
+
+    /* Mark location step completed */
+
+    const locationStep =
+        document.getElementById(
+            "locationStep"
+        );
+
+
+    locationStep.textContent =
+        "✓";
+
+
+    locationStep.style.background =
+        "#079447";
+
+    locationStep.style.color =
+        "white";
+
+
+    document
+        .getElementById(
+            "locationStatus"
+        )
+        .textContent =
+        "Completed";
+
+
+    closeLocationModal();
+
+
+    showToast(
+        "Location updated successfully"
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   CONTINUE
+--------------------------------------------------------- */
+
+function continueToLocation() {
+
+    if (!selectedBusiness) {
+
+        showToast(
+            "Please select a business"
+        );
+
+        return;
+
+    }
+
+
+    localStorage.setItem(
+        "vyentraBusiness",
+        selectedBusiness
+    );
+
+
+    showToast(
+        "Opening location setup..."
+    );
+
+
+    /*
+       Replace this with your actual next page.
+
+       Example:
+
+       window.location.href =
+       "location.html";
+    */
+
+
+    setTimeout(function() {
+
+        alert(
+            "Selected Business: " +
+            selectedBusiness +
+            "\n\nNext step: Location Setup"
+        );
+
+    }, 400);
+
+}
+
+
+/* ---------------------------------------------------------
+   BACK BUTTON
+--------------------------------------------------------- */
+
+function goBack() {
+
+    showToast(
+        "Going back to Profile..."
+    );
+
+
+    /*
+       Replace with your previous page:
+
+       window.location.href =
+       "profile.html";
+    */
+
+}
+
+
+/* ---------------------------------------------------------
+   SIDEBAR
+--------------------------------------------------------- */
+
+function menuClick(
+    element,
+    menuName
+) {
+
+    document
+        .querySelectorAll(
+            ".menu-item"
+        )
+        .forEach(function(item) {
+
+            item.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    element.classList.add(
+        "active"
+    );
+
+
+    showToast(
+        menuName +
+        " selected"
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   TOAST
+--------------------------------------------------------- */
+
+let toastTimeout;
+
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimeout
+    );
+
+
+    toastTimeout =
+        setTimeout(function() {
+
+            toast.classList.remove(
+                "show"
+            );
+
+        }, 2500);
+
+}
+
+
+/* ---------------------------------------------------------
+   LOAD SAVED DATA
+--------------------------------------------------------- */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const savedBusiness =
+            localStorage.getItem(
+                "vyentraBusiness"
+            );
+
+
+        const savedLocation =
+            localStorage.getItem(
+                "vyentraLocation"
+            );
+
+
+        /* Load business */
+
+        if (savedBusiness) {
+
+            selectedBusiness =
+                savedBusiness;
+
+
+            document
+                .querySelectorAll(
+                    ".business-card"
+                )
+                .forEach(function(card) {
+
+                    if (
+                        card.dataset.business ===
+                        savedBusiness
+                    ) {
+
+                        card.classList.add(
+                            "selected"
+                        );
+
+                    } else {
+
+                        card.classList.remove(
+                            "selected"
+                        );
+
+                    }
+
+                });
+
+        }
+
+
+        /* Load location */
+
+        if (savedLocation) {
+
+            document
+                .getElementById(
+                    "headerLocation"
+                )
+                .textContent =
+                savedLocation;
+
+        }
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   CLOSE MODAL BY CLICKING OUTSIDE
+--------------------------------------------------------- */
+
+document
+    .getElementById(
+        "locationModal"
+    )
+    .addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target ===
+                this
+            ) {
+
+                closeLocationModal();
+
+            }
+
+        }
+    );
+
+</script>
+
+</body>
+</html>

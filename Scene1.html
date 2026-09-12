@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VYENTRA | Smart Business Decisions</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#078b45;
+  --green-dark:#056b37;
+  --navy:#09285d;
+  --text:#19365f;
+  --white:#fff;
+  --glass:rgba(255,255,255,.90);
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--text);
+  min-height:100vh;
+  background:#dcecf8;
+}
+.page{
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(180deg,rgba(239,249,255,.96) 0%,rgba(225,241,251,.78) 48%,rgba(34,105,38,.08) 68%,rgba(20,89,29,.20) 100%),
+    url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2200&q=90") center bottom/cover fixed;
+}
+.page:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(90deg,rgba(255,255,255,.72) 0%,rgba(255,255,255,.35) 43%,rgba(255,255,255,.02) 100%);
+  pointer-events:none;
+}
+
+/* Header */
+header{
+  width:min(1400px,92%);
+  margin:auto;
+  height:108px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+  z-index:5;
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  cursor:pointer;
+  user-select:none;
+}
+.logo-mark{
+  width:55px;height:65px;position:relative;
+}
+.logo-mark:before,.logo-mark:after{
+  content:"";
+  position:absolute;
+  width:27px;height:48px;
+  border-radius:90% 15% 90% 15%;
+  transform:rotate(-35deg);
+  background:linear-gradient(135deg,#77df55,#078b45);
+}
+.logo-mark:before{left:8px;top:5px}
+.logo-mark:after{left:25px;top:17px;transform:rotate(35deg);background:linear-gradient(135deg,#42bd4c,#08763b)}
+.logo-mark i{
+  position:absolute;width:4px;height:47px;background:#0a7040;left:27px;top:18px;transform:rotate(8deg);
+}
+.logo-text{
+  font-size:38px;
+  font-weight:800;
+  letter-spacing:1px;
+  color:#075e42;
+}
+nav{display:flex;align-items:center;gap:58px}
+nav a{
+  text-decoration:none;
+  color:#10284e;
+  font-size:21px;
+  font-weight:600;
+  padding:10px 0;
+  position:relative;
+  cursor:pointer;
+}
+nav a.active:after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:-8px;
+  height:3px;border-radius:5px;background:var(--green);
+}
+.btn{
+  border:0;
+  border-radius:12px;
+  padding:17px 30px;
+  font-size:20px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s ease;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,80,45,.18)}
+.btn-green{background:var(--green);color:#fff}
+.menu-btn{display:none;background:none;border:0;font-size:30px;color:var(--navy);cursor:pointer}
+
+/* Hero */
+.hero{
+  width:min(1400px,92%);
+  min-height:515px;
+  margin:0 auto;
+  display:flex;
+  align-items:flex-start;
+  position:relative;
+  z-index:2;
+}
+.hero-content{width:64%;padding-top:52px}
+.hero h1{
+  font-size:64px;
+  line-height:1.04;
+  color:#0b2a62;
+  max-width:900px;
+  letter-spacing:-2px;
+}
+.hero h1 span{color:var(--green)}
+.hero p{
+  margin-top:24px;
+  max-width:800px;
+  font-size:28px;
+  line-height:1.25;
+  color:#25476f;
+  font-weight:500;
+}
+.actions{display:flex;gap:22px;margin-top:30px}
+.btn-primary{
+  min-width:270px;
+  background:var(--green);
+  color:#fff;
+}
+.btn-outline{
+  min-width:315px;
+  background:rgba(255,255,255,.72);
+  border:2px solid #9eafc4;
+  color:#0c2857;
+}
+.play{
+  display:inline-flex;
+  width:25px;height:25px;border:3px solid currentColor;
+  border-radius:50%;align-items:center;justify-content:center;
+  margin-right:12px;font-size:11px;
+}
+
+/* Slogan */
+.slogan{
+  position:absolute;
+  right:3%;
+  top:20px;
+  width:260px;
+  text-align:center;
+  color:#006b38;
+  font-size:38px;
+  line-height:1.02;
+  font-family:"Comic Sans MS",cursive;
+  font-weight:700;
+  transform:rotate(-5deg);
+}
+.slogan:after{
+  content:"";
+  display:block;width:150px;height:4px;background:#08783e;
+  margin:12px auto 0;transform:rotate(-4deg);
+  border-radius:50%;
+}
+
+/* Feature cards */
+.features{
+  width:min(1400px,92%);
+  margin:0 auto;
+  padding:0 0 46px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+  position:relative;
+  z-index:3;
+}
+.card{
+  background:rgba(255,255,255,.91);
+  border:1px solid rgba(190,205,215,.7);
+  border-radius:20px;
+  padding:27px 22px 24px;
+  text-align:center;
+  box-shadow:0 8px 24px rgba(20,55,70,.14);
+  cursor:pointer;
+  transition:.25s ease;
+  backdrop-filter:blur(5px);
+}
+.card:hover{transform:translateY(-8px);box-shadow:0 18px 35px rgba(0,90,55,.20)}
+.icon{
+  width:55px;height:55px;margin:0 auto 15px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--green);font-size:46px;
+}
+.card h3{font-size:25px;color:#0b2b61;margin-bottom:10px}
+.card p{font-size:21px;line-height:1.25;color:#2f537b}
+
+/* Modal */
+.modal{
+  position:fixed;inset:0;background:rgba(4,24,48,.52);
+  display:none;align-items:center;justify-content:center;
+  z-index:50;padding:20px;
+}
+.modal.show{display:flex}
+.modal-box{
+  width:min(560px,100%);
+  background:white;border-radius:22px;padding:34px;
+  box-shadow:0 25px 80px rgba(0,0,0,.3);
+  animation:pop .2s ease;
+}
+@keyframes pop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-box h2{color:var(--navy);font-size:30px;margin-bottom:12px}
+.modal-box p{font-size:18px;line-height:1.55;color:#47617e}
+.modal-close{
+  float:right;border:0;background:#edf4f1;border-radius:50%;
+  width:38px;height:38px;font-size:22px;cursor:pointer;color:#16415e;
+}
+.modal-form{display:grid;gap:13px;margin-top:20px}
+.modal-form input{
+  width:100%;padding:14px;border:1px solid #ccd8e4;border-radius:10px;font-size:16px;
+}
+.modal-form button{margin-top:4px}
+
+/* Mobile */
+@media(max-width:1050px){
+  nav{gap:25px}
+  nav a{font-size:18px}
+  .hero h1{font-size:52px}
+  .hero p{font-size:23px}
+  .features{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  header{height:82px}
+  .logo-text{font-size:27px}
+  .logo-mark{transform:scale(.75);transform-origin:left center;width:44px}
+  nav{
+    display:none;position:absolute;top:76px;left:0;right:0;
+    background:white;border-radius:15px;padding:18px;
+    flex-direction:column;gap:8px;box-shadow:0 10px 30px rgba(0,0,0,.12);
+  }
+  nav.open{display:flex}
+  nav a{width:100%;text-align:center}
+  .menu-btn{display:block}
+  header>.btn{display:none}
+  .hero{min-height:auto}
+  .hero-content{width:100%;padding:38px 0 30px}
+  .hero h1{font-size:43px;letter-spacing:-1px}
+  .hero p{font-size:20px}
+  .actions{flex-direction:column}
+  .btn-primary,.btn-outline{width:100%;min-width:0}
+  .slogan{display:none}
+  .features{grid-template-columns:1fr;padding-bottom:28px}
+  .card h3{font-size:23px}
+  .card p{font-size:18px}
+}
+</style>
+</head>
+
+<body>
+<div class="page" id="home">
+
+  <header>
+    <div class="logo" onclick="goHome()">
+      <div class="logo-mark"><i></i></div>
+      <div class="logo-text">VYENTRA</div>
+    </div>
+
+    <nav id="mainNav">
+      <a class="active" data-section="how" onclick="setActive(this); openHowItWorks()">How It Works</a>
+      <a data-section="features" onclick="setActive(this); scrollToFeatures()">Features</a>
+      <a data-section="about" onclick="setActive(this); openAbout()">About</a>
+      <a data-section="login" onclick="setActive(this); openLogin()">Login</a>
+    </nav>
+
+    <button class="btn btn-green" onclick="startJourney()">Get Started <span>→</span></button>
+    <button class="menu-btn" onclick="toggleMenu()" aria-label="Open menu">☰</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Make Smarter<br><span>Business Decisions.</span></h1>
+        <p>AI-powered hyper-local insights, financial planning and government scheme guidance for rural entrepreneurs.</p>
+
+        <div class="actions">
+          <button class="btn btn-primary" onclick="startJourney()">Get Started →</button>
+          <button class="btn btn-outline" onclick="openHowItWorks()">
+            <span class="play">▶</span>See How It Works
+          </button>
+        </div>
+      </div>
+
+      <div class="slogan">Stronger<br>Villages<br>Brighter<br>Tomorrows</div>
+    </section>
+
+    <section class="features" id="features">
+      <article class="card" onclick="showFeature('Hyper-Local Insights','Understand your local market using location-based business opportunities, nearby demand and local conditions.')">
+        <div class="icon">📍</div>
+        <h3>Hyper-Local Insights</h3>
+        <p>Understand your<br>local market</p>
+      </article>
+
+      <article class="card" onclick="showFeature('Market Analysis','Identify real opportunities by comparing demand, competition, pricing and underserved local needs.')">
+        <div class="icon">▥</div>
+        <h3>Market Analysis</h3>
+        <p>Identify real<br>opportunities</p>
+      </article>
+
+      <article class="card" onclick="showFeature('Financial Planning','Know your investment, estimated costs, revenue, profit, loan requirements and repayment obligations.')">
+        <div class="icon">◉</div>
+        <h3>Financial Planning</h3>
+        <p>Know your<br>investment and returns</p>
+      </article>
+
+      <article class="card" onclick="showFeature('Scheme Matching','Find relevant government support and financing schemes based on your business profile and financial requirements.')">
+        <div class="icon">▤</div>
+        <h3>Scheme Matching</h3>
+        <p>Find relevant<br>government support</p>
+      </article>
+    </section>
+  </main>
+</div>
+
+<!-- Dynamic modal -->
+<div class="modal" id="modal" onclick="closeOnBackdrop(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+const modal = document.getElementById("modal");
+const modalContent = document.getElementById("modalContent");
+const nav = document.getElementById("mainNav");
+
+function toggleMenu(){
+  nav.classList.toggle("open");
+}
+
+function setActive(el){
+  document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
+  el.classList.add("active");
+  nav.classList.remove("open");
+}
+
+function goHome(){
+  window.scrollTo({top:0,behavior:"smooth"});
+  document.querySelectorAll("nav a").forEach(a=>a.classList.remove("active"));
+  document.querySelector('nav a[data-section="how"]').classList.add("active");
+}
+
+function scrollToFeatures(){
+  document.getElementById("features").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
+function startJourney(){
+  showFeature(
+    "Welcome to VYENTRA",
+    "Start your journey by entering your business profile. VYENTRA can then guide you through business selection, local analysis, financial planning and suitable government schemes.",
+    true
+  );
+}
+
+function openHowItWorks(){
+  showFeature(
+    "How VYENTRA Works",
+    "1. Create your entrepreneur profile.<br><br>2. Choose or describe your business idea.<br><br>3. Select your location for hyper-local analysis.<br><br>4. Review market opportunities and competition.<br><br>5. Plan investment, revenue and financing.<br><br>6. Explore suitable government schemes and take the next step."
+  );
+}
+
+function openAbout(){
+  showFeature(
+    "About VYENTRA",
+    "VYENTRA is designed to help rural and semi-urban entrepreneurs make better business decisions through localized market insights, financial planning and scheme guidance."
+  );
+}
+
+function openLogin(){
+  modalContent.innerHTML = `
+    <h2>Login to VYENTRA</h2>
+    <p>Access your entrepreneur dashboard and continue your business planning journey.</p>
+    <form class="modal-form" onsubmit="loginUser(event)">
+      <input type="email" id="email" placeholder="Email address" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button class="btn btn-green" type="submit">Login →</button>
+    </form>
+  `;
+  modal.classList.add("show");
+}
+
+function loginUser(e){
+  e.preventDefault();
+  modalContent.innerHTML = `
+    <h2>Welcome back!</h2>
+    <p>Your login form has been submitted successfully. Connect this form to your backend authentication API for real user accounts.</p>
+    <button class="btn btn-green" style="margin-top:20px" onclick="closeModal()">Continue</button>
+  `;
+}
+
+function showFeature(title,text,form=false){
+  modalContent.innerHTML = `
+    <h2>${title}</h2>
+    <p>${text}</p>
+    ${form ? `<button class="btn btn-green" style="margin-top:20px" onclick="startProfile()">Create Profile →</button>` : ""}
+  `;
+  modal.classList.add("show");
+}
+
+function startProfile(){
+  closeModal();
+  alert("Profile setup can be connected to your registration page or backend.");
+}
+
+function closeModal(){
+  modal.classList.remove("show");
+}
+
+function closeOnBackdrop(e){
+  if(e.target === modal) closeModal();
+}
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape") closeModal();
+});
+</script>
+</body>
+</html>

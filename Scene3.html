@@ -1,0 +1,1329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VYENTRA - Business Profile</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --navy:#0d2856;
+  --green:#07964b;
+  --green-dark:#087a40;
+  --green-soft:#d9f4e5;
+  --bg:#f3fafc;
+  --border:#dce6ee;
+  --muted:#70829a;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(135deg,#f8fcff 0%,#eef8f7 100%);
+  color:var(--navy);
+  min-height:100vh;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+  height:80px;
+  background:#fff;
+  border-bottom:1px solid #dfe8ee;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 27px;
+  position:sticky;
+  top:0;
+  z-index:50;
+  box-shadow:0 2px 8px rgba(20,55,75,.06);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.logo-mark{
+  width:45px;
+  height:52px;
+  position:relative;
+}
+
+.logo-mark .leaf{
+  position:absolute;
+  border-radius:100% 0 100% 0;
+}
+
+.leaf-one{
+  width:25px;
+  height:41px;
+  left:3px;
+  top:2px;
+  background:linear-gradient(135deg,#61d353,#0a8b49);
+  transform:rotate(-34deg);
+}
+
+.leaf-two{
+  width:24px;
+  height:38px;
+  left:20px;
+  top:11px;
+  background:linear-gradient(135deg,#39bb4d,#08763e);
+  transform:rotate(36deg);
+}
+
+.logo-stem{
+  position:absolute;
+  width:3px;
+  height:41px;
+  left:21px;
+  top:12px;
+  background:#087642;
+  transform:rotate(7deg);
+}
+
+.logo-text{
+  font-size:31px;
+  font-weight:800;
+  letter-spacing:1px;
+  color:#075d43;
+}
+
+.brand-line{
+  height:39px;
+  width:2px;
+  background:#ccd7df;
+  margin-left:4px;
+}
+
+.brand-caption{
+  color:#304766;
+  font-size:14px;
+  line-height:1.35;
+}
+
+.header-right{
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.location-top{
+  font-size:15px;
+  color:#2d4666;
+  padding-right:19px;
+  border-right:1px solid #dce4e9;
+}
+
+.welcome{
+  font-size:16px;
+  color:#233e60;
+}
+
+.avatar{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:#edf2f6;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+}
+
+/* ================= LAYOUT ================= */
+
+.layout{
+  display:grid;
+  grid-template-columns:270px 1fr;
+  min-height:calc(100vh - 80px);
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+  background:linear-gradient(180deg,#f7fcfd,#eef8f7);
+  border-right:1px solid #dce7ed;
+  padding:29px 15px;
+  position:relative;
+}
+
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.nav-item{
+  width:100%;
+  height:55px;
+  border:0;
+  border-radius:10px;
+  background:transparent;
+  display:flex;
+  align-items:center;
+  gap:17px;
+  padding:0 18px;
+  color:#17395e;
+  font-size:17px;
+  text-align:left;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.nav-item:hover{
+  background:#e5f6ed;
+  color:#087c42;
+}
+
+.nav-item.active{
+  background:#d5f3e3;
+  color:#087c42;
+  font-weight:700;
+}
+
+.nav-icon{
+  width:30px;
+  text-align:center;
+  font-size:23px;
+}
+
+.side-art{
+  position:absolute;
+  bottom:32px;
+  left:52px;
+  color:#08773f;
+  text-align:center;
+}
+
+.side-leaves{
+  font-size:67px;
+  line-height:.8;
+}
+
+.side-art p{
+  font-family:"Comic Sans MS",cursive;
+  font-size:19px;
+  font-weight:bold;
+  line-height:1.08;
+}
+
+.logout{
+  position:absolute;
+  bottom:11px;
+  left:38px;
+  border:0;
+  background:none;
+  color:#17395d;
+  font-size:15px;
+  cursor:pointer;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+  padding:30px 30px 35px;
+  overflow:auto;
+}
+
+.workspace{
+  width:100%;
+  max-width:1280px;
+  margin:auto;
+  background:#fff;
+  border:1px solid #e1e9ef;
+  border-radius:14px;
+  min-height:735px;
+  padding:29px 35px 26px;
+  box-shadow:0 5px 18px rgba(28,60,80,.05);
+  position:relative;
+}
+
+/* ================= STEPPER ================= */
+
+.stepper{
+  width:100%;
+  max-width:700px;
+  margin:0 auto 30px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.step{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  min-width:155px;
+}
+
+.circle{
+  width:43px;
+  height:43px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#e9eef3;
+  color:#233c5d;
+  font-size:19px;
+  font-weight:bold;
+  flex:none;
+}
+
+.step.active .circle{
+  background:var(--green);
+  color:#fff;
+}
+
+.step.current .circle{
+  background:var(--green);
+  color:#fff;
+}
+
+.step-text{
+  font-size:18px;
+  color:#263e5d;
+}
+
+.step.active .step-text,
+.step.current .step-text{
+  color:#087d43;
+  font-weight:600;
+}
+
+.connector{
+  height:2px;
+  background:#cfd9e1;
+  flex:1;
+  min-width:65px;
+  margin:0 12px;
+}
+
+.connector.done{
+  background:#159b55;
+}
+
+/* ================= TOP ================= */
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+}
+
+.heading h1{
+  font-size:39px;
+  line-height:1.08;
+  letter-spacing:-1px;
+}
+
+.heading p{
+  margin-top:8px;
+  color:#58708e;
+  font-size:20px;
+}
+
+.next-btn{
+  background:var(--green);
+  color:#fff;
+  border:0;
+  border-radius:9px;
+  padding:11px 19px;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(7,150,75,.15);
+}
+
+.next-btn:hover{
+  background:#087d42;
+}
+
+/* ================= FORM ================= */
+
+.form{
+  margin-top:34px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  column-gap:37px;
+  row-gap:26px;
+}
+
+.field label{
+  display:block;
+  font-size:18px;
+  font-weight:600;
+  color:#162b4c;
+  margin-bottom:10px;
+}
+
+.input-wrap{
+  position:relative;
+}
+
+.input,
+.select{
+  width:100%;
+  height:58px;
+  border:1.5px solid #d4dfe7;
+  border-radius:9px;
+  background:#fff;
+  color:#263f60;
+  padding:0 20px;
+  font-size:17px;
+  outline:none;
+  transition:.2s;
+}
+
+.input::placeholder{
+  color:#8a9aaf;
+}
+
+.input:focus,
+.select:focus{
+  border-color:#44ad73;
+  box-shadow:0 0 0 3px rgba(7,150,75,.08);
+}
+
+.select{
+  appearance:none;
+  -webkit-appearance:none;
+  padding-right:45px;
+  color:#7e8fa4;
+}
+
+.select.has-value{
+  color:#263f60;
+}
+
+.select-arrow{
+  position:absolute;
+  right:18px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:19px;
+  color:#334d6b;
+  pointer-events:none;
+}
+
+.skills{
+  padding-left:20px;
+}
+
+.currency{
+  position:absolute;
+  left:0;
+  top:0;
+  width:55px;
+  height:58px;
+  display:grid;
+  place-items:center;
+  border-right:1px solid #dce4ea;
+  color:#273e5d;
+  font-size:21px;
+}
+
+.capital{
+  padding-left:72px;
+}
+
+/* ================= BOTTOM ================= */
+
+.bottom{
+  margin-top:49px;
+  display:grid;
+  grid-template-columns:250px 1fr;
+  gap:30px;
+  align-items:center;
+}
+
+.back-btn{
+  height:58px;
+  border:0;
+  border-radius:9px;
+  background:#eef3f7;
+  color:#405875;
+  font-size:21px;
+  cursor:pointer;
+}
+
+.back-btn:hover{
+  background:#e4ebf0;
+}
+
+.continue-btn{
+  height:60px;
+  border:0;
+  border-radius:9px;
+  background:linear-gradient(90deg,#07964b,#07994c);
+  color:#fff;
+  font-size:21px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.continue-btn:hover{
+  background:#087d42;
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(7,150,75,.16);
+}
+
+/* ================= STATUS ================= */
+
+.form-status{
+  margin-top:15px;
+  text-align:right;
+  min-height:22px;
+  font-size:14px;
+  color:#087c42;
+}
+
+/* ================= MODAL ================= */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(7,26,48,.48);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(560px,100%);
+  background:#fff;
+  border-radius:17px;
+  padding:28px;
+  box-shadow:0 25px 70px rgba(0,0,0,.25);
+}
+
+.modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.modal-head h2{
+  font-size:26px;
+}
+
+.close{
+  width:38px;
+  height:38px;
+  border:0;
+  border-radius:50%;
+  background:#edf3f6;
+  font-size:22px;
+  cursor:pointer;
+}
+
+.summary{
+  background:#f4faf7;
+  border:1px solid #d7eee0;
+  border-radius:10px;
+  padding:16px;
+  line-height:1.8;
+  color:#365472;
+}
+
+.summary strong{
+  color:#087c42;
+}
+
+.modal-action{
+  margin-top:20px;
+  width:100%;
+  height:47px;
+  background:var(--green);
+  color:#fff;
+  border:0;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+  .layout{grid-template-columns:220px 1fr}
+  .workspace{padding:25px}
+  .header-right .location-top{display:none}
+}
+
+@media(max-width:850px){
+  .header{height:72px;padding:0 15px}
+  .brand-caption,.brand-line,.welcome{display:none}
+  .logo-text{font-size:28px}
+
+  .layout{
+    grid-template-columns:70px 1fr;
+  }
+
+  .sidebar{
+    padding:22px 9px;
+  }
+
+  .nav-item{
+    justify-content:center;
+    padding:0;
+  }
+
+  .nav-item span:not(.nav-icon),
+  .side-art,
+  .logout{
+    display:none;
+  }
+
+  .main{
+    padding:18px;
+  }
+
+  .workspace{
+    min-height:auto;
+    padding:22px 20px;
+  }
+
+  .stepper{
+    justify-content:flex-start;
+    overflow:auto;
+    padding-bottom:5px;
+  }
+
+  .step{
+    min-width:130px;
+  }
+
+  .connector{
+    min-width:35px;
+  }
+
+  .topbar{
+    display:block;
+  }
+
+  .next-btn{
+    margin-top:15px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+    row-gap:21px;
+  }
+
+  .bottom{
+    grid-template-columns:1fr;
+    gap:13px;
+    margin-top:32px;
+  }
+}
+
+@media(max-width:560px){
+  .heading h1{font-size:30px}
+  .heading p{font-size:17px}
+  .step-text{font-size:15px}
+  .circle{width:38px;height:38px}
+  .connector{margin:0 7px}
+  .form{margin-top:25px}
+  .field label{font-size:16px}
+  .input,.select{height:53px;font-size:16px}
+  .currency{height:53px}
+  .capital{padding-left:65px}
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="brand">
+
+    <div class="logo-mark">
+      <span class="leaf leaf-one"></span>
+      <span class="leaf leaf-two"></span>
+      <span class="logo-stem"></span>
+    </div>
+
+    <div class="logo-text">VYENTRA</div>
+
+    <div class="brand-line"></div>
+
+    <div class="brand-caption">
+      Smart Business Decisions<br>
+      for a Better Tomorrow
+    </div>
+
+  </div>
+
+  <div class="header-right">
+    <div class="location-top">
+      📍 <span id="headerLocation">Kothapalli, Guntur, Andhra Pradesh</span>
+    </div>
+
+    <div class="welcome">Welcome, Entrepreneur!</div>
+
+    <div class="avatar">👤</div>
+  </div>
+
+</header>
+
+
+<div class="layout">
+
+  <!-- SIDEBAR -->
+
+  <aside class="sidebar">
+
+    <nav class="nav">
+
+      <button class="nav-item" onclick="navigate('dashboard.html')">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </button>
+
+      <button class="nav-item" onclick="navigate('location.html')">
+        <span class="nav-icon">📍</span>
+        <span>Location</span>
+      </button>
+
+      <button class="nav-item" onclick="navigate('local-analysis.html')">
+        <span class="nav-icon">▥</span>
+        <span>Local Analysis</span>
+      </button>
+
+      <button class="nav-item" onclick="navigate('market-analysis.html')">
+        <span class="nav-icon">↗</span>
+        <span>Market Analysis</span>
+      </button>
+
+      <button class="nav-item" onclick="navigate('financial-planner.html')">
+        <span class="nav-icon">▣</span>
+        <span>Financial Planner</span>
+      </button>
+
+      <button class="nav-item" onclick="navigate('government-schemes.html')">
+        <span class="nav-icon">▤</span>
+        <span>Government Schemes</span>
+      </button>
+
+      <button class="nav-item" onclick="navigate('ai-advisor.html')">
+        <span class="nav-icon">🤖</span>
+        <span>AI Advisor</span>
+      </button>
+
+      <button class="nav-item" onclick="navigate('business-plan.html')">
+        <span class="nav-icon">💡</span>
+        <span>Business Plan</span>
+      </button>
+
+    </nav>
+
+    <div class="side-art">
+      <div class="side-leaves">🌿</div>
+      <p>
+        Small<br>
+        Entrepreneurs<br>
+        Big Possibilities
+      </p>
+    </div>
+
+    <button class="logout" onclick="logout()">↪ &nbsp; Logout</button>
+
+  </aside>
+
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <section class="workspace">
+
+      <!-- STEP INDICATOR -->
+
+      <div class="stepper">
+
+        <div class="step active">
+          <div class="circle">✓</div>
+          <div class="step-text">Profile</div>
+        </div>
+
+        <div class="connector done"></div>
+
+        <div class="step current">
+          <div class="circle">2</div>
+          <div class="step-text">Business</div>
+        </div>
+
+        <div class="connector"></div>
+
+        <div class="step">
+          <div class="circle">3</div>
+          <div class="step-text">Location</div>
+        </div>
+
+      </div>
+
+
+      <!-- HEADING -->
+
+      <div class="topbar">
+
+        <div class="heading">
+          <h1>Tell Us About Your Business</h1>
+          <p>This helps us give you personalized recommendations.</p>
+        </div>
+
+        <button class="next-btn" onclick="quickNext()">
+          Next →
+        </button>
+
+      </div>
+
+
+      <!-- FORM -->
+
+      <form class="form" id="businessForm" onsubmit="continueForm(event)">
+
+        <div class="form-grid">
+
+          <!-- Entrepreneur Name -->
+
+          <div class="field">
+            <label for="name">Entrepreneur Name</label>
+            <input
+              class="input"
+              id="name"
+              type="text"
+              placeholder="Enter your name"
+              autocomplete="name"
+              required
+            >
+          </div>
+
+
+          <!-- Age Group -->
+
+          <div class="field">
+            <label for="age">Age Group</label>
+
+            <div class="input-wrap">
+
+              <select class="select" id="age" required>
+                <option value="" selected>Select age group</option>
+                <option>18 - 25</option>
+                <option>26 - 35</option>
+                <option>36 - 45</option>
+                <option>46 - 55</option>
+                <option>56+</option>
+              </select>
+
+              <span class="select-arrow">⌄</span>
+
+            </div>
+          </div>
+
+
+          <!-- Education -->
+
+          <div class="field">
+            <label for="education">Education</label>
+
+            <div class="input-wrap">
+
+              <select class="select" id="education" required>
+                <option value="" selected>Select education</option>
+                <option>Below 10th</option>
+                <option>10th</option>
+                <option>12th</option>
+                <option>Diploma</option>
+                <option>Graduate</option>
+                <option>Post Graduate</option>
+                <option>Other</option>
+              </select>
+
+              <span class="select-arrow">⌄</span>
+
+            </div>
+          </div>
+
+
+          <!-- Skills -->
+
+          <div class="field">
+            <label for="skills">Skills</label>
+
+            <input
+              class="input skills"
+              id="skills"
+              type="text"
+              placeholder="e.g. farming, management, technical"
+              required
+            >
+          </div>
+
+
+          <!-- Experience -->
+
+          <div class="field">
+            <label for="experience">Business Experience</label>
+
+            <div class="input-wrap">
+
+              <select class="select" id="experience" required>
+                <option value="" selected>Select experience</option>
+                <option>No experience</option>
+                <option>Less than 1 year</option>
+                <option>1 - 3 years</option>
+                <option>3 - 5 years</option>
+                <option>More than 5 years</option>
+              </select>
+
+              <span class="select-arrow">⌄</span>
+
+            </div>
+          </div>
+
+
+          <!-- Capital -->
+
+          <div class="field">
+
+            <label for="capital">Available Capital</label>
+
+            <div class="input-wrap">
+
+              <span class="currency">₹</span>
+
+              <input
+                class="input capital"
+                id="capital"
+                type="number"
+                min="0"
+                step="1000"
+                placeholder="Enter amount (INR)"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- Previous Experience -->
+
+          <div class="field">
+
+            <label for="previous">Previous Business Experience</label>
+
+            <div class="input-wrap">
+
+              <select class="select" id="previous">
+                <option value="" selected>Select option</option>
+                <option>Yes - Same business</option>
+                <option>Yes - Different business</option>
+                <option>No previous business</option>
+              </select>
+
+              <span class="select-arrow">⌄</span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-status" id="status"></div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="bottom">
+
+          <button
+            type="button"
+            class="back-btn"
+            onclick="goBack()"
+          >
+            Back
+          </button>
+
+          <button
+            type="submit"
+            class="continue-btn"
+          >
+            Continue &nbsp; →
+          </button>
+
+        </div>
+
+      </form>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<!-- SUMMARY MODAL -->
+
+<div class="modal" id="summaryModal" onclick="closeBackdrop(event)">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h2>Business Profile Summary</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+
+    <div class="summary" id="summary"></div>
+
+    <button class="modal-action" onclick="goToLocation()">
+      Continue to Location →
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   SELECT STYLING
+========================================== */
+
+document.querySelectorAll(".select").forEach(select => {
+
+  select.addEventListener("change", function(){
+
+    if(this.value){
+      this.classList.add("has-value");
+    }else{
+      this.classList.remove("has-value");
+    }
+
+  });
+
+});
+
+
+/* ==========================================
+   SAVE PROFILE
+========================================== */
+
+function saveProfile(){
+
+  const profile = {
+
+    name:document.getElementById("name").value.trim(),
+
+    age:document.getElementById("age").value,
+
+    education:document.getElementById("education").value,
+
+    skills:document.getElementById("skills").value.trim(),
+
+    experience:document.getElementById("experience").value,
+
+    capital:document.getElementById("capital").value,
+
+    previous:document.getElementById("previous").value
+
+  };
+
+  localStorage.setItem(
+    "vyentraBusinessProfile",
+    JSON.stringify(profile)
+  );
+
+  return profile;
+
+}
+
+
+/* ==========================================
+   LOAD SAVED DATA
+========================================== */
+
+function loadProfile(){
+
+  const saved =
+    localStorage.getItem("vyentraBusinessProfile");
+
+  if(!saved) return;
+
+  try{
+
+    const p = JSON.parse(saved);
+
+    document.getElementById("name").value = p.name || "";
+
+    document.getElementById("age").value = p.age || "";
+
+    document.getElementById("education").value =
+      p.education || "";
+
+    document.getElementById("skills").value =
+      p.skills || "";
+
+    document.getElementById("experience").value =
+      p.experience || "";
+
+    document.getElementById("capital").value =
+      p.capital || "";
+
+    document.getElementById("previous").value =
+      p.previous || "";
+
+    document.querySelectorAll(".select").forEach(select => {
+
+      if(select.value){
+        select.classList.add("has-value");
+      }
+
+    });
+
+  }catch(error){
+
+    console.log("Unable to load saved profile.");
+
+  }
+
+}
+
+
+/* ==========================================
+   VALIDATION
+========================================== */
+
+function validateForm(){
+
+  const form =
+    document.getElementById("businessForm");
+
+  if(!form.checkValidity()){
+
+    form.reportValidity();
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+/* ==========================================
+   CONTINUE
+========================================== */
+
+function continueForm(event){
+
+  event.preventDefault();
+
+  if(!validateForm()) return;
+
+  const profile = saveProfile();
+
+  showSummary(profile);
+
+}
+
+
+/* ==========================================
+   SUMMARY
+========================================== */
+
+function showSummary(profile){
+
+  const capital =
+    Number(profile.capital || 0).toLocaleString("en-IN");
+
+  document.getElementById("summary").innerHTML = `
+
+    <strong>Entrepreneur:</strong> ${escapeHTML(profile.name)}<br>
+
+    <strong>Age Group:</strong> ${escapeHTML(profile.age)}<br>
+
+    <strong>Education:</strong> ${escapeHTML(profile.education)}<br>
+
+    <strong>Skills:</strong> ${escapeHTML(profile.skills)}<br>
+
+    <strong>Business Experience:</strong> ${escapeHTML(profile.experience)}<br>
+
+    <strong>Available Capital:</strong> ₹${capital}<br>
+
+    <strong>Previous Experience:</strong>
+    ${escapeHTML(profile.previous || "Not specified")}
+
+  `;
+
+  document.getElementById("summaryModal")
+    .classList.add("show");
+
+}
+
+
+/* ==========================================
+   QUICK NEXT BUTTON
+========================================== */
+
+function quickNext(){
+
+  if(!validateForm()) return;
+
+  const profile = saveProfile();
+
+  showSummary(profile);
+
+}
+
+
+/* ==========================================
+   LOCATION PAGE
+========================================== */
+
+function goToLocation(){
+
+  /*
+    Save the current step so location.html
+    can read the completed business profile.
+  */
+
+  localStorage.setItem(
+    "vyentraCurrentStep",
+    "location"
+  );
+
+  window.location.href = "location.html";
+
+}
+
+
+/* ==========================================
+   BACK
+========================================== */
+
+function goBack(){
+
+  if(history.length > 1){
+
+    history.back();
+
+  }else{
+
+    window.location.href = "dashboard.html";
+
+  }
+
+}
+
+
+/* ==========================================
+   SIDEBAR NAVIGATION
+========================================== */
+
+function navigate(page){
+
+  window.location.href = page;
+
+}
+
+
+/* ==========================================
+   LOGOUT
+========================================== */
+
+function logout(){
+
+  if(confirm("Are you sure you want to logout?")){
+
+    localStorage.removeItem("vyentraBusinessProfile");
+
+    window.location.href = "login.html";
+
+  }
+
+}
+
+
+/* ==========================================
+   MODAL
+========================================== */
+
+function closeModal(){
+
+  document.getElementById("summaryModal")
+    .classList.remove("show");
+
+}
+
+function closeBackdrop(event){
+
+  if(event.target.id === "summaryModal"){
+
+    closeModal();
+
+  }
+
+}
+
+document.addEventListener("keydown",function(event){
+
+  if(event.key === "Escape"){
+
+    closeModal();
+
+  }
+
+});
+
+
+/* ==========================================
+   SECURITY HELPER
+========================================== */
+
+function escapeHTML(value){
+
+  return String(value)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* ==========================================
+   INITIALIZE
+========================================== */
+
+document.addEventListener("DOMContentLoaded",function(){
+
+  loadProfile();
+
+});
+
+</script>
+
+</body>
+</html>

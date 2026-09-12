@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VYENTRA | Market Analysis</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;background:#f3fafc;color:#102d5d}
+.header{height:80px;background:#fff;border-bottom:1px solid #dce7ef;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:12px}.logo{font-size:31px;font-weight:800;color:#075d43;letter-spacing:1px}.leaf{font-size:38px}.tag{border-left:2px solid #ccd7df;padding-left:17px;color:#304766;font-size:14px;line-height:1.35}
+.headerRight{display:flex;gap:22px;align-items:center;color:#294362}.avatar{background:#edf2f6;border-radius:50%;width:44px;height:44px;display:grid;place-items:center;font-size:22px}
+.layout{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 80px)}.side{background:#f7fcfd;border-right:1px solid #dce7ef;padding:28px 15px;position:relative}
+.nav{display:flex;flex-direction:column;gap:7px}.nav button{height:55px;border:0;background:transparent;border-radius:9px;text-align:left;padding:0 18px;color:#18395c;font-size:17px;display:flex;align-items:center;gap:17px;cursor:pointer}.nav button:hover,.nav .active{background:#d7f4e4;color:#087d43;font-weight:700}.ico{width:30px;text-align:center;font-size:23px}.sideArt{position:absolute;bottom:34px;left:50px;text-align:center;color:#08773f}.sideArt .plant{font-size:65px}.sideArt p{font-family:cursive;font-size:19px;font-weight:bold;line-height:1.05}.logout{position:absolute;bottom:12px;left:38px;border:0;background:none;color:#173b5e}
+main{padding:27px 30px}.head{display:flex;justify-content:space-between;gap:18px;margin-bottom:18px}.title h1{font-size:38px}.title p{font-size:20px;color:#58718e;margin-top:7px}
+.biz{min-width:440px;background:white;border:1px solid #dce7ef;border-radius:12px;padding:11px 16px;display:flex;justify-content:space-between;align-items:center}.bizinfo{display:flex;align-items:center;gap:13px}.bizicon{width:52px;height:52px;border-radius:50%;background:#f0f4fa;display:grid;place-items:center;font-size:29px}.biz small{display:block;color:#58718e;margin-top:5px}.edit{border:1px solid #dce5ed;background:white;border-radius:9px;padding:10px 17px;font-weight:bold;color:#142f59;cursor:pointer}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:17px;margin-bottom:18px}.metric{background:white;border:1px solid #dce7ef;border-radius:11px;min-height:137px;padding:15px;display:flex;gap:14px;box-shadow:0 3px 12px #183a5208}.mi{width:53px;height:53px;min-width:53px;border-radius:50%;display:grid;place-items:center;font-size:27px;background:#e5f8ed;color:#07964b}.metric:nth-child(2) .mi{background:#fff0e3;color:#f47717}.metric:nth-child(4) .mi{background:#e8f2ff;color:#1267d8}.mv{font-size:28px;font-weight:800;color:#07964b}.metric:nth-child(2) .mv{color:#f47717}.metric:nth-child(4) .mv{color:#1267d8}.ml{font-size:16px;font-weight:bold;color:#405b7b}.md{margin-top:13px;color:#647b97;font-size:15px;line-height:1.25}
+.grid{display:grid;grid-template-columns:1.03fr .97fr;gap:18px}.panel{background:white;border:1px solid #dce7ef;border-radius:11px;padding:17px;box-shadow:0 3px 12px #183a5208}.panel h2{font-size:22px;margin-bottom:14px}
+.legend{display:flex;gap:22px;margin-left:58px;font-size:15px;color:#4d6685}.legend span{display:flex;gap:8px;align-items:center}.sw{width:20px;height:13px;border-radius:2px}.d{background:#159b55}.c{background:#1267d8}
+.chart{height:275px;position:relative;padding-left:48px}.lines{position:absolute;left:48px;right:15px;top:17px;bottom:39px;background:repeating-linear-gradient(to bottom,transparent 0,transparent 19.3%,#e4ecf1 19.5%,#e4ecf1 20%)}.ys{position:absolute;left:0;top:14px;bottom:36px;display:flex;flex-direction:column;justify-content:space-between;font-size:13px;color:#536c8b}.bars{position:absolute;left:64px;right:18px;top:25px;bottom:39px;display:flex;justify-content:space-around;align-items:flex-end}.group{height:100%;width:75px;display:flex;align-items:flex-end;justify-content:center;gap:5px;position:relative}.bar{width:25px;border-radius:3px 3px 0 0;transition:.5s}.bar.demand{background:#159b55}.bar.comp{background:#1267d8}.cat{position:absolute;bottom:-27px;width:100px;text-align:center;font-size:14px;color:#4d6685}
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:10px}.box{padding:12px 14px;border-radius:8px;min-height:121px}.box h3{font-size:18px;margin-bottom:6px}.box ul{padding-left:19px;font-size:15px;line-height:1.55}.good{background:#e5f7ec}.good h3{color:#0a8547}.bad{background:#ffeaea}.bad h3{color:#e12e2a}
+.insight{margin-top:18px;background:#fbfdff;border:1px solid #dce7ef;border-radius:11px;padding:15px 18px;display:flex;align-items:center;gap:16px}.bulb{width:55px;height:55px;border-radius:50%;background:#e8f3ff;color:#1267d8;display:grid;place-items:center;font-size:30px}.it{flex:1}.it h3{font-size:19px;margin-bottom:6px}.it p{font-size:15px;color:#58718e;line-height:1.45}.report{border:1px solid #7bc9a0;background:white;color:#087b40;border-radius:8px;padding:13px 20px;font-weight:bold;cursor:pointer}
+.modal{position:fixed;inset:0;background:#06182f88;display:none;place-items:center;z-index:30;padding:20px}.modal.show{display:grid}.modalbox{background:white;width:min(600px,100%);border-radius:17px;padding:28px}.close{float:right;border:0;background:#edf3f6;border-radius:50%;width:36px;height:36px;font-size:22px}.modalbox h2{margin-bottom:18px}.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}.row label{display:block;font-weight:bold;font-size:14px;margin-bottom:6px}.row input,.row select{width:100%;height:44px;border:1px solid #d1dfe8;border-radius:8px;padding:0 11px}.save{background:#07964b;color:white;border:0;border-radius:8px;padding:12px 22px;font-weight:bold;cursor:pointer}
+@media(max-width:1100px){.layout{grid-template-columns:220px 1fr}.metrics{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:850px){.header{height:70px}.tag,.headerRight .welcome,.headerRight .top{display:none}.layout{grid-template-columns:70px 1fr}.nav button{justify-content:center;padding:0}.nav button span:not(.ico),.sideArt,.logout{display:none}main{padding:20px 15px}.head{display:block}.biz{margin-top:15px;min-width:0}.grid{grid-template-columns:1fr}}
+@media(max-width:600px){.metrics{grid-template-columns:1fr}.title h1{font-size:31px}.title p{font-size:17px}.swot{grid-template-columns:1fr}.insight{flex-wrap:wrap}.report{width:100%}.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="brand"><div class="leaf">🌿</div><div class="logo">VYENTRA</div><div class="tag">Smart Business Decisions<br>for a Better Tomorrow</div></div>
+  <div class="headerRight"><div class="top">📍 <span id="topLoc">Kothapalli, Guntur, Andhra Pradesh</span></div><div class="welcome">Welcome, Entrepreneur!</div><div class="avatar">👤</div></div>
+</header>
+
+<div class="layout">
+<aside class="side">
+<nav class="nav">
+<button onclick="go('dashboard.html')"><span class="ico">⌂</span><span>Dashboard</span></button>
+<button onclick="go('local-analysis.html')"><span class="ico">▥</span><span>Local Analysis</span></button>
+<button class="active"><span class="ico">↗</span><span>Market Analysis</span></button>
+<button onclick="go('financial-planner.html')"><span class="ico">▣</span><span>Financial Planner</span></button>
+<button onclick="go('government-schemes.html')"><span class="ico">▤</span><span>Government Schemes</span></button>
+<button onclick="go('ai-advisor.html')"><span class="ico">🤖</span><span>AI Advisor</span></button>
+<button onclick="go('business-plan.html')"><span class="ico">💡</span><span>Business Plan</span></button>
+</nav>
+<div class="sideArt"><div class="plant">🌿</div><p>Small<br>Entrepreneurs<br>Big Possibilities</p></div>
+<button class="logout" onclick="logout()">↪ &nbsp; Logout</button>
+</aside>
+
+<main>
+<div class="head">
+<div class="title"><h1>Market Analysis</h1><p>Understand market potential, competition and opportunities.</p></div>
+<div class="biz"><div class="bizinfo"><div class="bizicon">🐄</div><div><strong id="bizName">Dairy Farming</strong><small id="bizLoc">Kothapalli, Guntur, Andhra Pradesh</small></div></div><button class="edit" onclick="openEdit()">✎ &nbsp; Edit</button></div>
+</div>
+
+<section class="metrics">
+<div class="metric"><div class="mi">▥</div><div><div class="mv">High</div><div class="ml">Estimated Demand</div><p class="md">Strong local demand<br>for dairy products</p></div></div>
+<div class="metric"><div class="mi">👥</div><div><div class="mv">Medium</div><div class="ml">Competition Level</div><p class="md">Moderate competition<br>in the local market</p></div></div>
+<div class="metric"><div class="mi">↗</div><div><div class="mv">High</div><div class="ml">Market Opportunity</div><p class="md">Good scope for<br>expansion and value addition</p></div></div>
+<div class="metric"><div class="mi">A</div><div><div class="mv">Good</div><div class="ml">Accessibility</div><p class="md">Well connected by<br>road and nearby markets</p></div></div>
+</section>
+
+<section class="grid">
+<div class="panel">
+<h2>Demand vs Competition</h2>
+<div class="legend"><span><i class="sw d"></i>Demand</span><span><i class="sw c"></i>Competition</span></div>
+<div class="chart"><div class="lines"></div><div class="ys"><span>400</span><span>300</span><span>200</span><span>100</span><span>0</span></div><div class="bars" id="bars"></div></div>
+</div>
+
+<div class="panel">
+<h2>SWOT Analysis</h2>
+<div class="swot">
+<div class="box good"><h3>Strengths</h3><ul><li>High local demand</li><li>Availability of raw milk</li><li>Support from government</li></ul></div>
+<div class="box bad"><h3>Weaknesses</h3><ul><li>Initial investment required</li><li>Skilled labor needed</li><li>Cold storage limitations</li></ul></div>
+<div class="box good"><h3>Opportunities</h3><ul><li>Growing demand for value-added products</li><li>Supply to nearby towns</li><li>Government support schemes</li></ul></div>
+<div class="box bad"><h3>Threats</h3><ul><li>Price fluctuations</li><li>Disease outbreaks in cattle</li><li>Competition from larger dairy brands</li></ul></div>
+</div>
+</div>
+</section>
+
+<section class="insight">
+<div class="bulb">💡</div>
+<div class="it"><h3>Recommended Insight</h3><p>There is a strong market opportunity for dairy farming in <span id="insightLoc">Kothapalli</span>, with high local demand and moderate competition.<br>Consider focusing on milk collection, curd, paneer or value-added products to maximize profitability.</p></div>
+<button class="report" onclick="openReport()">View Detailed Report &nbsp; →</button>
+</section>
+</main>
+</div>
+
+<div class="modal" id="editModal" onclick="backdrop(event)">
+<div class="modalbox"><button class="close" onclick="closeModal()">×</button><h2>Edit Business Analysis</h2>
+<div class="row"><div><label>Business Name</label><input id="editName" value="Dairy Farming"></div><div><label>Location</label><input id="editLoc" value="Kothapalli, Guntur, Andhra Pradesh"></div></div>
+<div class="row"><div><label>Demand</label><select id="demand"><option>High</option><option>Medium</option><option>Low</option></select></div><div><label>Competition</label><select id="competition"><option>Medium</option><option>High</option><option>Low</option></select></div></div>
+<button class="save" onclick="saveEdit()">Save Changes</button></div></div>
+
+<div class="modal" id="reportModal" onclick="backdrop(event)">
+<div class="modalbox"><button class="close" onclick="closeModal()">×</button><h2>Detailed Market Report</h2>
+<p style="font-size:16px;line-height:1.65;color:#526c88">The current demonstration analysis shows high estimated demand, moderate competition, high market opportunity and good accessibility for the selected dairy business.<br><br><strong>Recommended focus:</strong> milk collection, curd, paneer and other value-added dairy products.<br><br>This page uses sample values. Connect it to your backend or verified local datasets for live market information.</p>
+<button class="save" style="margin-top:20px" onclick="closeModal()">Close</button></div></div>
+
+<script>
+const data=[["Milk",300,150],["Curd",200,125],["Paneer",175,100],["Ghee",115,75],["Other",220,145]];
+function drawChart(){const b=document.getElementById("bars");b.innerHTML="";data.forEach(x=>{const g=document.createElement("div");g.className="group";g.innerHTML=`<div class="bar demand" style="height:${x[1]/400*100}%"></div><div class="bar comp" style="height:${x[2]/400*100}%"></div><div class="cat">${x[0]}</div>`;b.appendChild(g)})}
+function go(p){location.href=p}
+function openEdit(){document.getElementById("editModal").classList.add("show")}
+function saveEdit(){let n=document.getElementById("editName").value.trim(),l=document.getElementById("editLoc").value.trim();if(!n||!l)return alert("Enter business name and location.");document.getElementById("bizName").textContent=n;document.getElementById("bizLoc").textContent=l;document.getElementById("topLoc").textContent=l;document.getElementById("insightLoc").textContent=l.split(",")[0];localStorage.setItem("vyentraMarket",JSON.stringify({n,l,d:document.getElementById("demand").value,c:document.getElementById("competition").value}));closeModal()}
+function openReport(){document.getElementById("reportModal").classList.add("show")}
+function closeModal(){document.querySelectorAll(".modal").forEach(x=>x.classList.remove("show"))}
+function backdrop(e){if(e.target.classList.contains("modal"))closeModal()}
+function logout(){if(confirm("Are you sure you want to logout?"))location.href="login.html"}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+window.addEventListener("DOMContentLoaded",()=>{drawChart();let s=localStorage.getItem("vyentraMarket");if(s){try{let x=JSON.parse(s);document.getElementById("bizName").textContent=x.n;document.getElementById("bizLoc").textContent=x.l;document.getElementById("topLoc").textContent=x.l;document.getElementById("insightLoc").textContent=x.l.split(",")[0];document.getElementById("editName").value=x.n;document.getElementById("editLoc").value=x.l;document.getElementById("demand").value=x.d;document.getElementById("competition").value=x.c}catch(e){}}});
+</script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VYENTRA - AI Advisor</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --navy:#102b59;--green:#07964b;--green2:#087d43;--blue:#1768d7;
+ --bg:#f3fafc;--border:#dce7ef;--muted:#5d7591
+}
+body{font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#f8fcff,#edf8f8);color:var(--navy);min-height:100vh}
+button,input{font:inherit}
+.header{height:80px;background:#fff;border-bottom:1px solid #dfe8ee;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:30;box-shadow:0 2px 8px rgba(20,55,75,.06)}
+.brand{display:flex;align-items:center;gap:10px}.logo-mark{width:45px;height:50px;position:relative}.leaf{position:absolute;border-radius:100% 0 100% 0}.leaf1{width:25px;height:41px;left:2px;top:1px;background:linear-gradient(135deg,#68d45a,#0b914b);transform:rotate(-35deg)}.leaf2{width:24px;height:38px;left:20px;top:10px;background:linear-gradient(135deg,#43bf50,#08763e);transform:rotate(35deg)}.stem{position:absolute;width:3px;height:40px;background:#087642;left:21px;top:11px;transform:rotate(7deg)}
+.logo{font-size:31px;font-weight:800;letter-spacing:1px;color:#075d43}.divider{height:39px;width:2px;background:#ccd7df;margin-left:5px}.tag{font-size:14px;line-height:1.35;color:#304766}
+.header-right{display:flex;align-items:center;gap:20px}.top-location{font-size:15px;padding-right:18px;border-right:1px solid #dce4e9}.welcome{font-size:16px}.avatar{width:45px;height:45px;border-radius:50%;background:#edf2f6;display:grid;place-items:center;font-size:22px}
+.layout{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 80px)}
+.sidebar{background:linear-gradient(180deg,#f7fcfd,#eef8f7);border-right:1px solid var(--border);padding:28px 15px;position:relative}
+.nav{display:flex;flex-direction:column;gap:7px}.nav button{height:55px;border:0;background:transparent;border-radius:10px;padding:0 18px;display:flex;align-items:center;gap:17px;color:#17395e;font-size:17px;text-align:left;cursor:pointer;transition:.2s}.nav button:hover,.nav button.active{background:#d6f3e3;color:#087c42}.nav button.active{font-weight:700}.nav-icon{width:30px;text-align:center;font-size:23px}
+.side-art{position:absolute;left:50px;bottom:33px;text-align:center;color:#08773f}.side-art .plant{font-size:66px;line-height:.8}.side-art p{font-family:cursive;font-size:19px;font-weight:bold;line-height:1.05}.logout{position:absolute;bottom:10px;left:38px;border:0;background:none;color:#17395d;font-size:15px;cursor:pointer}
+main{padding:25px 30px 20px;overflow:hidden}.content{max-width:1300px;margin:auto}
+.page-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:13px}.title h1{font-size:37px;letter-spacing:-1px}.title p{font-size:19px;color:#58718e;margin-top:5px}
+.business-card{min-width:500px;border:1px solid var(--border);background:#fff;border-radius:10px;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 3px 12px rgba(20,55,75,.04)}.business-info{display:flex;align-items:center;gap:14px}.business-icon{width:54px;height:54px;border-radius:50%;background:#edf5ff;display:grid;place-items:center;font-size:31px}.business-name{font-size:20px;font-weight:700}.business-location{font-size:14px;color:#4d6684;margin-top:4px}.edit-btn{height:45px;padding:0 19px;border:1px solid #dbe4ec;border-radius:8px;background:#fff;color:#132d52;font-size:16px;font-weight:600;cursor:pointer}
+.advisor-layout{display:grid;grid-template-columns:minmax(620px,1fr) 390px;gap:18px}
+.chat-card{height:calc(100vh - 175px);min-height:650px;background:#fff;border:1px solid var(--border);border-radius:11px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 3px 12px rgba(20,55,75,.04)}
+.chat-scroll{flex:1;overflow-y:auto;padding:12px 15px 8px}.intro{display:flex;align-items:flex-start;gap:14px}.bot{width:62px;height:62px;flex:none;border-radius:50%;background:#e1f7eb;display:grid;place-items:center;font-size:32px}.bubble{background:#eef3fa;border-radius:9px;padding:12px 16px;line-height:1.35;font-size:16px;max-width:690px}.bubble strong{font-size:17px}.suggestions{display:flex;gap:8px;margin:10px 0 12px 0;flex-wrap:nowrap}.suggestion{border:1px solid #d5eee1;background:#e9f9f1;color:#15763e;border-radius:9px;padding:10px 12px;font-size:13px;line-height:1.2;cursor:pointer;flex:1;min-height:58px}.suggestion:hover{background:#d8f3e6}.show-more{border:0;background:#effaf5;color:#087d43;border-radius:50%;width:46px;height:46px;cursor:pointer;font-size:23px;flex:none}
+.user-row{display:flex;justify-content:flex-end;align-items:flex-start;gap:10px;margin:7px 0 13px}.user-bubble{background:#dcecff;border-radius:10px;padding:11px 15px;max-width:360px;font-size:15px;line-height:1.35}.user-avatar{width:51px;height:51px;border-radius:50%;background:#eaf0f6;display:grid;place-items:center;font-size:23px;flex:none}
+.bot-row{display:flex;gap:14px}.answer{background:#eef3fa;border-radius:9px;padding:12px 16px;line-height:1.42;font-size:15px;max-width:720px}.answer p{margin-bottom:9px}.answer strong{font-weight:800}
+.cost-table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #d6e1e9;border-radius:6px;overflow:hidden;margin:8px 0}.cost-table th,.cost-table td{padding:4px 10px;border-bottom:1px solid #dce5eb;text-align:left;font-size:13px}.cost-table th{background:#f4f7fa}.cost-table tr:last-child td{border-bottom:0}.cost-table .total{background:#dff7ea;font-weight:700}
+.composer{border-top:1px solid #dce6ed;padding:10px;display:flex;gap:9px;background:#fff}.attach{width:45px;border:0;background:transparent;color:#426486;font-size:23px;cursor:pointer}.question{flex:1;height:54px;border:1px solid #d6e2ea;border-radius:10px;padding:0 15px;font-size:15px;outline:none}.question:focus{border-color:#64b68b;box-shadow:0 0 0 3px #07964b10}.send{width:58px;height:54px;border:0;border-radius:10px;background:#07964b;color:#fff;font-size:25px;cursor:pointer}.send:hover{background:#087d43}
+.right-col{display:flex;flex-direction:column;gap:12px}.side-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 15px;box-shadow:0 3px 12px rgba(20,55,75,.04)}.side-title{font-size:18px;font-weight:700;margin-bottom:9px;display:flex;align-items:center;gap:9px}.suggestion-list,.resource-list{list-style:none}.suggestion-list li,.resource-list li{border:1px solid #dfe8ef;border-radius:7px;padding:8px 11px;margin:5px 0;font-size:14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;color:#284565}.suggestion-list li:hover,.resource-list li:hover{background:#f5fafc}.resource-list li span:last-child{font-size:18px}.tagline{background:#dff7eb;border:0;padding:19px 22px;min-height:110px}.tagline .small-leaf{font-size:43px;float:left;margin-right:10px}.tagline h3{color:#08783f;font-size:20px;line-height:1.25;margin-top:4px}.line{height:4px;width:65px;background:#07964b;border-radius:4px;margin-top:12px}
+.modal{position:fixed;inset:0;background:#071a3080;display:none;align-items:center;justify-content:center;z-index:100;padding:20px}.modal.show{display:flex}.modal-box{background:#fff;width:min(620px,100%);border-radius:15px;padding:25px;box-shadow:0 25px 70px #0004}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal-head h2{font-size:25px}.close{border:0;width:37px;height:37px;border-radius:50%;background:#edf3f6;font-size:22px;cursor:pointer}.form-row{margin-top:18px}.form-row label{display:block;font-weight:600;margin-bottom:7px}.form-row input{width:100%;height:47px;border:1px solid #d4dfe8;border-radius:8px;padding:0 13px;font-size:16px}.save{margin-top:17px;width:100%;height:47px;border:0;border-radius:8px;background:#07964b;color:#fff;font-weight:bold;cursor:pointer}
+.toast{position:fixed;right:25px;bottom:25px;background:#092b50;color:#fff;padding:13px 17px;border-radius:9px;display:none;z-index:110}.toast.show{display:block}
+@media(max-width:1150px){.advisor-layout{grid-template-columns:1fr}.right-col{display:grid;grid-template-columns:1fr 1fr}.tagline{grid-column:1/-1}.chat-card{height:650px}.business-card{min-width:400px}}
+@media(max-width:850px){.header{height:70px;padding:0 15px}.tag,.divider,.welcome,.top-location{display:none}.logo{font-size:27px}.layout{grid-template-columns:70px 1fr}.sidebar{padding:20px 9px}.nav button{justify-content:center;padding:0}.nav button span:not(.nav-icon),.side-art,.logout{display:none}main{padding:18px}.page-head{display:block}.business-card{margin-top:14px;min-width:0}.right-col{display:block}.side-card{margin-top:12px}.suggestions{overflow-x:auto}.suggestion{min-width:155px}.chat-card{height:680px}}
+@media(max-width:560px){.title h1{font-size:30px}.title p{font-size:16px}.business-name{font-size:17px}.bubble,.answer{font-size:14px}.bot{width:50px;height:50px;font-size:26px}.chat-card{min-height:620px;height:calc(100vh - 185px)}.composer{padding:7px}.send{width:50px}.attach{width:35px}}
+</style>
+</head>
+<body>
+
+<header class="header">
+ <div class="brand">
+  <div class="logo-mark"><span class="leaf leaf1"></span><span class="leaf leaf2"></span><span class="stem"></span></div>
+  <div class="logo">VYENTRA</div><div class="divider"></div>
+  <div class="tag">Smart Business Decisions<br>for a Better Tomorrow</div>
+ </div>
+ <div class="header-right">
+  <div class="top-location">📍 <span id="headerLocation">Kothapalli, Guntur, Andhra Pradesh</span></div>
+  <div class="welcome">Welcome, Entrepreneur!</div><div class="avatar">👤</div>
+ </div>
+</header>
+
+<div class="layout">
+<aside class="sidebar">
+ <nav class="nav">
+  <button onclick="navigate('dashboard.html')"><span class="nav-icon">⌂</span><span>Dashboard</span></button>
+  <button onclick="navigate('local-analysis.html')"><span class="nav-icon">▥</span><span>Local Analysis</span></button>
+  <button onclick="navigate('market-analysis.html')"><span class="nav-icon">↗</span><span>Market Analysis</span></button>
+  <button onclick="navigate('financial-planner.html')"><span class="nav-icon">▣</span><span>Financial Planner</span></button>
+  <button onclick="navigate('government-schemes.html')"><span class="nav-icon">▤</span><span>Government Schemes</span></button>
+  <button class="active"><span class="nav-icon">🤖</span><span>AI Advisor</span></button>
+  <button onclick="navigate('business-plan.html')"><span class="nav-icon">💡</span><span>Business Plan</span></button>
+ </nav>
+ <div class="side-art"><div class="plant">🌿</div><p>Small<br>Entrepreneurs<br>Big Possibilities</p></div>
+ <button class="logout" onclick="logout()">↪ &nbsp; Logout</button>
+</aside>
+
+<main>
+<div class="content">
+
+ <div class="page-head">
+  <div class="title">
+   <h1>AI Advisor</h1>
+   <p>Get personalized guidance, recommendations and answers to your business questions.</p>
+  </div>
+  <div class="business-card">
+   <div class="business-info">
+    <div class="business-icon">🐄</div>
+    <div><div class="business-name" id="businessName">Dairy Farming</div><div class="business-location" id="businessLocation">Kothapalli, Guntur, Andhra Pradesh</div></div>
+   </div>
+   <button class="edit-btn" onclick="editBusiness()">✎ &nbsp;Edit</button>
+  </div>
+ </div>
+
+ <div class="advisor-layout">
+
+  <section class="chat-card">
+   <div class="chat-scroll" id="chat">
+
+    <div class="intro">
+     <div class="bot">🤖</div>
+     <div class="bubble">
+      <strong>Hello! I'm VYENTRA AI Advisor 👋</strong><br>
+      I can help you with business planning, government schemes, market insights,
+      financial calculations and more. How can I assist you today?
+     </div>
+    </div>
+
+    <div class="suggestions" id="suggestions"></div>
+
+    <div id="messages">
+     <div class="user-row">
+      <div class="user-bubble">What is the investment required for dairy farming in Kothapalli, Guntur?</div>
+      <div class="user-avatar">👤</div>
+     </div>
+
+     <div class="bot-row">
+      <div class="bot">🤖</div>
+      <div class="answer">
+       <p>For a small to medium dairy farming unit in Kothapalli, Guntur, the estimated investment is <strong>₹4,00,000 – ₹6,00,000</strong> depending on the number of cows, shed infrastructure, equipment and initial working capital.</p>
+       <p>Here's a quick breakdown:</p>
+       <table class="cost-table">
+        <tr><th>Component</th><th>Estimated Cost (₹)</th></tr>
+        <tr><td>Cattle (5 cows)</td><td>2,50,000</td></tr>
+        <tr><td>Shed Construction</td><td>1,00,000</td></tr>
+        <tr><td>Equipment (milking, storage, etc.)</td><td>75,000</td></tr>
+        <tr><td>Working Capital (first 3 months)</td><td>75,000</td></tr>
+        <tr class="total"><td>Total Estimated Investment</td><td>5,00,000</td></tr>
+       </table>
+       <p>You can also explore government schemes like DEDS and PM Mudra Yojana to reduce your initial investment through subsidies and low-interest loans.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+
+   <div class="composer">
+    <button class="attach" title="Attach">📎</button>
+    <input class="question" id="question" placeholder="Ask your question here..." autocomplete="off">
+    <button class="send" onclick="sendQuestion()">➤</button>
+   </div>
+  </section>
+
+  <aside class="right-col">
+
+   <div class="side-card">
+    <div class="side-title">💡 Quick Suggestions</div>
+    <ul class="suggestion-list" id="quickList"></ul>
+   </div>
+
+   <div class="side-card">
+    <div class="side-title">📄 Useful Resources</div>
+    <ul class="resource-list">
+     <li onclick="resource('Dairy Farming Guide')"><span>Dairy Farming Guide (PDF)</span><span>↗</span></li>
+     <li onclick="resource('Government Schemes List')"><span>Government Schemes List</span><span>↗</span></li>
+     <li onclick="resource('Training & Skill Development')"><span>Training & Skill Development</span><span>↗</span></li>
+     <li onclick="resource('Market Price Trends')"><span>Market Price Trends</span><span>↗</span></li>
+     <li onclick="resource('Expert Videos')"><span>Expert Videos</span><span>↗</span></li>
+    </ul>
+   </div>
+
+   <div class="side-card tagline">
+    <span class="small-leaf">🌿</span>
+    <h3>Smarter Questions<br>Brighter Futures</h3>
+    <div class="line"></div>
+   </div>
+
+  </aside>
+ </div>
+
+</div>
+</main>
+</div>
+
+<div class="modal" id="editModal" onclick="closeBackdrop(event)">
+ <div class="modal-box">
+  <div class="modal-head"><h2>Edit Business Details</h2><button class="close" onclick="closeEdit()">×</button></div>
+  <div class="form-row"><label>Business Name</label><input id="editBusinessName"></div>
+  <div class="form-row"><label>Location</label><input id="editBusinessLocation"></div>
+  <button class="save" onclick="saveBusiness()">Save Changes</button>
+ </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const quickQuestions=[
+ "Best dairy breed for my region",
+ "Monthly profit estimation",
+ "Required licenses and permits",
+ "Marketing strategies",
+ "Common diseases and prevention",
+ "How to start with 2 cows?"
+];
+
+const responses={
+ "best dairy breed for my region":
+  "For your local planning, compare breeds based on milk yield, feed availability, climate suitability, veterinary support and purchase cost. A local dairy expert should validate the final breed choice before purchase.",
+ "monthly profit estimation":
+  "A simple estimate is monthly revenue minus monthly operating expenses. Enter your expected milk sales, other product income, feed, labour, veterinary, electricity, transport and maintenance costs to get a more useful estimate.",
+ "required licenses and permits":
+  "The licenses and registrations depend on the exact dairy activity, scale and local authority. For a project plan, prepare your business registration details, local permissions and any food-related registration that applies to your products.",
+ "marketing strategies":
+  "Useful dairy marketing options include direct household sales, local shops, tea stalls, weekly markets, subscription delivery and value-added products such as curd or paneer. Compare margins and demand before choosing a channel.",
+ "common diseases and prevention":
+  "Maintain vaccination schedules, clean housing, safe drinking water, balanced feed and regular veterinary checks. Isolate visibly sick animals and consult a qualified veterinarian for diagnosis and treatment.",
+ "how to start with 2 cows?":
+  "Start small by budgeting for two healthy animals, a suitable shed, feed, basic equipment, veterinary care and working capital. Track daily milk yield, feed cost and selling price before expanding."
+};
+
+function renderSuggestions(){
+ const container=document.getElementById("suggestions");
+ container.innerHTML="";
+ quickQuestions.slice(0,4).forEach(q=>{
+  const b=document.createElement("button");
+  b.className="suggestion";b.textContent=q;b.onclick=()=>ask(q);
+  container.appendChild(b);
+ });
+ const more=document.createElement("button");
+ more.className="show-more";more.title="Show more suggestions";more.textContent="⟳";
+ more.onclick=()=>toggleSuggestions();
+ container.appendChild(more);
+
+ const list=document.getElementById("quickList");
+ list.innerHTML="";
+ quickQuestions.forEach(q=>{
+  const li=document.createElement("li");li.innerHTML=`<span>${q}</span><span>›</span>`;
+  li.onclick=()=>ask(q);list.appendChild(li);
+ });
+}
+
+function toggleSuggestions(){
+ const all=quickQuestions;
+ const c=document.getElementById("suggestions");
+ c.innerHTML="";
+ all.forEach(q=>{
+  const b=document.createElement("button");b.className="suggestion";b.textContent=q;b.onclick=()=>ask(q);c.appendChild(b);
+ });
+ const back=document.createElement("button");back.className="show-more";back.textContent="↑";back.onclick=renderSuggestions;c.appendChild(back);
+}
+
+function ask(question){
+ document.getElementById("question").value=question;
+ sendQuestion();
+}
+
+function sendQuestion(){
+ const input=document.getElementById("question");
+ const text=input.value.trim();
+ if(!text)return;
+
+ const messages=document.getElementById("messages");
+
+ const user=document.createElement("div");
+ user.className="user-row";
+ user.innerHTML=`<div class="user-bubble">${escapeHtml(text)}</div><div class="user-avatar">👤</div>`;
+ messages.appendChild(user);
+
+ input.value="";
+ scrollChat();
+
+ const typing=document.createElement("div");
+ typing.className="bot-row";
+ typing.id="typing";
+ typing.innerHTML=`<div class="bot">🤖</div><div class="answer">VYENTRA AI is preparing your guidance...</div>`;
+ messages.appendChild(typing);
+ scrollChat();
+
+ setTimeout(()=>{
+  typing.remove();
+  const answer=getAnswer(text);
+  const bot=document.createElement("div");
+  bot.className="bot-row";
+  bot.innerHTML=`<div class="bot">🤖</div><div class="answer">${answer}</div>`;
+  messages.appendChild(bot);
+  scrollChat();
+ },650);
+}
+
+function getAnswer(question){
+ const q=question.toLowerCase();
+
+ for(const key in responses){
+  if(q.includes(key.split(" ")[0]) && q.includes(key.split(" ")[1]||"")){
+   return `<p>${responses[key]}</p>`;
+  }
+ }
+
+ if(q.includes("investment")||q.includes("cost")||q.includes("capital")){
+  return `<p>For a small to medium dairy unit, use the displayed planning estimate of <strong>₹4,00,000 – ₹6,00,000</strong>. Your exact requirement depends on cattle count, shed, equipment, feed and working capital.</p>
+  <p>Use the <strong>Financial Planner</strong> to compare your own capital, required loan, monthly revenue, expenses, EMI and break-even period.</p>`;
+ }
+
+ if(q.includes("scheme")||q.includes("loan")||q.includes("subsid")){
+  return `<p>You can review the <strong>Government Schemes</strong> section for applicable loans, subsidies, infrastructure support and training programmes. Scheme eligibility and current terms should be checked against the official programme information before applying.</p>`;
+ }
+
+ if(q.includes("profit")||q.includes("revenue")||q.includes("income")){
+  return `<p>Estimated monthly profit can be calculated as <strong>monthly revenue − monthly operating expenses</strong>. Include feed, labour, veterinary care, electricity, transport and maintenance when estimating expenses.</p>`;
+ }
+
+ if(q.includes("market")||q.includes("demand")){
+  return `<p>For market planning, compare local demand, nearby competitors, selling prices, weekly markets, transport access and opportunities for milk, curd, paneer and other value-added products.</p>`;
+ }
+
+ return `<p>I can help with <strong>business costs, market analysis, financial planning, government schemes, profitability, risks and business planning</strong>.</p><p>Try asking a more specific question such as “What loan can I get?”, “How much can I earn per month?” or “What are the main dairy risks?”</p>`;
+}
+
+function escapeHtml(text){
+ const div=document.createElement("div");div.textContent=text;return div.innerHTML;
+}
+
+function scrollChat(){
+ const chat=document.getElementById("chat");
+ setTimeout(()=>chat.scrollTop=chat.scrollHeight,30);
+}
+
+function editBusiness(){
+ document.getElementById("editBusinessName").value=document.getElementById("businessName").textContent;
+ document.getElementById("editBusinessLocation").value=document.getElementById("businessLocation").textContent;
+ document.getElementById("editModal").classList.add("show");
+}
+
+function saveBusiness(){
+ const name=document.getElementById("editBusinessName").value.trim()||"Dairy Farming";
+ const location=document.getElementById("editBusinessLocation").value.trim()||"Kothapalli, Guntur, Andhra Pradesh";
+ document.getElementById("businessName").textContent=name;
+ document.getElementById("businessLocation").textContent=location;
+ document.getElementById("headerLocation").textContent=location;
+ localStorage.setItem("vyentraBusinessName",name);
+ localStorage.setItem("vyentraLocation",location);
+ closeEdit();showToast("Business details updated");
+}
+
+function closeEdit(){document.getElementById("editModal").classList.remove("show")}
+function closeBackdrop(e){if(e.target.id==="editModal")closeEdit()}
+
+function resource(name){showToast(name+" selected")}
+
+function navigate(page){window.location.href=page}
+
+function logout(){
+ if(confirm("Are you sure you want to logout?")){
+  localStorage.removeItem("vyentraBusinessProfile");
+  localStorage.removeItem("vyentraFinancialPlan");
+  window.location.href="login.html";
+ }
+}
+
+function showToast(message){
+ const t=document.getElementById("toast");t.textContent=message;t.classList.add("show");
+ setTimeout(()=>t.classList.remove("show"),2800);
+}
+
+document.getElementById("question").addEventListener("keydown",e=>{
+ if(e.key==="Enter"){e.preventDefault();sendQuestion()}
+});
+
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeEdit()});
+
+document.addEventListener("DOMContentLoaded",()=>{
+ const location=localStorage.getItem("vyentraLocation");
+ const business=localStorage.getItem("vyentraBusinessName");
+ if(location){
+  document.getElementById("headerLocation").textContent=location;
+  document.getElementById("businessLocation").textContent=location;
+ }
+ if(business)document.getElementById("businessName").textContent=business;
+ renderSuggestions();
+});
+</script>
+</body>
+</html>

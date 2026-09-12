@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VYENTRA - Financial Planner</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --navy:#0d2856;--green:#07964b;--green2:#087d43;--bg:#f3fafc;
+ --border:#dce7ef;--muted:#617795;--blue:#1267d8;--gold:#e8a500;
+}
+body{font-family:Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#f8fcff,#edf8f8);color:var(--navy);min-height:100vh}
+.header{height:80px;background:#fff;border-bottom:1px solid #dfe8ee;display:flex;align-items:center;justify-content:space-between;padding:0 28px;position:sticky;top:0;z-index:20;box-shadow:0 2px 8px #173b5d0d}
+.brand{display:flex;align-items:center;gap:10px}.logo-mark{width:45px;height:50px;position:relative}
+.leaf{position:absolute;border-radius:100% 0 100% 0}.leaf1{width:25px;height:41px;left:2px;top:1px;background:linear-gradient(135deg,#68d45a,#0b914b);transform:rotate(-35deg)}.leaf2{width:24px;height:38px;left:20px;top:10px;background:linear-gradient(135deg,#43bf50,#08763e);transform:rotate(35deg)}.stem{position:absolute;width:3px;height:40px;background:#087642;left:21px;top:11px;transform:rotate(7deg)}
+.logo{font-size:31px;font-weight:800;letter-spacing:1px;color:#075d43}.divider{height:39px;width:2px;background:#ccd7df;margin-left:5px}.tag{font-size:14px;line-height:1.35;color:#304766}
+.header-right{display:flex;align-items:center;gap:20px}.top-location{font-size:15px;padding-right:18px;border-right:1px solid #dce4e9}.welcome{font-size:16px}.avatar{width:45px;height:45px;border-radius:50%;background:#edf2f6;display:grid;place-items:center;font-size:22px}
+.layout{display:grid;grid-template-columns:270px 1fr;min-height:calc(100vh - 80px)}
+.sidebar{background:linear-gradient(180deg,#f7fcfd,#eef8f7);border-right:1px solid var(--border);padding:28px 15px;position:relative}
+.nav{display:flex;flex-direction:column;gap:7px}.nav button{height:55px;border:0;background:transparent;border-radius:10px;padding:0 18px;display:flex;align-items:center;gap:17px;color:#17395e;font-size:17px;text-align:left;cursor:pointer;transition:.2s}.nav button:hover{background:#e5f6ed;color:#087c42}.nav button.active{background:#d6f3e3;color:#087c42;font-weight:700}.nav-icon{width:30px;text-align:center;font-size:23px}
+.side-art{position:absolute;left:50px;bottom:33px;text-align:center;color:#08773f}.side-art .plant{font-size:66px;line-height:.8}.side-art p{font-family:cursive;font-size:19px;font-weight:bold;line-height:1.05}.logout{position:absolute;bottom:10px;left:38px;border:0;background:none;color:#17395d;font-size:15px;cursor:pointer}
+main{padding:28px 30px;overflow:auto}.content{max-width:1280px;margin:auto}
+.page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:18px}.title h1{font-size:38px;letter-spacing:-1px}.title p{font-size:20px;color:#58718e;margin-top:7px}
+.planner{display:grid;grid-template-columns:minmax(500px,1fr) minmax(430px,.9fr);gap:30px}
+.card{background:#fff;border:1px solid var(--border);border-radius:11px;box-shadow:0 3px 12px #183a5208}
+.inputs{padding:0 5px}.field{margin-bottom:14px}.field label{display:block;font-size:17px;font-weight:600;margin:0 0 7px 5px}.input-wrap{position:relative}.input{width:100%;height:50px;border:1.5px solid #d3dfe8;border-radius:8px;background:#fff;padding:0 18px 0 58px;font-size:17px;color:#263f60;outline:none;transition:.2s}.input:focus{border-color:#4ab17a;box-shadow:0 0 0 3px #07964b12}.currency{position:absolute;left:0;top:0;width:51px;height:50px;border-right:1px solid #dce5eb;display:grid;place-items:center;font-size:20px;color:#334c6b}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:22px}.plain{padding-left:17px}
+.calculate{width:100%;height:60px;margin-top:0;border:0;border-radius:9px;background:linear-gradient(90deg,#07964b,#07994d);color:#fff;font-size:20px;font-weight:600;cursor:pointer;transition:.2s}.calculate:hover{background:#087d43;transform:translateY(-1px);box-shadow:0 7px 16px #07964b2a}
+.results{padding:18px 20px}.results h2{font-size:25px;margin-bottom:14px}.result{height:76px;border-radius:11px;margin-bottom:11px;display:flex;align-items:center;gap:17px;padding:10px 18px}.result-icon{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;font-size:26px;flex:none}.result-main{font-size:27px;font-weight:800}.result-label{font-size:16px;color:#506986;margin-top:3px}.profit{background:#effaf5}.profit .result-icon{background:#d9f5e5;color:#07964b}.emi{background:#edf6ff}.emi .result-icon{background:#dcecff;color:#1267d8}.repay{background:#eef6ff}.repay .result-icon{background:#dcecff;color:#1267d8}.break{background:#fff8e7}.break .result-icon{background:#fff0c6;color:#d89800}
+.chart-card{padding:18px 20px;margin-top:12px}.chart-head{display:flex;justify-content:space-between;align-items:center}.chart-head h2{font-size:22px}.legend{display:flex;gap:18px;color:#4c6683}.legend span{display:flex;gap:7px;align-items:center}.dot{width:21px;height:13px;border-radius:2px}.green{background:#159b55}.blue{background:#1267d8}.chart{height:245px;position:relative;margin-top:12px;padding-left:42px}.gridlines{position:absolute;left:42px;right:7px;top:10px;bottom:36px;background:repeating-linear-gradient(to bottom,transparent 0,transparent 32.8%,#e1e9ef 33%,#e1e9ef 33.6%)}.yaxis{position:absolute;left:0;top:9px;bottom:36px;display:flex;flex-direction:column;justify-content:space-between;color:#536c8b;font-size:13px}.bar-area{position:absolute;left:55px;right:10px;top:18px;bottom:36px;display:flex;justify-content:space-around;align-items:flex-end}.month{height:100%;width:60px;display:flex;align-items:flex-end;justify-content:center;gap:5px;position:relative}.bar{width:24px;border-radius:3px 3px 0 0;transition:height .5s}.revenue{background:#159b55}.expense{background:#1267d8}.month-label{position:absolute;bottom:-27px;width:70px;text-align:center;font-size:14px;color:#4d6685}
+.info{margin-top:14px;background:#f8fcff;border:1px solid var(--border);border-radius:10px;padding:13px 16px;color:#526d8a;font-size:14px;line-height:1.5}.info strong{color:#087d43}
+.modal{position:fixed;inset:0;background:#071a3080;display:none;align-items:center;justify-content:center;z-index:100;padding:20px}.modal.show{display:flex}.modal-box{background:#fff;width:min(620px,100%);border-radius:16px;padding:27px;box-shadow:0 25px 70px #0004}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.modal-head h2{font-size:26px}.close{border:0;background:#edf3f6;border-radius:50%;width:37px;height:37px;font-size:22px;cursor:pointer}.summary{background:#f3faf6;border:1px solid #d8eee0;border-radius:10px;padding:17px;line-height:1.9;color:#405c79}.summary strong{color:#087d43}.modal-btn{margin-top:18px;width:100%;height:47px;border:0;border-radius:8px;background:#07964b;color:#fff;font-weight:bold;cursor:pointer}
+@media(max-width:1100px){.layout{grid-template-columns:220px 1fr}.planner{grid-template-columns:1fr}.results,.chart-card{max-width:none}.inputs{max-width:none}}
+@media(max-width:850px){.header{height:70px;padding:0 15px}.tag,.divider,.welcome,.top-location{display:none}.logo{font-size:27px}.layout{grid-template-columns:70px 1fr}.sidebar{padding:20px 9px}.nav button{justify-content:center;padding:0}.nav button span:not(.nav-icon),.side-art,.logout{display:none}main{padding:18px}.title h1{font-size:31px}.title p{font-size:17px}.planner{display:block}.results{margin-top:20px}}
+@media(max-width:560px){.page-head{display:block}.two{grid-template-columns:1fr;gap:0}.field{margin-bottom:15px}.results{padding:15px}.result{height:auto;min-height:70px}.result-main{font-size:23px}.chart-head{display:block}.legend{margin-top:10px}.chart{height:230px}}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="brand">
+    <div class="logo-mark">
+      <span class="leaf leaf1"></span><span class="leaf leaf2"></span><span class="stem"></span>
+    </div>
+    <div class="logo">VYENTRA</div>
+    <div class="divider"></div>
+    <div class="tag">Smart Business Decisions<br>for a Better Tomorrow</div>
+  </div>
+  <div class="header-right">
+    <div class="top-location">📍 <span id="headerLocation">Kothapalli, Guntur, Andhra Pradesh</span></div>
+    <div class="welcome">Welcome, Entrepreneur!</div>
+    <div class="avatar">👤</div>
+  </div>
+</header>
+
+<div class="layout">
+
+<aside class="sidebar">
+  <nav class="nav">
+    <button onclick="navigate('dashboard.html')"><span class="nav-icon">⌂</span><span>Dashboard</span></button>
+    <button onclick="navigate('local-analysis.html')"><span class="nav-icon">▥</span><span>Local Analysis</span></button>
+    <button onclick="navigate('market-analysis.html')"><span class="nav-icon">↗</span><span>Market Analysis</span></button>
+    <button class="active"><span class="nav-icon">▣</span><span>Financial Planner</span></button>
+    <button onclick="navigate('government-schemes.html')"><span class="nav-icon">▤</span><span>Government Schemes</span></button>
+    <button onclick="navigate('ai-advisor.html')"><span class="nav-icon">🤖</span><span>AI Advisor</span></button>
+    <button onclick="navigate('business-plan.html')"><span class="nav-icon">💡</span><span>Business Plan</span></button>
+  </nav>
+  <div class="side-art"><div class="plant">🌿</div><p>Small<br>Entrepreneurs<br>Big Possibilities</p></div>
+  <button class="logout" onclick="logout()">↪ &nbsp; Logout</button>
+</aside>
+
+<main>
+<div class="content">
+
+  <div class="page-head">
+    <div class="title">
+      <h1>Financial Planner</h1>
+      <p>Plan your investment and estimate your returns.</p>
+    </div>
+  </div>
+
+  <div class="planner">
+
+    <section class="inputs">
+
+      <div class="field">
+        <label>Total Project Cost</label>
+        <div class="input-wrap">
+          <span class="currency">₹</span>
+          <input class="input" id="projectCost" type="number" min="0" value="500000">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Available Own Capital</label>
+        <div class="input-wrap">
+          <span class="currency">₹</span>
+          <input class="input" id="ownCapital" type="number" min="0" value="100000">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Required Loan</label>
+        <div class="input-wrap">
+          <span class="currency">₹</span>
+          <input class="input" id="loan" type="number" min="0" value="400000">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Expected Monthly Revenue</label>
+        <div class="input-wrap">
+          <span class="currency">₹</span>
+          <input class="input" id="revenue" type="number" min="0" value="80000">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Monthly Expenses</label>
+        <div class="input-wrap">
+          <span class="currency">₹</span>
+          <input class="input" id="expenses" type="number" min="0" value="40000">
+        </div>
+      </div>
+
+      <div class="two">
+        <div class="field">
+          <label>Interest Rate (%)</label>
+          <input class="input plain" id="rate" type="number" min="0" step="0.1" value="9.5">
+        </div>
+
+        <div class="field">
+          <label>Loan Tenure (Years)</label>
+          <input class="input plain" id="tenure" type="number" min="1" max="30" value="5">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Moratorium Period (Months)</label>
+        <input class="input plain" id="moratorium" type="number" min="0" max="36" value="6">
+      </div>
+
+      <button class="calculate" onclick="calculatePlan()">Calculate Plan →</button>
+
+    </section>
+
+
+    <section>
+
+      <div class="card results">
+        <h2>Estimated Results</h2>
+
+        <div class="result profit">
+          <div class="result-icon">💰</div>
+          <div>
+            <div class="result-main" id="profitResult">₹ 40,000</div>
+            <div class="result-label">Estimated Monthly Profit</div>
+          </div>
+        </div>
+
+        <div class="result emi">
+          <div class="result-icon">▣</div>
+          <div>
+            <div class="result-main" id="emiResult">₹ 8,400</div>
+            <div class="result-label">Monthly EMI (Approx.)</div>
+          </div>
+        </div>
+
+        <div class="result repay">
+          <div class="result-icon">▤</div>
+          <div>
+            <div class="result-main" id="repaymentResult">₹ 5,04,000</div>
+            <div class="result-label">Total Repayment</div>
+          </div>
+        </div>
+
+        <div class="result break">
+          <div class="result-icon">◷</div>
+          <div>
+            <div class="result-main" id="breakEvenResult">14 Months</div>
+            <div class="result-label">Break-even Period</div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="card chart-card">
+        <div class="chart-head">
+          <h2>Revenue vs Expenses</h2>
+          <div class="legend">
+            <span><i class="dot green"></i>Revenue</span>
+            <span><i class="dot blue"></i>Expenses</span>
+          </div>
+        </div>
+
+        <div class="chart">
+          <div class="gridlines"></div>
+          <div class="yaxis">
+            <span>100K</span><span>50K</span><span>0</span>
+          </div>
+          <div class="bar-area" id="barArea"></div>
+        </div>
+      </div>
+
+      <div class="info">
+        <strong>Dynamic calculation:</strong>
+        Change the investment, loan, revenue, expenses, interest rate or tenure and select
+        <strong>Calculate Plan</strong> to update the financial results and chart.
+      </div>
+
+    </section>
+
+  </div>
+</div>
+</main>
+</div>
+
+
+<div class="modal" id="modal" onclick="backdrop(event)">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>Financial Plan Summary</h2>
+      <button class="close" onclick="closeModal()">×</button>
+    </div>
+    <div class="summary" id="summary"></div>
+    <button class="modal-btn" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+
+<script>
+
+const months = ["Jan","Feb","Mar","Apr","May","Jun"];
+
+function money(value){
+  return "₹ " + Math.round(value).toLocaleString("en-IN");
+}
+
+function calculateEMI(principal, annualRate, years){
+  const n = years * 12;
+  const r = annualRate / 100 / 12;
+
+  if(principal <= 0 || n <= 0) return 0;
+
+  if(r === 0) return principal / n;
+
+  return principal * r * Math.pow(1+r,n) /
+         (Math.pow(1+r,n)-1);
+}
+
+function calculatePlan(showSummary = false){
+
+  const project = Number(document.getElementById("projectCost").value) || 0;
+  const own = Number(document.getElementById("ownCapital").value) || 0;
+  const loanInput = Number(document.getElementById("loan").value) || 0;
+  const revenue = Number(document.getElementById("revenue").value) || 0;
+  const expenses = Number(document.getElementById("expenses").value) || 0;
+  const rate = Number(document.getElementById("rate").value) || 0;
+  const tenure = Number(document.getElementById("tenure").value) || 1;
+  const moratorium = Number(document.getElementById("moratorium").value) || 0;
+
+  let loan = loanInput;
+
+  /*
+    If the project cost and own capital are supplied,
+    calculate the required loan automatically.
+  */
+  if(project > 0 && own >= 0){
+    loan = Math.max(0, project - own);
+    document.getElementById("loan").value = Math.round(loan);
+  }
+
+  const monthlyProfit = revenue - expenses;
+
+  const emi = calculateEMI(loan, rate, tenure);
+
+  const totalRepayment = emi * tenure * 12;
+
+  /*
+    Simple planning estimate:
+    project cost divided by monthly operating profit.
+    This is an indicative break-even calculation, not
+    an accounting or loan underwriting result.
+  */
+  let breakEven = monthlyProfit > 0
+    ? Math.ceil(project / monthlyProfit)
+    : 0;
+
+  if(breakEven < 1 && project > 0) breakEven = 1;
+
+  document.getElementById("profitResult").textContent =
+    money(monthlyProfit);
+
+  document.getElementById("emiResult").textContent =
+    money(emi);
+
+  document.getElementById("repaymentResult").textContent =
+    money(totalRepayment);
+
+  document.getElementById("breakEvenResult").textContent =
+    breakEven ? breakEven + " Months" : "N/A";
+
+  drawChart(revenue, expenses);
+
+  const plan = {
+    project,
+    own,
+    loan,
+    revenue,
+    expenses,
+    rate,
+    tenure,
+    moratorium,
+    monthlyProfit,
+    emi,
+    totalRepayment,
+    breakEven
+  };
+
+  localStorage.setItem(
+    "vyentraFinancialPlan",
+    JSON.stringify(plan)
+  );
+
+  if(showSummary){
+    showSummary(plan);
+  }
+
+  return plan;
+}
+
+
+function drawChart(revenue, expenses){
+
+  const area = document.getElementById("barArea");
+
+  area.innerHTML = "";
+
+  /*
+    Creates a six-month demonstration chart.
+    Revenue gradually increases while expenses
+    grow more slowly.
+  */
+
+  const revenueValues = [
+    revenue * .55,
+    revenue * .72,
+    revenue * .88,
+    revenue * 1.05,
+    revenue * 1.18,
+    revenue * 1.30
+  ];
+
+  const expenseValues = [
+    expenses * .75,
+    expenses * .82,
+    expenses * .90,
+    expenses * .98,
+    expenses * 1.05,
+    expenses * 1.12
+  ];
+
+  const maxValue = Math.max(
+    ...revenueValues,
+    ...expenseValues,
+    100000
+  );
+
+  revenueValues.forEach((value,index)=>{
+
+    const group = document.createElement("div");
+    group.className = "month";
+
+    const r = document.createElement("div");
+    r.className = "bar revenue";
+    r.style.height = Math.max(2,(value/maxValue)*100) + "%";
+    r.title = "Revenue: " + money(value);
+
+    const e = document.createElement("div");
+    e.className = "bar expense";
+    e.style.height = Math.max(2,(expenseValues[index]/maxValue)*100) + "%";
+    e.title = "Expenses: " + money(expenseValues[index]);
+
+    const label = document.createElement("div");
+    label.className = "month-label";
+    label.textContent = months[index];
+
+    group.appendChild(r);
+    group.appendChild(e);
+    group.appendChild(label);
+
+    area.appendChild(group);
+
+  });
+}
+
+
+function showSummary(plan){
+
+  document.getElementById("summary").innerHTML = `
+    <strong>Total Project Cost:</strong> ${money(plan.project)}<br>
+    <strong>Available Own Capital:</strong> ${money(plan.own)}<br>
+    <strong>Required Loan:</strong> ${money(plan.loan)}<br>
+    <strong>Monthly Revenue:</strong> ${money(plan.revenue)}<br>
+    <strong>Monthly Expenses:</strong> ${money(plan.expenses)}<br>
+    <strong>Estimated Monthly Profit:</strong> ${money(plan.monthlyProfit)}<br>
+    <strong>Interest Rate:</strong> ${plan.rate}%<br>
+    <strong>Loan Tenure:</strong> ${plan.tenure} years<br>
+    <strong>Moratorium:</strong> ${plan.moratorium} months<br>
+    <strong>Monthly EMI:</strong> ${money(plan.emi)}<br>
+    <strong>Total Repayment:</strong> ${money(plan.totalRepayment)}<br>
+    <strong>Estimated Break-even:</strong>
+    ${plan.breakEven ? plan.breakEven + " months" : "N/A"}
+  `;
+
+  document.getElementById("modal").classList.add("show");
+}
+
+
+function closeModal(){
+  document.getElementById("modal").classList.remove("show");
+}
+
+
+function backdrop(event){
+  if(event.target.id === "modal"){
+    closeModal();
+  }
+}
+
+
+function navigate(page){
+  window.location.href = page;
+}
+
+
+function logout(){
+
+  if(confirm("Are you sure you want to logout?")){
+
+    localStorage.removeItem("vyentraFinancialPlan");
+    window.location.href = "login.html";
+
+  }
+
+}
+
+
+function loadSavedPlan(){
+
+  const saved = localStorage.getItem("vyentraFinancialPlan");
+
+  if(!saved){
+    calculatePlan(false);
+    return;
+  }
+
+  try{
+
+    const p = JSON.parse(saved);
+
+    document.getElementById("projectCost").value = p.project ?? 500000;
+    document.getElementById("ownCapital").value = p.own ?? 100000;
+    document.getElementById("loan").value = p.loan ?? 400000;
+    document.getElementById("revenue").value = p.revenue ?? 80000;
+    document.getElementById("expenses").value = p.expenses ?? 40000;
+    document.getElementById("rate").value = p.rate ?? 9.5;
+    document.getElementById("tenure").value = p.tenure ?? 5;
+    document.getElementById("moratorium").value = p.moratorium ?? 6;
+
+    calculatePlan(false);
+
+  }catch(error){
+
+    calculatePlan(false);
+
+  }
+}
+
+
+document.addEventListener("keydown",function(e){
+  if(e.key === "Escape") closeModal();
+});
+
+
+document.addEventListener("DOMContentLoaded",function(){
+
+  /*
+    Read location from the existing VYENTRA profile/location
+    storage when available.
+  */
+
+  const location =
+    localStorage.getItem("vyentraLocation");
+
+  if(location){
+    document.getElementById("headerLocation").textContent = location;
+  }
+
+  loadSavedPlan();
+
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VYENTRA - Hyper-Local Analysis</title>
+
+<style>
+/* =========================================================
+   VYENTRA - SINGLE FILE CSS
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #0d4d72;
+    --primary-dark: #083b59;
+    --green: #159447;
+    --light-green: #e4f8ef;
+    --mint: #eefaf6;
+    --border: #dbe7ec;
+    --text: #183b56;
+    --muted: #647b8b;
+    --white: #ffffff;
+    --bg: #f5fafc;
+    --blue: #1976d2;
+    --orange: #ef8b22;
+    --purple: #7954c8;
+    --red: #e54848;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+    height: 78px;
+    background: #fff;
+    border-bottom: 1px solid #e1e9ee;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(20, 70, 100, 0.05);
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.logo::before {
+    content: "🌿";
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.brand-name {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #126d57;
+}
+
+.brand-divider {
+    width: 2px;
+    height: 42px;
+    background: #9eacb8;
+}
+
+.tagline {
+    color: #17415e;
+    font-size: 14px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.location-top {
+    font-size: 15px;
+    color: #24445b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.location-top span {
+    font-size: 18px;
+}
+
+.top-divider {
+    width: 1px;
+    height: 30px;
+    background: #d9e1e6;
+}
+
+.welcome {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.profile-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #edf2f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 78px;
+    bottom: 0;
+    width: 270px;
+    background: #fff;
+    border-right: 1px solid #dce7ec;
+    padding: 25px 15px;
+    z-index: 900;
+}
+
+.menu {
+    list-style: none;
+}
+
+.menu-item {
+    height: 58px;
+    margin-bottom: 8px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 0 20px;
+    color: #163f5d;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.menu-item:hover {
+    background: #edf9f4;
+    transform: translateX(2px);
+}
+
+.menu-item.active {
+    background: #d9f5e7;
+    color: #137345;
+    font-weight: 700;
+}
+
+.menu-icon {
+    width: 25px;
+    text-align: center;
+    font-size: 23px;
+}
+
+.sidebar-bottom {
+    position: absolute;
+    bottom: 25px;
+    left: 45px;
+    right: 25px;
+    text-align: center;
+}
+
+.leaf-art {
+    font-size: 70px;
+    line-height: 0.7;
+    transform: rotate(-10deg);
+}
+
+.sidebar-bottom p {
+    color: #23854a;
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.main {
+    margin-left: 270px;
+    padding: 110px 25px 35px;
+    min-height: 100vh;
+}
+
+.page-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.page-title h1 {
+    font-size: 30px;
+    color: #102e4d;
+    margin-bottom: 4px;
+}
+
+.page-title p {
+    color: #61778a;
+    font-size: 18px;
+}
+
+.location-card {
+    background: linear-gradient(100deg, #e3f7ef, #edf9f7);
+    border-radius: 14px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.location-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.location-pin {
+    font-size: 38px;
+}
+
+.location-info h3 {
+    color: #177044;
+    margin-bottom: 3px;
+}
+
+.location-info p {
+    color: #557080;
+}
+
+.btn {
+    border: none;
+    padding: 12px 19px;
+    border-radius: 8px;
+    background: white;
+    border: 1px solid #c8d9df;
+    color: #126c4c;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn:hover {
+    background: #f2faf7;
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: #16834c;
+    color: white;
+    border-color: #16834c;
+}
+
+.btn-primary:hover {
+    background: #106d3e;
+}
+
+/* =========================================================
+   BUSINESS HEADER
+   ========================================================= */
+
+.business-header {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 15px 15px 0 0;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.business-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.business-icon {
+    width: 50px;
+    height: 50px;
+    background: #edf4fc;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+}
+
+.business-info h2 {
+    font-size: 21px;
+    margin-bottom: 4px;
+}
+
+.business-info p {
+    font-size: 14px;
+    color: #657988;
+}
+
+.edit-btn {
+    padding: 10px 18px;
+}
+
+/* =========================================================
+   CONTENT GRID
+   ========================================================= */
+
+.analysis-grid {
+    display: grid;
+    grid-template-columns: minmax(500px, 1.35fr) minmax(420px, 0.9fr);
+    gap: 20px;
+}
+
+/* =========================================================
+   MAP
+   ========================================================= */
+
+.map-container {
+    position: relative;
+    height: 495px;
+    border-radius: 0 0 15px 15px;
+    overflow: hidden;
+    border: 1px solid #d4e1e7;
+    background:
+        linear-gradient(rgba(40, 110, 70, 0.13), rgba(40, 110, 70, 0.13)),
+        repeating-linear-gradient(
+            30deg,
+            #6e9960 0px,
+            #6e9960 7px,
+            #759d65 8px,
+            #688e58 16px
+        );
+}
+
+/* fake satellite roads */
+
+.map-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(30deg,
+            transparent 47%,
+            rgba(230,220,180,.8) 48%,
+            rgba(230,220,180,.8) 49%,
+            transparent 50%
+        ),
+        linear-gradient(150deg,
+            transparent 47%,
+            rgba(220,210,175,.7) 48%,
+            rgba(220,210,175,.7) 49%,
+            transparent 50%
+        );
+    background-size: 170px 130px;
+    opacity: .7;
+}
+
+.map-label {
+    position: absolute;
+    font-size: 17px;
+    font-weight: 700;
+    color: white;
+    text-shadow: 1px 2px 3px #1c3825;
+    z-index: 2;
+}
+
+.label-1 { left: 7%; top: 17%; }
+.label-2 { left: 45%; top: 8%; }
+.label-3 { left: 3%; top: 56%; }
+.label-4 { right: 8%; top: 58%; }
+.label-5 { right: 5%; bottom: 15%; }
+.label-6 { left: 10%; bottom: 13%; }
+
+.radius {
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 51%;
+    transform: translate(-50%, -50%);
+    background: rgba(44, 168, 230, 0.20);
+    border: 2px solid #42a9ee;
+    z-index: 1;
+}
+
+.marker {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 17px;
+    border: 2px solid white;
+    box-shadow: 0 3px 8px rgba(0,0,0,.25);
+    z-index: 4;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.marker:hover {
+    transform: rotate(-45deg) scale(1.2);
+}
+
+.marker span {
+    transform: rotate(45deg);
+}
+
+.marker-blue { background: #287ed1; }
+.marker-red { background: #df3d3d; }
+.marker-orange { background: #ed8b23; }
+.marker-green { background: #269b54; }
+.marker-purple { background: #8544ce; }
+.marker-yellow { background: #e5a522; }
+
+.m1 { left: 30%; top: 26%; }
+.m2 { left: 51%; top: 22%; }
+.m3 { left: 67%; top: 30%; }
+.m4 { left: 42%; top: 36%; }
+.m5 { left: 26%; top: 48%; }
+.m6 { left: 66%; top: 51%; }
+.m7 { left: 45%; top: 65%; }
+.m8 { left: 55%; top: 72%; }
+.m9 { left: 35%; top: 75%; }
+
+.main-location-marker {
+    width: 46px;
+    height: 46px;
+    border-radius: 50% 50% 50% 0;
+    background: #e52d3b;
+    transform: rotate(-45deg);
+    position: absolute;
+    left: 50%;
+    top: 47%;
+    z-index: 7;
+    border: 3px solid white;
+    box-shadow: 0 4px 12px rgba(0,0,0,.3);
+}
+
+.main-location-marker::after {
+    content: "";
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: white;
+    position: absolute;
+    left: 12px;
+    top: 12px;
+}
+
+.location-popup {
+    position: absolute;
+    left: 42%;
+    top: 56%;
+    background: #073d66;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 12px;
+    text-align: center;
+    z-index: 8;
+    box-shadow: 0 4px 12px rgba(0,0,0,.25);
+}
+
+.location-popup strong {
+    font-size: 18px;
+}
+
+.location-popup small {
+    display: block;
+    margin-top: 2px;
+}
+
+/* map legend */
+
+.legend {
+    position: absolute;
+    right: 14px;
+    top: 18px;
+    background: rgba(255,255,255,.96);
+    border-radius: 12px;
+    padding: 15px;
+    width: 180px;
+    z-index: 10;
+    box-shadow: 0 3px 12px rgba(0,0,0,.2);
+}
+
+.legend-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.legend-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 8px 0;
+    font-size: 13px;
+}
+
+.legend-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+
+/* map controls */
+
+.map-controls {
+    position: absolute;
+    right: 15px;
+    bottom: 20px;
+    z-index: 10;
+    background: white;
+    border-radius: 9px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,.2);
+}
+
+.map-controls button {
+    display: block;
+    width: 48px;
+    height: 48px;
+    border: none;
+    background: white;
+    font-size: 25px;
+    color: #17405c;
+    cursor: pointer;
+}
+
+.map-controls button:first-child {
+    border-bottom: 1px solid #ddd;
+}
+
+/* =========================================================
+   RIGHT PANEL
+   ========================================================= */
+
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+}
+
+.stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 15px 10px;
+    min-height: 125px;
+}
+
+.stat-number {
+    font-size: 30px;
+    font-weight: 800;
+    color: #1472c5;
+    margin-bottom: 8px;
+}
+
+.stat-icon {
+    font-size: 24px;
+}
+
+.stat-title {
+    font-weight: 600;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.stat-sub {
+    font-size: 12px;
+    color: #607887;
+    margin-top: 4px;
+}
+
+/* =========================================================
+   LOWER CARDS
+   ========================================================= */
+
+.lower-grid {
+    display: grid;
+    grid-template-columns: 1.25fr .9fr;
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.chart {
+    height: 190px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 20px 15px 5px;
+    border-left: 1px solid #dce4e9;
+    border-bottom: 1px solid #dce4e9;
+    position: relative;
+}
+
+.chart-grid {
+    position: absolute;
+    inset: 10px 0 0 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 35px,
+        #e9eef1 36px
+    );
+    z-index: 0;
+}
+
+.bar-group {
+    width: 55px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 2;
+}
+
+.bar {
+    width: 25px;
+    border-radius: 4px 4px 0 0;
+    transition: height .6s ease;
+}
+
+.bar-label {
+    margin-top: 7px;
+    font-size: 11px;
+}
+
+.high { background: #1cac5a; }
+.medium { background: #277bd7; }
+.low { background: #7fbb98; }
+
+.insights {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.insight {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.check {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    background: #1fa15a;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
+
+/* =========================================================
+   RECOMMENDATION
+   ========================================================= */
+
+.recommendation {
+    background: linear-gradient(100deg, #dff8ee, #e9faf4);
+    border-radius: 15px;
+    padding: 18px 28px;
+    margin-top: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #d0eee1;
+}
+
+.recommendation-left {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.target-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 5px solid #198c53;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #198c53;
+    font-size: 27px;
+}
+
+.recommendation h3 {
+    color: #168047;
+    margin-bottom: 6px;
+}
+
+.recommendation p {
+    color: #56717b;
+    line-height: 1.4;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 35, 52, .55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    width: 440px;
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 15px 50px rgba(0,0,0,.3);
+}
+
+.modal-box h2 {
+    margin-bottom: 18px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccdbe3;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+.toast {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    background: #123e59;
+    color: white;
+    padding: 15px 22px;
+    border-radius: 10px;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: .3s;
+    z-index: 5000;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width: 1200px) {
+    .analysis-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .right-panel {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main {
+        margin-left: 220px;
+    }
+}
+
+@media(max-width: 900px) {
+    .header {
+        padding: 0 12px;
+    }
+
+    .tagline,
+    .top-divider,
+    .welcome {
+        display: none;
+    }
+
+    .sidebar {
+        width: 75px;
+    }
+
+    .menu-item {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .menu-item span:last-child {
+        display: none;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .main {
+        margin-left: 75px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .lower-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 650px) {
+    .brand-divider,
+    .location-top {
+        display: none;
+    }
+
+    .brand-name {
+        font-size: 22px;
+    }
+
+    .main {
+        margin-left: 0;
+        padding-top: 95px;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .page-title {
+        display: block;
+    }
+
+    .page-title h1 {
+        font-size: 25px;
+    }
+
+    .location-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .analysis-grid {
+        display: block;
+    }
+
+    .map-container {
+        height: 400px;
+        margin-bottom: 18px;
+    }
+
+    .radius {
+        width: 300px;
+        height: 300px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .recommendation {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .recommendation .btn {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =======================================================
+     HEADER
+     ======================================================= -->
+
+<header class="header">
+
+    <div class="logo-area">
+        <div class="logo"></div>
+
+        <div class="brand">
+            <div class="brand-name">VYENTRA</div>
+
+            <div class="brand-divider"></div>
+
+            <div class="tagline">
+                Smart Business Decisions<br>
+                for a Better Tomorrow
+            </div>
+        </div>
+    </div>
+
+    <div class="user-area">
+
+        <div class="location-top" onclick="openLocationModal()">
+            <span>📍</span>
+            <span id="topLocation">Kothapalli, Guntur, Andhra Pradesh</span>
+            <span>⌄</span>
+        </div>
+
+        <div class="top-divider"></div>
+
+        <div class="welcome">
+            Welcome, Entrepreneur!
+        </div>
+
+        <div class="profile-icon">
+            👤
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =======================================================
+     SIDEBAR
+     ======================================================= -->
+
+<aside class="sidebar">
+
+    <ul class="menu">
+
+        <li class="menu-item">
+            <span class="menu-icon">⌂</span>
+            <span>Dashboard</span>
+        </li>
+
+        <li class="menu-item active">
+            <span class="menu-icon">▥</span>
+            <span>Local Analysis</span>
+        </li>
+
+        <li class="menu-item active">
+            <span class="menu-icon">▰</span>
+            <span>Market Analysis</span>
+        </li>
+
+        <li class="menu-item" onclick="showToast('Financial Planner selected')">
+            <span class="menu-icon">▦</span>
+            <span>Financial Planner</span>
+        </li>
+
+        <li class="menu-item" onclick="showToast('Government Schemes selected')">
+            <span class="menu-icon">▤</span>
+            <span>Government Schemes</span>
+        </li>
+
+        <li class="menu-item" onclick="showToast('AI Advisor selected')">
+            <span class="menu-icon">🤖</span>
+            <span>AI Advisor</span>
+        </li>
+
+        <li class="menu-item" onclick="showToast('Business Plan selected')">
+            <span class="menu-icon">💡</span>
+            <span>Business Plan</span>
+        </li>
+
+    </ul>
+
+
+    <div class="sidebar-bottom">
+
+        <div class="leaf-art">🌿</div>
+
+        <p>
+            Small<br>
+            Entrepreneurs<br>
+            Big Possibilities
+        </p>
+
+    </div>
+
+</aside>
+
+
+<!-- =======================================================
+     MAIN CONTENT
+     ======================================================= -->
+
+<main class="main">
+
+    <div class="page-title">
+
+        <div>
+            <h1>Hyper-Local Analysis</h1>
+
+            <p>
+                Explore your business environment within 10 km radius.
+            </p>
+        </div>
+
+    </div>
+
+
+    <!-- LOCATION -->
+
+    <div class="location-card">
+
+        <div class="location-info">
+
+            <div class="location-pin">
+                📍
+            </div>
+
+            <div>
+                <h3>Your Location</h3>
+                <p id="locationText">
+                    Kothapalli, Guntur, Andhra Pradesh
+                </p>
+            </div>
+
+        </div>
+
+        <button class="btn" onclick="openLocationModal()">
+            ✎ &nbsp; Change Location
+        </button>
+
+    </div>
+
+
+    <!-- BUSINESS -->
+
+    <div class="business-header">
+
+        <div class="business-info">
+
+            <div class="business-icon">
+                🐄
+            </div>
+
+            <div>
+                <h2 id="businessName">
+                    Dairy Farming
+                </h2>
+
+                <p id="businessLocation">
+                    Kothapalli, Guntur, Andhra Pradesh
+                </p>
+            </div>
+
+        </div>
+
+        <button class="btn edit-btn" onclick="openBusinessModal()">
+            ✎ &nbsp; Edit
+        </button>
+
+    </div>
+
+
+    <!-- MAIN GRID -->
+
+    <div class="analysis-grid">
+
+        <!-- MAP -->
+
+        <div>
+
+            <div class="map-container" id="map">
+
+                <div class="label-1 map-label">Tenali</div>
+                <div class="label-2 map-label">Pedakakani</div>
+                <div class="label-3 map-label">Narasaraopet</div>
+                <div class="label-4 map-label">Amaravati →</div>
+                <div class="label-5 map-label">Mangalagiri</div>
+                <div class="label-6 map-label">Ponnur</div>
+
+                <div class="radius"></div>
+
+
+                <!-- BUSINESS MARKERS -->
+
+                <div class="marker marker-blue m1"
+                     title="Nearby Business"
+                     onclick="markerClicked('Nearby dairy business')">
+                    <span>🏪</span>
+                </div>
+
+                <div class="marker marker-blue m2"
+                     onclick="markerClicked('Retail business')">
+                    <span>🏪</span>
+                </div>
+
+                <div class="marker marker-red m3"
+                     onclick="markerClicked('Competitor')">
+                    <span>●</span>
+                </div>
+
+                <div class="marker marker-red m4"
+                     onclick="markerClicked('Main competitor')">
+                    <span>●</span>
+                </div>
+
+                <div class="marker marker-orange m5"
+                     onclick="markerClicked('Weekly market')">
+                    <span>🍴</span>
+                </div>
+
+                <div class="marker marker-purple m6"
+                     onclick="markerClicked('Local market')">
+                    <span>🛒</span>
+                </div>
+
+                <div class="marker marker-yellow m7"
+                     onclick="markerClicked('Transport hub')">
+                    <span>🚚</span>
+                </div>
+
+                <div class="marker marker-green m8"
+                     onclick="markerClicked('Supplier')">
+                    <span>🌿</span>
+                </div>
+
+                <div class="marker marker-blue m9"
+                     onclick="markerClicked('Nearby business')">
+                    <span>🏪</span>
+                </div>
+
+
+                <!-- MAIN LOCATION -->
+
+                <div class="main-location-marker"></div>
+
+                <div class="location-popup">
+                    <strong id="mapLocation">Kothapalli</strong>
+                    <small>5–10 km radius</small>
+                </div>
+
+
+                <!-- LEGEND -->
+
+                <div class="legend">
+
+                    <div class="legend-title">
+                        Map Legend
+                    </div>
+
+                    <div class="legend-row">
+                        <div class="legend-dot" style="background:#e52d3b"></div>
+                        Your Location
+                    </div>
+
+                    <div class="legend-row">
+                        <div class="legend-dot" style="background:#287ed1"></div>
+                        Nearby Businesses
+                    </div>
+
+                    <div class="legend-row">
+                        <div class="legend-dot" style="background:#df3d3d"></div>
+                        Competitors
+                    </div>
+
+                    <div class="legend-row">
+                        <div class="legend-dot" style="background:#ed8b23"></div>
+                        Markets
+                    </div>
+
+                    <div class="legend-row">
+                        <div class="legend-dot" style="background:#269b54"></div>
+                        Suppliers
+                    </div>
+
+                    <div class="legend-row">
+                        <div class="legend-dot" style="background:#e5a522"></div>
+                        Transport Hubs
+                    </div>
+
+                </div>
+
+
+                <!-- MAP CONTROLS -->
+
+                <div class="map-controls">
+
+                    <button onclick="zoomMap(1)">
+                        +
+                    </button>
+
+                    <button onclick="zoomMap(-1)">
+                        −
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="right-panel">
+
+            <!-- STATS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-number" id="nearbyBusinesses">
+                        12
+                    </div>
+
+                    <div class="stat-icon">👥</div>
+
+                    <div class="stat-title">
+                        Nearby Businesses
+                    </div>
+
+                    <div class="stat-sub">
+                        in 10 km
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-number" style="color:#e02e46">
+                        <span id="competitors">3</span>
+                    </div>
+
+                    <div class="stat-icon">👥</div>
+
+                    <div class="stat-title">
+                        Main Competitors
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-number" style="color:#ef8b22">
+                        <span id="markets">4</span>
+                    </div>
+
+                    <div class="stat-icon">🏪</div>
+
+                    <div class="stat-title">
+                        Weekly Markets
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-number" style="color:#218c4c">
+                        A
+                    </div>
+
+                    <div class="stat-icon">🛣</div>
+
+                    <div class="stat-title">
+                        Good
+                    </div>
+
+                    <div class="stat-sub">
+                        Road Accessibility
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOWER CARDS -->
+
+            <div class="lower-grid">
+
+                <!-- MARKET DEMAND -->
+
+                <div class="card">
+
+                    <div class="card-title">
+                        Market Demand
+                    </div>
+
+                    <div class="chart">
+
+                        <div class="chart-grid"></div>
+
+                        <div class="bar-group">
+
+                            <div class="bar high"
+                                 id="barMilk"
+                                 style="height:80px">
+                            </div>
+
+                            <div class="bar-label">
+                                Milk
+                            </div>
+
+                        </div>
+
+                        <div class="bar-group">
+
+                            <div class="bar medium"
+                                 style="height:60px">
+                            </div>
+
+                            <div class="bar-label">
+                                Curd
+                            </div>
+
+                        </div>
+
+                        <div class="bar-group">
+
+                            <div class="bar medium"
+                                 style="height:40px">
+                            </div>
+
+                            <div class="bar-label">
+                                Paneer
+                            </div>
+
+                        </div>
+
+                        <div class="bar-group">
+
+                            <div class="bar high"
+                                 style="height:50px">
+                            </div>
+
+                            <div class="bar-label">
+                                Ghee
+                            </div>
+
+                        </div>
+
+                        <div class="bar-group">
+
+                            <div class="bar medium"
+                                 style="height:55px">
+                            </div>
+
+                            <div class="bar-label">
+                                Other
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- QUICK INSIGHTS -->
+
+                <div class="card">
+
+                    <div class="card-title">
+                        💡 Quick Insights
+                    </div>
+
+                    <div class="insights">
+
+                        <div class="insight">
+                            <span class="check">✓</span>
+                            <span>
+                                Growing demand for dairy products
+                            </span>
+                        </div>
+
+                        <div class="insight">
+                            <span class="check">✓</span>
+                            <span>
+                                Presence of local markets
+                            </span>
+                        </div>
+
+                        <div class="insight">
+                            <span class="check">✓</span>
+                            <span>
+                                Good transport connectivity
+                            </span>
+                        </div>
+
+                        <div class="insight">
+                            <span class="check">✓</span>
+                            <span>
+                                Scope for value-added products
+                            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         RECOMMENDATION
+         ===================================================== -->
+
+    <div class="recommendation">
+
+        <div class="recommendation-left">
+
+            <div class="target-icon">
+                🎯
+            </div>
+
+            <div>
+
+                <h3>
+                    Recommended Opportunity
+                </h3>
+
+                <p id="recommendationText">
+                    Dairy and milk product businesses have strong
+                    local demand in Kothapalli.<br>
+
+                    Consider starting with milk collection,
+                    packaging or value-added products.
+                </p>
+
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary"
+                onclick="showDetailedAnalysis()">
+
+            View Detailed Analysis
+            &nbsp; →
+            
+        </button>
+
+    </div>
+
+</main>
+
+
+<!-- =======================================================
+     LOCATION MODAL
+     ======================================================= -->
+
+<div class="modal" id="locationModal">
+
+    <div class="modal-box">
+
+        <h2>
+            📍 Change Location
+        </h2>
+
+        <div class="form-group">
+
+            <label>
+                Village / Town
+            </label>
+
+            <input
+                type="text"
+                id="villageInput"
+                value="Kothapalli"
+                placeholder="Enter village"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                District
+            </label>
+
+            <input
+                type="text"
+                id="districtInput"
+                value="Guntur"
+                placeholder="Enter district"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                State
+            </label>
+
+            <input
+                type="text"
+                id="stateInput"
+                value="Andhra Pradesh"
+                placeholder="Enter state"
+            >
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button class="btn"
+                    onclick="closeModal('locationModal')">
+                Cancel
+            </button>
+
+            <button class="btn btn-primary"
+                    onclick="saveLocation()">
+                Save Location
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     BUSINESS MODAL
+     ======================================================= -->
+
+<div class="modal" id="businessModal">
+
+    <div class="modal-box">
+
+        <h2>
+            🐄 Select Business
+        </h2>
+
+        <div class="form-group">
+
+            <label>
+                Business Category
+            </label>
+
+            <select id="businessSelect">
+
+                <option value="Dairy Farming">
+                    🐄 Dairy Farming
+                </option>
+
+                <option value="Retail Store">
+                    🏪 Retail Store
+                </option>
+
+                <option value="Textiles">
+                    👕 Textiles
+                </option>
+
+                <option value="Food Processing">
+                    🍲 Food Processing
+                </option>
+
+                <option value="Poultry Farming">
+                    🐔 Poultry Farming
+                </option>
+
+                <option value="Vegetable Business">
+                    🥬 Vegetable Business
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button class="btn"
+                    onclick="closeModal('businessModal')">
+                Cancel
+            </button>
+
+            <button class="btn btn-primary"
+                    onclick="saveBusiness()">
+                Update
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     TOAST
+     ======================================================= -->
+
+<div class="toast" id="toast">
+    Action completed successfully.
+</div>
+
+
+<script>
+
+/* =========================================================
+   VYENTRA - JAVASCRIPT
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   LOCATION MODAL
+   --------------------------------------------------------- */
+
+function openLocationModal() {
+
+    document
+        .getElementById("locationModal")
+        .classList.add("show");
+
+}
+
+
+function saveLocation() {
+
+    const village =
+        document
+        .getElementById("villageInput")
+        .value
+        .trim();
+
+    const district =
+        document
+        .getElementById("districtInput")
+        .value
+        .trim();
+
+    const state =
+        document
+        .getElementById("stateInput")
+        .value
+        .trim();
+
+
+    if (!village || !district || !state) {
+
+        showToast("Please enter all location details.");
+
+        return;
+
+    }
+
+
+    const fullLocation =
+        village + ", " +
+        district + ", " +
+        state;
+
+
+    document
+        .getElementById("locationText")
+        .textContent = fullLocation;
+
+    document
+        .getElementById("businessLocation")
+        .textContent = fullLocation;
+
+    document
+        .getElementById("topLocation")
+        .textContent = fullLocation;
+
+    document
+        .getElementById("mapLocation")
+        .textContent = village;
+
+
+    localStorage.setItem(
+        "vyentraLocation",
+        fullLocation
+    );
+
+
+    closeModal("locationModal");
+
+    showToast(
+        "Location updated successfully."
+    );
+
+
+    updateAnalysis(village);
+
+}
+
+
+/* ---------------------------------------------------------
+   BUSINESS MODAL
+   --------------------------------------------------------- */
+
+function openBusinessModal() {
+
+    document
+        .getElementById("businessModal")
+        .classList.add("show");
+
+}
+
+
+function saveBusiness() {
+
+    const business =
+        document
+        .getElementById("businessSelect")
+        .value;
+
+
+    document
+        .getElementById("businessName")
+        .textContent = business;
+
+
+    localStorage.setItem(
+        "vyentraBusiness",
+        business
+    );
+
+
+    updateBusinessData(business);
+
+    closeModal("businessModal");
+
+    showToast(
+        business + " selected."
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   CLOSE MODAL
+   --------------------------------------------------------- */
+
+function closeModal(id) {
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+
+}
+
+
+/* ---------------------------------------------------------
+   UPDATE BUSINESS DATA
+   --------------------------------------------------------- */
+
+function updateBusinessData(business) {
+
+    const nearby =
+        document.getElementById("nearbyBusinesses");
+
+    const competitors =
+        document.getElementById("competitors");
+
+    const markets =
+        document.getElementById("markets");
+
+    const recommendation =
+        document.getElementById("recommendationText");
+
+
+    const data = {
+
+        "Dairy Farming": {
+            nearby: 12,
+            competitors: 3,
+            markets: 4,
+            text:
+                "Dairy and milk product businesses have strong local demand. Consider starting with milk collection, packaging or value-added products."
+        },
+
+        "Retail Store": {
+            nearby: 18,
+            competitors: 7,
+            markets: 5,
+            text:
+                "Retail demand is strong for essential household products. Focus on daily-use products and convenient local delivery."
+        },
+
+        "Textiles": {
+            nearby: 9,
+            competitors: 2,
+            markets: 3,
+            text:
+                "Local textile and tailoring demand shows opportunity for customized clothing, school uniforms and traditional wear."
+        },
+
+        "Food Processing": {
+            nearby: 7,
+            competitors: 2,
+            markets: 4,
+            text:
+                "Food processing has good potential through locally available agricultural products and value-added packaging."
+        },
+
+        "Poultry Farming": {
+            nearby: 10,
+            competitors: 4,
+            markets: 5,
+            text:
+                "Poultry products show steady demand. Feed availability, disease management and local distribution should be planned carefully."
+        },
+
+        "Vegetable Business": {
+            nearby: 14,
+            competitors: 5,
+            markets: 6,
+            text:
+                "Fresh vegetables have recurring local demand. Direct farmer sourcing and local delivery can improve margins."
+        }
+
+    };
+
+
+    const selected =
+        data[business] || data["Dairy Farming"];
+
+
+    nearby.textContent =
+        selected.nearby;
+
+    competitors.textContent =
+        selected.competitors;
+
+    markets.textContent =
+        selected.markets;
+
+    recommendation.textContent =
+        selected.text;
+
+
+    updateChart(business);
+
+}
+
+
+/* ---------------------------------------------------------
+   UPDATE LOCATION
+   --------------------------------------------------------- */
+
+function updateAnalysis(village) {
+
+    const text =
+        document.getElementById(
+            "recommendationText"
+        );
+
+
+    text.textContent =
+        "Local market analysis for " +
+        village +
+        " has been refreshed. " +
+        "Review demand, competition, markets and suppliers before investing.";
+
+}
+
+
+/* ---------------------------------------------------------
+   DYNAMIC MARKET CHART
+   --------------------------------------------------------- */
+
+function updateChart(business) {
+
+    const bars =
+        document.querySelectorAll(
+            ".bar"
+        );
+
+
+    let values;
+
+
+    switch (business) {
+
+        case "Retail Store":
+            values =
+                [70, 65, 45, 35, 80];
+            break;
+
+        case "Textiles":
+            values =
+                [40, 55, 75, 50, 65];
+            break;
+
+        case "Food Processing":
+            values =
+                [65, 50, 75, 70, 55];
+            break;
+
+        case "Poultry Farming":
+            values =
+                [75, 50, 35, 55, 65];
+            break;
+
+        case "Vegetable Business":
+            values =
+                [85, 60, 40, 45, 80];
+            break;
+
+        default:
+            values =
+                [85, 65, 45, 55, 70];
+
+    }
+
+
+    bars.forEach(
+        (bar, index) => {
+
+            bar.style.height =
+                values[index] + "px";
+
+        }
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   MAP ZOOM
+   --------------------------------------------------------- */
+
+let mapScale = 1;
+
+
+function zoomMap(direction) {
+
+    mapScale +=
+        direction * 0.1;
+
+
+    mapScale =
+        Math.max(
+            .8,
+            Math.min(
+                1.5,
+                mapScale
+            )
+        );
+
+
+    document
+        .getElementById("map")
+        .style.transform =
+        "scale(" +
+        mapScale +
+        ")";
+
+
+    if (mapScale !== 1) {
+
+        document
+            .getElementById("map")
+            .style.transformOrigin =
+            "center";
+
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   MARKER CLICK
+   --------------------------------------------------------- */
+
+function markerClicked(message) {
+
+    showToast(message);
+
+}
+
+
+/* ---------------------------------------------------------
+   DETAILED ANALYSIS
+   --------------------------------------------------------- */
+
+function showDetailedAnalysis() {
+
+    const business =
+        document
+        .getElementById("businessName")
+        .textContent;
+
+
+    const location =
+        document
+        .getElementById("locationText")
+        .textContent;
+
+
+    alert(
+        "VYENTRA Detailed Analysis\n\n" +
+        "Business: " + business + "\n" +
+        "Location: " + location + "\n\n" +
+
+        "✓ Market demand analysis\n" +
+        "✓ Competitor analysis\n" +
+        "✓ Supplier availability\n" +
+        "✓ Pricing analysis\n" +
+        "✓ Business opportunity\n" +
+        "✓ Risk assessment\n\n" +
+
+        "The detailed business feasibility report can be generated here."
+    );
+
+}
+
+
+/* ---------------------------------------------------------
+   TOAST
+   --------------------------------------------------------- */
+
+let toastTimer;
+
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
+
+}
+
+
+/* ---------------------------------------------------------
+   SIDEBAR MENU
+   --------------------------------------------------------- */
+
+document
+    .querySelectorAll(".menu-item")
+    .forEach(
+        item => {
+
+            item.addEventListener(
+                "click",
+                function() {
+
+                    document
+                        .querySelectorAll(
+                            ".menu-item"
+                        )
+                        .forEach(
+                            x =>
+                            x.classList.remove(
+                                "active"
+                            )
+                        );
+
+
+                    this.classList.add(
+                        "active"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* ---------------------------------------------------------
+   LOAD SAVED DATA
+   --------------------------------------------------------- */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const savedLocation =
+            localStorage.getItem(
+                "vyentraLocation"
+            );
+
+
+        const savedBusiness =
+            localStorage.getItem(
+                "vyentraBusiness"
+            );
+
+
+        if (savedLocation) {
+
+            document
+                .getElementById(
+                    "locationText"
+                )
+                .textContent =
+                savedLocation;
+
+            document
+                .getElementById(
+                    "businessLocation"
+                )
+                .textContent =
+                savedLocation;
+
+            document
+                .getElementById(
+                    "topLocation"
+                )
+                .textContent =
+                savedLocation;
+
+        }
+
+
+        if (savedBusiness) {
+
+            document
+                .getElementById(
+                    "businessName"
+                )
+                .textContent =
+                savedBusiness;
+
+
+            document
+                .getElementById(
+                    "businessSelect"
+                )
+                .value =
+                savedBusiness;
+
+
+            updateBusinessData(
+                savedBusiness
+            );
+
+        }
+
+    }
+);
+
+
+/* ---------------------------------------------------------
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+   --------------------------------------------------------- */
+
+document
+    .querySelectorAll(".modal")
+    .forEach(
+        modal => {
+
+            modal.addEventListener(
+                "click",
+                function(e) {
+
+                    if (
+                        e.target === modal
+                    ) {
+
+                        modal.classList.remove(
+                            "show"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+</script>
+
+</body>
+</html>
